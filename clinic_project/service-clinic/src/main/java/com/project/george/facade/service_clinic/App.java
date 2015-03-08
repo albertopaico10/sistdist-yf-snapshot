@@ -1,4 +1,4 @@
-package com.project.george.facade.business;
+package com.project.george.facade.service_clinic;
 
 /**
  * Hello world!
