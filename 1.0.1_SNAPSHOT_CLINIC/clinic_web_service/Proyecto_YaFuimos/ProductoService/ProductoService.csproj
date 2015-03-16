@@ -63,6 +63,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Dominio\Producto.hbm.xml" />
     <EmbeddedResource Include="Dominio\Presentation.hbm.xml" />
+    <EmbeddedResource Include="Dominio\Paciente.hbm.xml" />
+    <Content Include="Pacientes.svc" />
     <Content Include="Producto.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -73,11 +75,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dominio\Paciente.cs" />
     <Compile Include="Dominio\Presentation.cs" />
     <Compile Include="Dominio\Producto.cs" />
+    <Compile Include="IPacientes.cs" />
+    <Compile Include="Pacientes.svc.cs">
+      <DependentUpon>Pacientes.svc</DependentUpon>
+    </Compile>
     <Compile Include="Persistencia\BaseDAO.cs" />
     <Compile Include="Persistencia\ConexionUtil.cs" />
     <Compile Include="Persistencia\NHibernateHelper.cs" />
+    <Compile Include="Persistencia\PacienteDAO.cs" />
     <Compile Include="Persistencia\PresentationDAO.cs" />
     <Compile Include="Persistencia\ProductoDAO.cs" />
     <Compile Include="Producto.svc.cs">
