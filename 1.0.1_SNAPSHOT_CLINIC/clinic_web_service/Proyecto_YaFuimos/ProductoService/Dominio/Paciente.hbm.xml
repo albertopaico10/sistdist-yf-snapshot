@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ProductoService"
+                   namespace="ProductoService.Dominio"
+                   default-lazy="false">
+  <class name="Paciente" table="tb_newpatient">
+    <id name="Codigo" column="id">
+      <generator class="increment"></generator>
+    </id>
+    <property name="Nombre" column="namePatient"></property>
+    <property name="Apellido" column="lastNamePatient"></property>
+    <property name="Dni" column="DNI"></property>
+    <property name="BirthDay" column="birth_day"></property>
+    <property name="Direccion" column="adress"></property>
+    <property name="Distrito" column="districtName"></property>
+    <property name="Status" column="statusPatient"></property>
+    <property name="HistoriaClinidaId" column="code_history_clinic"></property>
+    <property name="CreatedDate" column="date_created"></property>
+    <property name="UpdatedDate" column="date_updated"></property>
+    <property name="UserCreated" column="user_created"></property>
+    <property name="UserUpdated" column="user_updated"></property>
+    <property name="Sexo" column="sex"></property>
+    <property name="NombreReferencia" column="name_reference"></property>
+    <property name="TelefonoReferencia" column="phone_reference"></property>
+
+  </class>
+</hibernate-mapping>
