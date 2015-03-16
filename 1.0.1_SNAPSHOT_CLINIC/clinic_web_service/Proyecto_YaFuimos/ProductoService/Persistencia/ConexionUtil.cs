@@ -9,7 +9,7 @@ namespace ProductoService.Persistencia
     {
         public static string ObtenerCadena()
         {
-            return "Server=localhost;Database=db_corazondejesus;User ID=root;Password=karina";
+            return "Server=localhost;Database=db_corazondejesus;User ID=root;Password=root";
         }
     }
 }
