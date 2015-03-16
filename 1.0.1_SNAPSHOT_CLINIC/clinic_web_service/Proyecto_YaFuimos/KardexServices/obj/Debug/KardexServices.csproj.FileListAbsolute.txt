@@ -1,0 +1,4 @@
+C:\Users\Karina.Karina-PC\Git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\bin\KardexServices.dll
+C:\Users\Karina.Karina-PC\Git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\bin\KardexServices.pdb
+C:\Users\Karina.Karina-PC\Git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\obj\Debug\KardexServices.dll
+C:\Users\Karina.Karina-PC\Git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\obj\Debug\KardexServices.pdb

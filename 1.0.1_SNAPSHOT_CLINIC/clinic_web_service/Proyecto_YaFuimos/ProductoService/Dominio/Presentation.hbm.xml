@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ProductoService"
+                   namespace="ProductoService.Dominio"
+                   default-lazy="false">
+  <class name="Presentation" table="tb_presentation">
+    <id name="Id" column="id">
+      <generator class="increment"></generator>
+    </id>
+    <property name="NamePresentation" column="namePresentation"></property>
+    <property name="Status" column="status"></property>
+    <property name="DateCreated" column="date_created"></property>
+  </class>
+</hibernate-mapping>

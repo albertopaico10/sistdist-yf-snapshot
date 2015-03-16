@@ -3,6 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KardexServices", "KardexServices\KardexServices.csproj", "{1D825465-FDCD-4077-AEC2-58645ECA12BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductoService", "ProductoService\ProductoService.csproj", "{AE063258-3BF0-4D63-A4CB-A36D45F0730F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librerias", "Librerias", "{5BEB5233-FE5F-4CA6-BD61-F9E5BF8C3662}"
+	ProjectSection(SolutionItems) = preProject
+		Librerias\Iesi.Collections.dll = Librerias\Iesi.Collections.dll
+		Librerias\MySql.Data.dll = Librerias\MySql.Data.dll
+		Librerias\NHibernate.dll = Librerias\NHibernate.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +22,10 @@ Global
 		{1D825465-FDCD-4077-AEC2-58645ECA12BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D825465-FDCD-4077-AEC2-58645ECA12BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D825465-FDCD-4077-AEC2-58645ECA12BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

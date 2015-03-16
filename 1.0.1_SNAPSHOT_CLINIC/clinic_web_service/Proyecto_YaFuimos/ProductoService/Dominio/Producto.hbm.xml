@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ProductoService"
+                   namespace="ProductoService.Dominio"
+                   default-lazy="false">
+  <class name="Producto" table="tb_product">
+    <id name="Id" column="id">
+      <generator class="increment"></generator>
+    </id>
+    <property name="NameProduct" column="nameProduct"></property>
+    <property name="Status" column="status"></property>
+    <property name="IdPresentation" column="idPresentation"></property>
+    <property name="PriceProduct" column="price_Product"></property>
+    <property name="DateCreated" column="date_created"></property>
+    <property name="PriceSale" column="price_sale"></property>
+    <property name="ExpirationDate" column="expiration_date"></property>
+  </class>
+</hibernate-mapping>
+
