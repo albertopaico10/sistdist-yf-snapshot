@@ -13,6 +13,7 @@ namespace ProductoService
     public interface IPacientes
     {
         [OperationContract]
+        [FaultContract(typeof(MyExceptionContainer))]
         Paciente crearPaciente(string nombre, string apellido, string dni, DateTime birthDay, string direccion, string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated, int userUpdated, int sexo, string nombreReferente, string telefonoReferente);
         [OperationContract]
         Paciente obtenerPaciente(int codigo);
@@ -21,6 +22,6 @@ namespace ProductoService
         [OperationContract]
         void EliminarPaciente(int codigo);
         [OperationContract]
-        List<Paciente> ListarSesores();
+        List<Paciente> ListarPacientes();
     }
 }

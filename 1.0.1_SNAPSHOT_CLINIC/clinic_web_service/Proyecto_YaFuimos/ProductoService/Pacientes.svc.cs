@@ -28,26 +28,37 @@ namespace ProductoService
             string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated,
             int userUpdated, int sexo, string nombreReferente, string telefonoReferente)
         {
-            Paciente pacienteNuevo = new Paciente
-            {
-                Nombre = nombre,
-                Apellido = apellido,
-                Dni = dni,
-                BirthDay = birthDay,
-                Direccion = direccion,
-                Distrito = distrito,
-                Status = status,
-                HistoriaClinidaId = historiaClinicaId,
-                CreatedDate = createDate,
-                UpdatedDate = updateDate,
-                UserCreated = userCreated,
-                UserUpdated = userUpdated,
-                Sexo = sexo,
-                NombreReferencia = nombreReferente,
-                TelefonoReferencia = telefonoReferente
-            };
+            Paciente pacienteNuevo = null;
+            try{
+                pacienteNuevo = new Paciente
+                {
+                    Nombre = nombre,
+                    Apellido = apellido,
+                    Dni = dni,
+                    BirthDay = birthDay,
+                    Direccion = direccion,
+                    Distrito = distrito,
+                    Status = status,
+                    HistoriaClinidaId = historiaClinicaId,
+                    CreatedDate = createDate,
+                    UpdatedDate = updateDate,
+                    UserCreated = userCreated,
+                    UserUpdated = userUpdated,
+                    Sexo = sexo,
+                    NombreReferencia = nombreReferente,
+                    TelefonoReferencia = telefonoReferente
+                };
 
-            return PacienteDao.Crear(pacienteNuevo);
+                return PacienteDao.Crear(pacienteNuevo);
+                }
+            catch(Exception e){
+                MyExceptionContainer exceptionDetails = new MyExceptionContainer();
+                exceptionDetails.Messsage = e.Message;
+                exceptionDetails.Description = e.StackTrace;
+                throw new FaultException<MyExceptionContainer>(exceptionDetails); 
+                }
+
+            return pacienteNuevo;
         }
 
         public Dominio.Paciente obtenerPaciente(int codigo)
@@ -86,7 +97,7 @@ namespace ProductoService
             PacienteDao.Eliminar(pacienteEliminar);
         }
 
-        public List<Dominio.Paciente> ListarSesores()
+        public List<Dominio.Paciente> ListarPacientes()
         {
             return PacienteDao.ListarTodos().ToList();
         }
