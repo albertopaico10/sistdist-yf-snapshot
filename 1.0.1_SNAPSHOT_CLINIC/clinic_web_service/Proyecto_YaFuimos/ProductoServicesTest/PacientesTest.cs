@@ -10,14 +10,15 @@ namespace ProductoServicesTest
     public class PacientesTest
     {
       
-        /*[TestMethod]
+        [TestMethod]
         public void crearPaciente()
         {
             try{
+                DateTime dt = DateTime.Now; 
                 PacientesWS.PacientesClient proxy = new PacientesWS.PacientesClient();
                 PacientesWS.Paciente usuarionuevo = proxy.crearPaciente("juan",
-                    null, "46844382", new DateTime(), null, null, null,
-                    null, new DateTime(), new DateTime(), 0, 0, 0, null, null);
+                    null, "46844382", dt, null, null, null,
+                    null, dt, dt, 0, 0, 0, null, null);
                 Assert.AreEqual("juan", usuarionuevo.Nombre);
                 Assert.AreEqual("46844382", usuarionuevo.Dni);
             }
@@ -39,10 +40,11 @@ namespace ProductoServicesTest
         [TestMethod]
         public void modificarPaciente()
         {
+            DateTime dt = DateTime.Now; 
             PacientesWS.PacientesClient proxy = new PacientesWS.PacientesClient();
-            PacientesWS.Paciente usuarionuevo = proxy.ModificarPaciente(8007,"juan d",
-                null, "46844382", new DateTime(), null, null, null,
-                null, new DateTime(), new DateTime(), 0, 0, 0, null, null);
+            PacientesWS.Paciente usuarionuevo = proxy.ModificarPaciente(8002,"juan d",
+                null, "46844382", dt, null, null, null,
+                null, dt, dt, 0, 0, 0, null, null);
             Assert.AreEqual("juan d", usuarionuevo.Nombre);
         }
 
@@ -50,10 +52,10 @@ namespace ProductoServicesTest
         public void eliminarPaciente()
         {
             PacientesWS.PacientesClient proxy = new PacientesWS.PacientesClient();
-            proxy.EliminarPaciente(7999);
-            PacientesWS.Paciente usuarionuevo = proxy.obtenerPaciente(7999);
+            proxy.EliminarPaciente(8002);
+            PacientesWS.Paciente usuarionuevo = proxy.obtenerPaciente(8002);
             Assert.IsNull(usuarionuevo);
 
-        }*/
+        }
     }
 }
