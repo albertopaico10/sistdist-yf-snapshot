@@ -13,19 +13,19 @@ namespace ProductoService
     public interface IPacientes
     {
         [OperationContract]
-        [FaultContract(typeof(MyExceptionContainer))]
+        [FaultContract(typeof(CustomException))]
         Paciente crearPaciente(string nombre, string apellido, string dni, DateTime birthDay, string direccion, string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated, int userUpdated, int sexo, string nombreReferente, string telefonoReferente);
         [OperationContract]
-        [FaultContract(typeof(MyExceptionContainer))]
+        [FaultContract(typeof(CustomException))]
         Paciente obtenerPaciente(int codigo);
         [OperationContract]
-        [FaultContract(typeof(MyExceptionContainer))]
+        [FaultContract(typeof(CustomException))]
         Paciente ModificarPaciente(int codigo, string nombre, string apellido, string dni, DateTime birthDay, string direccion, string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated, int userUpdated, int sexo, string nombreReferente, string telefonoReferente);
         [OperationContract]
-        [FaultContract(typeof(MyExceptionContainer))]
+        [FaultContract(typeof(CustomException))]
         void EliminarPaciente(int codigo);
         [OperationContract]
-        [FaultContract(typeof(MyExceptionContainer))]
+        [FaultContract(typeof(CustomException))]
         List<Paciente> ListarPacientes();
     }
 }

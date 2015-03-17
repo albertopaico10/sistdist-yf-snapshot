@@ -52,10 +52,10 @@ namespace ProductoService
                     return PacienteDao.Crear(pacienteNuevo);
                 }
                 catch(Exception e){
-                    MyExceptionContainer exceptionDetails = new MyExceptionContainer();
+                    CustomException exceptionDetails = new CustomException();
                     exceptionDetails.Messsage = e.Message;
                     exceptionDetails.Description = e.StackTrace;
-                    throw new FaultException<MyExceptionContainer>(exceptionDetails); 
+                    throw new FaultException<CustomException>(exceptionDetails); 
                 }
 
         }
@@ -68,10 +68,10 @@ namespace ProductoService
             }
             catch (Exception e)
             {
-                MyExceptionContainer exceptionDetails = new MyExceptionContainer();
+                CustomException exceptionDetails = new CustomException();
                 exceptionDetails.Messsage = e.Message;
                 exceptionDetails.Description = e.StackTrace;
-                throw new FaultException<MyExceptionContainer>(exceptionDetails);
+                throw new FaultException<CustomException>(exceptionDetails);
             }
             
         }
@@ -103,10 +103,10 @@ namespace ProductoService
             }
             catch (Exception e)
             {
-                MyExceptionContainer exceptionDetails = new MyExceptionContainer();
+                CustomException exceptionDetails = new CustomException();
                 exceptionDetails.Messsage = e.Message;
                 exceptionDetails.Description = e.StackTrace;
-                throw new FaultException<MyExceptionContainer>(exceptionDetails);
+                throw new FaultException<CustomException>(exceptionDetails);
             }
             
         }
@@ -121,10 +121,10 @@ namespace ProductoService
             }
             catch (Exception e)
             {
-                MyExceptionContainer exceptionDetails = new MyExceptionContainer();
+                CustomException exceptionDetails = new CustomException();
                 exceptionDetails.Messsage = e.Message;
                 exceptionDetails.Description = e.StackTrace;
-                throw new FaultException<MyExceptionContainer>(exceptionDetails);
+                throw new FaultException<CustomException>(exceptionDetails);
             }
         }
 
@@ -137,10 +137,10 @@ namespace ProductoService
             }
             catch (Exception e)
             {
-                MyExceptionContainer exceptionDetails = new MyExceptionContainer();
+                CustomException exceptionDetails = new CustomException();
                 exceptionDetails.Messsage = e.Message;
                 exceptionDetails.Description = e.StackTrace;
-                throw new FaultException<MyExceptionContainer>(exceptionDetails);
+                throw new FaultException<CustomException>(exceptionDetails);
             }
         }
     }
