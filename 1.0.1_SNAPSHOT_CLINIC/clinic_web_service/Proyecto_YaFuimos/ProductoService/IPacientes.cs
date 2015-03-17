@@ -16,12 +16,16 @@ namespace ProductoService
         [FaultContract(typeof(MyExceptionContainer))]
         Paciente crearPaciente(string nombre, string apellido, string dni, DateTime birthDay, string direccion, string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated, int userUpdated, int sexo, string nombreReferente, string telefonoReferente);
         [OperationContract]
+        [FaultContract(typeof(MyExceptionContainer))]
         Paciente obtenerPaciente(int codigo);
         [OperationContract]
+        [FaultContract(typeof(MyExceptionContainer))]
         Paciente ModificarPaciente(int codigo, string nombre, string apellido, string dni, DateTime birthDay, string direccion, string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated, int userUpdated, int sexo, string nombreReferente, string telefonoReferente);
         [OperationContract]
+        [FaultContract(typeof(MyExceptionContainer))]
         void EliminarPaciente(int codigo);
         [OperationContract]
+        [FaultContract(typeof(MyExceptionContainer))]
         List<Paciente> ListarPacientes();
     }
 }
