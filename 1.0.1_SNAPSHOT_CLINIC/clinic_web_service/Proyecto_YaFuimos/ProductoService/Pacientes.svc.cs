@@ -28,31 +28,52 @@ namespace ProductoService
             string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated,
             int userUpdated, int sexo, string nombreReferente, string telefonoReferente)
         {
-            Paciente pacienteNuevo = new Paciente
-            {
-                Nombre = nombre,
-                Apellido = apellido,
-                Dni = dni,
-                BirthDay = birthDay,
-                Direccion = direccion,
-                Distrito = distrito,
-                Status = status,
-                HistoriaClinidaId = historiaClinicaId,
-                CreatedDate = createDate,
-                UpdatedDate = updateDate,
-                UserCreated = userCreated,
-                UserUpdated = userUpdated,
-                Sexo = sexo,
-                NombreReferencia = nombreReferente,
-                TelefonoReferencia = telefonoReferente
-            };
+            Paciente pacienteNuevo = null;
+                try{
+                    pacienteNuevo = new Paciente
+                    {
+                        Nombre = nombre,
+                        Apellido = apellido,
+                        Dni = dni,
+                        BirthDay = birthDay,
+                        Direccion = direccion,
+                        Distrito = distrito,
+                        Status = status,
+                        HistoriaClinidaId = historiaClinicaId,
+                        CreatedDate = createDate,
+                        UpdatedDate = updateDate,
+                        UserCreated = userCreated,
+                        UserUpdated = userUpdated,
+                        Sexo = sexo,
+                        NombreReferencia = nombreReferente,
+                        TelefonoReferencia = telefonoReferente
+                    };
 
-            return PacienteDao.Crear(pacienteNuevo);
+                    return PacienteDao.Crear(pacienteNuevo);
+                }
+                catch(Exception e){
+                    CustomException exceptionDetails = new CustomException();
+                    exceptionDetails.Messsage = e.Message;
+                    exceptionDetails.Description = e.StackTrace;
+                    throw new FaultException<CustomException>(exceptionDetails); 
+                }
+
         }
 
         public Dominio.Paciente obtenerPaciente(int codigo)
         {
-            return PacienteDao.Obtener(codigo);
+            try
+            {
+                return PacienteDao.Obtener(codigo);
+            }
+            catch (Exception e)
+            {
+                CustomException exceptionDetails = new CustomException();
+                exceptionDetails.Messsage = e.Message;
+                exceptionDetails.Description = e.StackTrace;
+                throw new FaultException<CustomException>(exceptionDetails);
+            }
+            
         }
 
         public Dominio.Paciente ModificarPaciente(int codigo, string nombre, string apellido, string dni, DateTime birthDay, string direccion, string distrito, string status, string historiaClinicaId, DateTime createDate, DateTime updateDate, int userCreated, int userUpdated, int sexo, string nombreReferente, string telefonoReferente)
@@ -76,19 +97,51 @@ namespace ProductoService
                 NombreReferencia = nombreReferente,
                 TelefonoReferencia = telefonoReferente
             };
-
-            return PacienteDao.Modificar(pacienteNuevo);
+            try
+            {
+                return PacienteDao.Modificar(pacienteNuevo);
+            }
+            catch (Exception e)
+            {
+                CustomException exceptionDetails = new CustomException();
+                exceptionDetails.Messsage = e.Message;
+                exceptionDetails.Description = e.StackTrace;
+                throw new FaultException<CustomException>(exceptionDetails);
+            }
+            
         }
 
         public void EliminarPaciente(int codigo)
         {
-            Paciente pacienteEliminar = PacienteDao.Obtener(codigo);
-            PacienteDao.Eliminar(pacienteEliminar);
+            
+            try
+            {
+                Paciente pacienteEliminar = PacienteDao.Obtener(codigo);
+                PacienteDao.Eliminar(pacienteEliminar);
+            }
+            catch (Exception e)
+            {
+                CustomException exceptionDetails = new CustomException();
+                exceptionDetails.Messsage = e.Message;
+                exceptionDetails.Description = e.StackTrace;
+                throw new FaultException<CustomException>(exceptionDetails);
+            }
         }
 
-        public List<Dominio.Paciente> ListarSesores()
+        public List<Dominio.Paciente> ListarPacientes()
         {
-            return PacienteDao.ListarTodos().ToList();
+            
+            try
+            {
+                return PacienteDao.ListarTodos().ToList();
+            }
+            catch (Exception e)
+            {
+                CustomException exceptionDetails = new CustomException();
+                exceptionDetails.Messsage = e.Message;
+                exceptionDetails.Description = e.StackTrace;
+                throw new FaultException<CustomException>(exceptionDetails);
+            }
         }
     }
 }
