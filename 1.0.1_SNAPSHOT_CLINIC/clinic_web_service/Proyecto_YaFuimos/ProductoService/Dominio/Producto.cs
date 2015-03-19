@@ -21,11 +21,11 @@ namespace ProductoService.Dominio
         [DataMember]
         public decimal PriceProduct { get; set; }
         [DataMember]
-        public DateTime DateCreated { get; set; }
+        public string DateCreated { get; set; }
         [DataMember]
         public decimal PriceSale { get; set; }
         [DataMember]
-        public DateTime ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
         
     }
 }

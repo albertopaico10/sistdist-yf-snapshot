@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using ProductoService.Persistencia;
+using System.Diagnostics;
 
 namespace ProductoService
 {
@@ -31,10 +32,13 @@ namespace ProductoService
                 return presentationDAO;
             }
         }
-        public ProductoService.Dominio.Producto crearProducto(string nameProduct, int status, int idPresentacion, 
-                                      decimal priceProduct, DateTime dateCreated, decimal priceSale, 
-                                      DateTime expirationDate)
+        public int crearProducto(string nameProduct, int status, int idPresentacion,
+                                      decimal priceProduct, string dateCreated, decimal priceSale,
+                                      string expirationDate)
         {
+            Debug.WriteLine("HHHHHHHH");
+            Debug.WriteLine("NAME PRODUCT : "+nameProduct);
+            Console.WriteLine("HHHHHHHH");
             ProductoService.Dominio.Producto productoNuevo = new ProductoService.Dominio.Producto()
             {
                 NameProduct = nameProduct,
@@ -45,16 +49,19 @@ namespace ProductoService
                 PriceSale = priceSale,
                 ExpirationDate = expirationDate
             };
-
-            return ProductoDAO.Crear(productoNuevo);
+            ProductoDAO.Crear(productoNuevo);
+            return 1;
         }
-
-
-
-
+        
         public Dominio.Producto consultarProducto(int id)
         {
             return ProductoDAO.Obtener(id);
+        }
+
+
+        public bool validarExistenciaProducto(int idPresentacion, string nombreProduct)
+        {
+            return false;
         }
     }
 }

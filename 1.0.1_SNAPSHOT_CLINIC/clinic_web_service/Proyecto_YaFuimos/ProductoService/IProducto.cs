@@ -10,14 +10,18 @@ namespace ProductoService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
+    [XmlSerializerFormat(Style = OperationFormatStyle.Rpc, Use = OperationFormatUse.Encoded)]
     public interface IProducto
     {
 
         [OperationContract]
-        ProductoService.Dominio.Producto crearProducto(string nameProduct, int status, int idPresentacion, decimal priceProduct, DateTime dateCreated,
-                               decimal priceSale, DateTime expirationDate);
+        int crearProducto(string nameProduct, int status, int idPresentacion, decimal priceProduct, string dateCreated,
+                               decimal priceSale, string expirationDate);
         [OperationContract]
         ProductoService.Dominio.Producto consultarProducto(int id);
+
+        [OperationContract]
+        Boolean validarExistenciaProducto(int idPresentacion,String nombreProduct);
     }
 
 
