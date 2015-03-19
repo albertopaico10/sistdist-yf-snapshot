@@ -20,7 +20,10 @@ namespace ProductoService
         ProductoService.Dominio.Producto consultarProducto(int id);
 
         [OperationContract]
-        ProductoService.Dominio.Presentation.consultarPresentacion(int id);
+        ProductoService.Dominio.Presentation consultarPresentacion(int id);
+
+        [OperationContract]
+        ProductoService.Dominio.Presentation crearPresentacion(string namePresentation, int status, DateTime dateCreated);
     }
 
 

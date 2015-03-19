@@ -58,6 +58,20 @@ namespace ProductoService
         }
 
 
+        public Dominio.Presentation crearPresentacion(string namePresentation, int status, DateTime dateCreated)
+        {
+            ProductoService.Dominio.Presentation presentacionNueva = new ProductoService.Dominio.Presentation()
+            {
+                NamePresentation = namePresentation,
+                Status = status,
+                DateCreated = dateCreated
+            };
+
+            return PresentationDAO.Crear(presentacionNueva);
+
+
+        }
+
         public Dominio.Presentation consultarPresentacion(int id)
         {
             return PresentationDAO.Obtener(id);
