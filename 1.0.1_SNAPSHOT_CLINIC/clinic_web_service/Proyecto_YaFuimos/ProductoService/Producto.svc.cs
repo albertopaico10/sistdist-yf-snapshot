@@ -56,5 +56,11 @@ namespace ProductoService
         {
             return ProductoDAO.Obtener(id);
         }
+
+
+        public Dominio.Presentation consultarPresentacion(int id)
+        {
+            return PresentationDAO.Obtener(id);
+        }
     }
 }

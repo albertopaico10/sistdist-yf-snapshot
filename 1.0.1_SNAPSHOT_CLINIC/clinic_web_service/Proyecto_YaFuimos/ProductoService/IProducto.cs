@@ -18,6 +18,9 @@ namespace ProductoService
                                decimal priceSale, DateTime expirationDate);
         [OperationContract]
         ProductoService.Dominio.Producto consultarProducto(int id);
+
+        [OperationContract]
+        ProductoService.Dominio.Presentation.consultarPresentacion(int id);
     }
 
 
