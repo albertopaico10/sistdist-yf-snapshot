@@ -20,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.model.TbArea;
 import com.project.george.model.TbNewPatient;
 import com.project.george.model.TbPatient;
@@ -51,7 +51,7 @@ public class ManteniencePatientController {
 		final TbNewPatient tablePatient=new TbNewPatient();
 		model.addAttribute("maintenancePatientForm", tablePatient);
 		
-		String responseStr=CommonUtil.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT;
+		String responseStr=CommonConstants.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT;
 
 		return new ModelAndView(responseStr);
 	}
@@ -104,7 +104,7 @@ public class ManteniencePatientController {
 				+"***"+tablePatientBean.getNameReference()+"****"+tablePatientBean.getPhoneReference());
 		try {
 			valueResponse=tableNewPatientMan.addNewPatient(tablePatientBean);
-			if(CommonUtil.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW.equals(valueResponse)){				
+			if(CommonConstants.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW.equals(valueResponse)){				
 				request.setAttribute("messages", "success");
 			}
 		} catch (Exception e) {

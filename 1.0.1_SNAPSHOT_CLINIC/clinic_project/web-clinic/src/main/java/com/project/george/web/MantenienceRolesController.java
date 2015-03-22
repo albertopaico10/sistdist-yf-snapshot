@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.model.TbRole;
 import com.project.george.model.TbUser;
 import com.project.george.model.dto.TbRoleDTO;
@@ -31,7 +31,7 @@ public class MantenienceRolesController {
 		System.out.println("inside mantenienceRoles htm");
 		final TbRole tableRole=new TbRole();
 		model.addAttribute("maintenanceRoleForm", tableRole);
-		return CommonUtil.MantenienceRoles.RESPONSE_MANTENIENCE_ROLE; 
+		return CommonConstants.MantenienceRoles.RESPONSE_MANTENIENCE_ROLE; 
 	}
 	
 	
@@ -43,13 +43,13 @@ public class MantenienceRolesController {
 		final TbRole tableRole=new TbRole();
 		model.addAttribute("maintenanceRoleForm", tableRole);
 		
-		String responseStr=CommonUtil.MantenienceRoles.RESPONSE_MANTENIENCE_ROLE;
+		String responseStr=CommonConstants.MantenienceRoles.RESPONSE_MANTENIENCE_ROLE;
 		try {
 			List<TbRoleDTO> listAllRole=tableRoleMan.listAllRoles();
 			System.out.println("Cantidad de filas que trae :"+listAllRole.size());
 			request.setAttribute("listRole", listAllRole);
 		} catch (Exception e) {
-			responseStr=CommonUtil.ERROR;
+			responseStr=CommonConstants.ERROR;
 		}
 		return new ModelAndView(responseStr); 
 	}

@@ -16,6 +16,6 @@ namespace ProductoService.Dominio
         [DataMember]
         public int Status { get; set; }
         [DataMember]
-        public DateTime DateCreated { get; set; }
+        public string DateCreated { get; set; }
     }
 }

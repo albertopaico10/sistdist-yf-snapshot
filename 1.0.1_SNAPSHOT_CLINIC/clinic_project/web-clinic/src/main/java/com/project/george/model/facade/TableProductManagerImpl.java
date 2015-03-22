@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.bean.catalog.product.BeanProduct;
+import com.project.george.bean.catalog.product.BeanRequestProduct;
+import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
+import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbProduct;
+import com.project.george.model.bean.BeanResponseWeb;
 import com.project.george.model.dao.TableProductDao;
-import com.project.george.model.dto.TbProductDTO;
+import com.project.george.model.dto.ProductDTO;
 
 @Service
 @Transactional
@@ -19,15 +23,18 @@ public class TableProductManagerImpl implements TableProductManager {
 	@Autowired
 	TableProductDao customTableTypeProduct;
 	
-	public List<TbProductDTO> listSpecificProduct(String nameProduct)
+	@Autowired
+	public ClinicApplicationBusiness clinicApplicationBusiness;
+	
+	public List<ProductDTO> listSpecificProduct(String nameProduct)
 			throws Exception {
 		List<TbProduct> listAllData=customTableTypeProduct.listSpecificProduct(nameProduct);
 		
-		List<TbProductDTO> newListAll=new ArrayList<TbProductDTO>();
+		List<ProductDTO> newListAll=new ArrayList<ProductDTO>();
 		
 		UtilMethods utilMethods=new UtilMethods();
 		for (TbProduct beanTableDB:listAllData) {
-			TbProductDTO beanDTO=new TbProductDTO();
+			ProductDTO beanDTO=new ProductDTO();
 			beanDTO=utilMethods.copyValuesTypeProductDTO(beanTableDB, beanDTO);
 			newListAll.add(beanDTO);
 		}
@@ -38,16 +45,16 @@ public class TableProductManagerImpl implements TableProductManager {
 		return newListAll;
 	}
 		
-	public List<TbProductDTO> listAllTypeProduct() throws Exception {
+	public List<ProductDTO> listAllTypeProduct() throws Exception {
 		System.out.println("Inside listAllPresentation");
 		List<TbProduct> listAllData=customTableTypeProduct.listAllTypeProduct();
 		
-		List<TbProductDTO> newListAll=new ArrayList<TbProductDTO>();
+		List<ProductDTO> newListAll=new ArrayList<ProductDTO>();
 		
 		UtilMethods utilMethods=new UtilMethods();
 		
 		for (TbProduct beanTableDB:listAllData) {
-			TbProductDTO beanDTO=new TbProductDTO();
+			ProductDTO beanDTO=new ProductDTO();
 			beanDTO=utilMethods.copyValuesTypeProductDTO(beanTableDB, beanDTO);
 			newListAll.add(beanDTO);
 		}
@@ -60,24 +67,49 @@ public class TableProductManagerImpl implements TableProductManager {
 
 	public String addNewTypeProduct(TbProduct tbTypeProductBean)
 			throws Exception {
-		String returnRsponse=CommonUtil.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW;
+		String returnRsponse=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW;
 		try {
 			customTableTypeProduct.addNewMantenience(tbTypeProductBean);
 		} catch (Exception e) {
-			returnRsponse=CommonUtil.ERROR;
+			returnRsponse=CommonConstants.ERROR;
 		}		
 		return returnRsponse;
 	}
 
 
 	public String deleteTypeProduct(int idTypeProduct) throws Exception {
-		String returnRsponse=CommonUtil.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW;
+		String returnRsponse=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW;
 		TbProduct tbTypeProduct=new TbProduct();
 		tbTypeProduct=customTableTypeProduct.beanProductSpecific(idTypeProduct);
 		tbTypeProduct.setId(idTypeProduct);
 		tbTypeProduct.setStatus(2);
 		customTableTypeProduct.deleteValueMantenience(tbTypeProduct);
 		return returnRsponse;
+	}
+
+	public BeanResponseWeb setBeanProduct(ProductDTO beanProductDTO) throws Exception {
+		BeanRequestProduct beanProduct=new BeanRequestProduct();
+		beanProduct.setNamePresentation(beanProduct.getNameProduct());
+		beanProduct.setIdPresentation(beanProductDTO.getIdPresentation());
+		beanProduct.setNameProduct(beanProductDTO.getNameProduct());
+		beanProduct.setPrice(beanProductDTO.getPrice());
+		beanProduct.setPriceSale(beanProductDTO.getPriceSale());
+		
+		BeanProduct beanResponseProduct=clinicApplicationBusiness.saveProduct(beanProduct);
+		
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		if(CommonConstants.ResponseIdResult.RESULT_CORRECT.equals(beanResponseProduct.getResult())){
+			beanResponseWeb.setRedirectTo(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW);
+			beanResponseWeb.setMessage("Se grabo con Exito...!!");
+		}else if(CommonConstants.ResponseIdResult.RESULT_EXIST_PRODUCT.equals(beanResponseProduct.getResult())){
+			beanResponseWeb.setRedirectTo(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW);
+			beanResponseWeb.setMessage("El Producto que esta ingresando ya Existe");
+		}
+		if(beanResponseWeb.getRedirectTo().isEmpty()){
+			beanResponseWeb.setRedirectTo(CommonConstants.ErrorPage.RESPONSE_ERROR_PAGE);
+			beanResponseWeb.setMessage("Hubo un Error en los Servicios. Comuniquese con el Administrador");
+		}
+		return beanResponseWeb;
 	}
 
 

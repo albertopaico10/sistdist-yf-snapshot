@@ -100,6 +100,11 @@
 .success{
 	font: 13px/22px Helvetica, Arial, sans-serif;
 	font-weight: bold;
+	color: #197716;
+}
+.success{
+	font: 13px/22px Helvetica, Arial, sans-serif;
+	font-weight: bold;
 	color: #21189A;
 }
 

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.model.TbPatient;
 import com.project.george.model.TbSystemParam;
@@ -30,12 +30,12 @@ public class TablePatientManagerImpl implements TablePatientManager {
 	TableSystemParamManager tbSystemMan;
 
 	public String addNewPatient(TbPatient tbPatientBean) throws Exception {
-		String returnRsponse=CommonUtil.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW;
+		String returnRsponse=CommonConstants.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW;
 		TbSystemParam beanSystemParam=null;
 		boolean saveSytemParam=false;
 		if(!saveSytemParam){
 			saveSytemParam=true;
-			beanSystemParam=tbSystemMan.getValueSystemParam(CommonUtil.SystemParam.NAME_PARAM_LAST_CODE);
+			beanSystemParam=tbSystemMan.getValueSystemParam(CommonConstants.SystemParam.NAME_PARAM_LAST_CODE);
 			tbPatientBean.setHistoryClinic(beanSystemParam.getValueParam());
 			int intNextCodeHistory=Integer.parseInt(beanSystemParam.getValueParam());
 			intNextCodeHistory=intNextCodeHistory+1;
@@ -49,7 +49,7 @@ public class TablePatientManagerImpl implements TablePatientManager {
 			}
 			
 		} catch (Exception e) {
-			returnRsponse=CommonUtil.ERROR;
+			returnRsponse=CommonConstants.ERROR;
 		}
 		return returnRsponse;
 	}
@@ -60,7 +60,7 @@ public class TablePatientManagerImpl implements TablePatientManager {
 		
 		List<TbPatientDTO> newListPatient=new ArrayList<TbPatientDTO>();
 		//--Add Reference Code History
-		TbSystemParam beanSystemParam=tbSystemMan.getValueSystemParam(CommonUtil.SystemParam.NAME_PARAM_HISTORY_CLINIC);
+		TbSystemParam beanSystemParam=tbSystemMan.getValueSystemParam(CommonConstants.SystemParam.NAME_PARAM_HISTORY_CLINIC);
 		
 		UtilMethods utilMethods=new UtilMethods();
 		for(TbPatient beanPatient:listAllPatient){
@@ -81,7 +81,7 @@ public class TablePatientManagerImpl implements TablePatientManager {
 		
 		List<TbPatientDTO> newListPatient=new ArrayList<TbPatientDTO>();
 		//--Add Reference Code History
-		TbSystemParam beanSystemParam=tbSystemMan.getValueSystemParam(CommonUtil.SystemParam.NAME_PARAM_HISTORY_CLINIC);
+		TbSystemParam beanSystemParam=tbSystemMan.getValueSystemParam(CommonConstants.SystemParam.NAME_PARAM_HISTORY_CLINIC);
 		
 		UtilMethods utilMethods=new UtilMethods();
 		for(TbPatient beanPatient:listAllPatient){
@@ -96,7 +96,7 @@ public class TablePatientManagerImpl implements TablePatientManager {
 	}
 
 	public String deletePatient(int idPatient) throws Exception {
-		String returnRsponse=CommonUtil.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW;
+		String returnRsponse=CommonConstants.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW;
 		TbPatient tbPatintBean=new TbPatient();
 		tbPatintBean=custmTablePatient.beanPatientSpecific(idPatient);
 		tbPatintBean.setStatusPatient(2);//--2 is Inactive

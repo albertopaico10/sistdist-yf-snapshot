@@ -8,7 +8,7 @@ import com.project.george.bean.catalog.product.BeanRequestProduct;
 @Service
 public interface ProductService {
 
-	public BeanProduct saveProduct(BeanRequestProduct beanProduct);
+	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
 	
-	public boolean verificationExistProduct(String name);
+	public boolean verificationExistProduct(String name,int idPresentation)throws Exception;
 }

@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using ProductoService.Dominio;
 
 namespace ProductoService
 {
@@ -22,6 +23,21 @@ namespace ProductoService
 
         [OperationContract]
         Boolean validarExistenciaProducto(int idPresentacion,String nombreProduct);
+
+        [OperationContract]
+        PresentationResponse crearPresentacion(string namePresentation);
+
+        [OperationContract]
+        PresentationResponse consultarPresentacionObj(int idPresentacion);
+
+        [OperationContract]
+        ListPresentation listarPresentacionObj();
+
+        [OperationContract]
+        PresentationResponse actualizarPresentacion(string namePresentation, int status,
+                                    string dateCreated, int idPresentation);
+
+       
     }
 
 

@@ -12,7 +12,21 @@
 <%-- 	<a href="#" id="new_area"><spring:message code="maintenance.area.botton.new.area" /></a> --%>
 	<br>
 	<div id="idTitleList"><label class="titlePage"><spring:message code="maintenance.presentation.title.list" /></label></div>
-	<c:if test="${listPresentation==null}"><spring:message code="maintenance.presentation.list.empty" /></c:if>
+	<c:if test="${messages == 'NOTWORKING'}">
+		<label class="error"><spring:message code="error.message.ws.notworking" /></label><br>
+	</c:if>
+	<c:if test="${messages == 'ERROR'}">
+		<label class="error"><spring:message code="error.message.ws.presentation.error" /></label><br>
+	</c:if>
+	<c:if test="${messages == 'SUCCESS'}">
+		<label class="success"><spring:message code="error.message.ws.presentation.success" /></label><br>
+	</c:if>
+	<c:if test="${messages == 'SUCCESS_UPDATE'}">
+		<label class="success"><spring:message code="error.message.ws.presentation.success.update" /></label><br>
+	</c:if>
+	<c:if test="${messages == 'SUCCESS_DELETE'}">
+		<label class="success"><spring:message code="error.message.ws.presentation.success.delete" /></label><br>
+	</c:if>
 	<c:if test="${listPresentation!=null}">
 	<table class="tableStyle" border="1">
 		<tr class="thStyle">
@@ -39,7 +53,10 @@
 			<label><spring:message code="maintenance.presentation.nombre.presentation" /></label>
 			<html:input path="namePresentation" maxlength="60" id="namePresentation"/>
 		</div>
-		<div id="divIdPresentation"></div>
+		<div id="divIdPresentation" style="display: none">
+			<html:input path="nameAction" maxlength="60" id="nameAction" value="saveAction"/>
+			<html:input path="id" maxlength="60" id="id"/>
+		</div>
 		<div class="contenButtons">
 			<button type="submit" id="savePresentation">
 				<spring:message code="maintenance.botton.new.form"/>
@@ -68,24 +85,28 @@ $("#new_presentation" ).click(function( event ) {
 		height:170
 	});
 	$( "#namePresentation" ).val("");
+	$( "#nameAction" ).val("saveAction");
+	$( "#id" ).val("");
 	$("#savePresentation").html('<spring:message code="maintenance.roles.botton.new.role.form" />');
 });
 
 $("#savePresentation").click(function(){
-	var title = $( "#frmMaintenancePresentation" ).dialog( "option", "title" );
-	var titleUpdate='<spring:message code="maintenance.roles.title.update" />';
-	if(title==titleUpdate){
-		$('#maintenanceRoleForm').attr('action', 'updatePresentation.htm').submit();
+	var valueAction=$( "#nameAction" ).val();
+	if(valueAction=='updateAction'){
+		alert("action");
+		$('#idMaintenancePresentationForm').attr('action', 'updatePresentation.htm').submit();
 	}
 });
 
 function updateArea(idArea,namePresentation){
-	$("#divIdPresentation").empty();
+// 	$("#divIdPresentation").empty();
 	$( "#frmMaintenancePresentation" ).dialog();
 	$( "#namePresentation" ).val(namePresentation+"");
 	$( "#frmMaintenancePresentation" ).dialog('option', 'title', '<spring:message code="maintenance.areas.title.update" />');
 	$("#savePresentation").html('<spring:message code="maintenance.roles.botton.update.role.form" />');
-	$("#divIdPresentation").append('<input id="idArea" name="id" type="hidden" value="'+idArea+'"/>');
+// 	$("#divIdPresentation").append('<input id="idArea" name="id" type="hidden" value="'+idArea+'"/>');
+	$("#id").val(idArea);
+	$( "#nameAction" ).val("updateAction");
 }
 
 function fnOpenNormalDialog(id,option) {

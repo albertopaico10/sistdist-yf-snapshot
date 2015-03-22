@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.model.TbUser;
 
@@ -37,7 +37,7 @@ public class TableUserDaoImplTest {
 		TbUser userBean=tableUserDao.beanSpecific("apaico");
 		System.out.println("Datos : "+userBean.getApellidoUsuario()+"||"+userBean.getNombreUsuario()+"||"+userBean.getStatus()+"||"+userBean.getLastLoginDate());
 		UtilMethods util=new UtilMethods();
-		String formatDate=util.convertFormatString(userBean.getLastLoginDate(), CommonUtil.FormatDate.MM_DD_YYYY_HHMMSS);
+		String formatDate=util.convertFormatString(userBean.getLastLoginDate(), CommonConstants.FormatDate.MM_DD_YYYY_HHMMSS);
 		System.out.println("Formato final : "+formatDate);
 	}
 }

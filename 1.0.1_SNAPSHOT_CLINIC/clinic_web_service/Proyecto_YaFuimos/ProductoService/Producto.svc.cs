@@ -7,6 +7,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using ProductoService.Persistencia;
 using System.Diagnostics;
+using ProductoService.Dominio;
 
 namespace ProductoService
 {
@@ -32,11 +33,11 @@ namespace ProductoService
                 return presentationDAO;
             }
         }
+
         public int crearProducto(string nameProduct, int status, int idPresentacion,
                                       decimal priceProduct, string dateCreated, decimal priceSale,
                                       string expirationDate)
         {
-            Debug.WriteLine("HHHHHHHH");
             Debug.WriteLine("NAME PRODUCT : "+nameProduct);
             Console.WriteLine("HHHHHHHH");
             ProductoService.Dominio.Producto productoNuevo = new ProductoService.Dominio.Producto()
@@ -58,10 +59,139 @@ namespace ProductoService
             return ProductoDAO.Obtener(id);
         }
 
-
-        public bool validarExistenciaProducto(int idPresentacion, string nombreProduct)
+        public Boolean validarExistenciaProducto(int idPresentacion, string nombreProduct)
         {
             return false;
+        }
+
+        //Create by : Cesar
+        //Update by : Alberto Paico
+        //Name : crearPresentacion
+        //Description : This method was created for save all the presentation in DB
+        public PresentationResponse crearPresentacion(string namePresentation)
+        {
+            PresentationResponse presentationResponse= new PresentationResponse();
+            try{
+                Presentation presentacionNueva = new ProductoService.Dominio.Presentation()
+                {
+                    NamePresentation = namePresentation,
+                    Status = 1
+                };
+                PresentationDAO.Crear(presentacionNueva);
+                presentationResponse.Id=presentacionNueva.Id;
+                presentationResponse.NamePresentation=presentacionNueva.NamePresentation;
+                presentationResponse.Status=presentacionNueva.Status;
+                presentationResponse.DateCreated=presentacionNueva.DateCreated;
+                presentationResponse.Result="SUCCESS";
+            }
+            catch {
+                presentationResponse.Result="ERROR";
+            }
+
+            return presentationResponse;
+        }
+        //Create by : Cesar
+        //Update by : Alberto Paico
+        //Name : consultarPresentacionObj
+        //Description : This method was created for save all the presentation in DB
+        public PresentationResponse consultarPresentacionObj(int idPresentacion)
+        {
+            PresentationResponse presentationResponse = new PresentationResponse();
+            try
+            {
+                Presentation beanPresentation = PresentationDAO.Obtener(idPresentacion);
+                presentationResponse.Id = beanPresentation.Id;
+                presentationResponse.NamePresentation = beanPresentation.NamePresentation;
+                presentationResponse.Status = beanPresentation.Status;
+                presentationResponse.DateCreated = beanPresentation.DateCreated;
+                presentationResponse.Result = "SUCCESS";
+            }
+            catch
+            {
+                presentationResponse.Result = "ERROR";
+            }
+
+            return presentationResponse;
+        }
+
+        //Create by : Cesar
+        //Update by : Alberto Paico
+        //Name : listarPresentacionObj
+        //Description : This method was created for list all the presentation from DB
+        public ListPresentation listarPresentacionObj()
+        {
+            ListPresentation beanListPresentation = new ListPresentation();
+            try
+            {
+                ICollection<Presentation> iCollectionPresentation = PresentationDAO.ListarTodos();
+                Debug.WriteLine("Cantidad de Datos DEBUG: " + iCollectionPresentation.Count);
+                Console.WriteLine("Cantidad de Datos : " + iCollectionPresentation.Count);
+
+                List<PresentationResponse> listBeanResponse = new List<PresentationResponse>();
+                string response = "{"+"\"response\":[";
+                Presentation last=iCollectionPresentation.Last();
+                foreach (Presentation beanPresentation in iCollectionPresentation)
+                {
+                    //--El Ultimo valor
+                    if (beanPresentation.Equals(last))
+                    {
+                        response = response + "{\"Id\":" + beanPresentation.Id + ",";
+                        response = response + "\"NamePresentation\":" + "\"" + beanPresentation.NamePresentation + "\",";
+                        response = response + "\"Status\":" + beanPresentation.Status + ",";
+                        response = response + "\"DateCreated\":" + "\"" + beanPresentation.DateCreated + "\"}";
+                        Debug.WriteLine("Datos :  " + beanPresentation.Id + "**** " + beanPresentation.NamePresentation);
+                    }
+                    else {
+                        response = response + "{\"Id\":" + beanPresentation.Id + ",";
+                        response = response + "\"NamePresentation\":" + "\"" + beanPresentation.NamePresentation + "\",";
+                        response = response + "\"Status\":" + beanPresentation.Status + ",";
+                        response = response + "\"DateCreated\":" + "\"" + beanPresentation.DateCreated + "\"},";
+                    }
+                   
+                    Debug.WriteLine("Datos :  " + beanPresentation.Id + "**** " + beanPresentation.NamePresentation);
+                }
+
+                response = response + "]}";
+                Debug.WriteLine("RESPONSE : ------->>  " + response);
+                beanListPresentation.strCadenaValues = response;
+                beanListPresentation.Result = "SUCCESS";
+            }
+            catch {
+                beanListPresentation.Result = "ERROR";
+            }
+            return beanListPresentation;
+        }
+
+
+        //Create by : Cesar
+        //Update by : Alberto Paico
+        //Name : crearPresentacion
+        //Description : This method was created for save all the presentation in DB
+        public PresentationResponse actualizarPresentacion(string namePresentation, int status, 
+                                            string dateCreated, int idPresentation)
+        {
+            PresentationResponse presentationResponse = new PresentationResponse();
+            try
+            {
+                Presentation presentacionNueva = new ProductoService.Dominio.Presentation()
+                {
+                    NamePresentation = namePresentation,
+                    Status = 1,
+                    Id = idPresentation
+                };
+                PresentationDAO.Modificar(presentacionNueva);
+                presentationResponse.Id = presentacionNueva.Id;
+                presentationResponse.NamePresentation = presentacionNueva.NamePresentation;
+                presentationResponse.Status = presentacionNueva.Status;
+                presentationResponse.DateCreated = presentacionNueva.DateCreated;
+                presentationResponse.Result = "SUCCESS";
+            }
+            catch
+            {
+                presentationResponse.Result = "ERROR";
+            }
+
+            return presentationResponse;
         }
     }
 }

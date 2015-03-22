@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.project.george.model.dto.TbNewPatientDTO;
 import com.project.george.model.dto.TbPatientDTO;
-import com.project.george.model.dto.TbProductDTO;
+import com.project.george.model.dto.ProductDTO;
 
 public class PatientJson {
 	int iTotalRecords;
@@ -13,7 +13,7 @@ public class PatientJson {
 	String sColumns;
 //	List<TbPatientDTO> patientData;
 	List<TbNewPatientDTO> patientData;
-	List<TbProductDTO> productData;
+	List<ProductDTO> productData;
 	public int getiTotalRecords() {
 		return iTotalRecords;
 	}
@@ -44,10 +44,10 @@ public class PatientJson {
 	public void setPatientData(List<TbNewPatientDTO> patientData) {
 		this.patientData = patientData;
 	}
-	public List<TbProductDTO> getProductData() {
+	public List<ProductDTO> getProductData() {
 		return productData;
 	}
-	public void setProductData(List<TbProductDTO> productData) {
+	public void setProductData(List<ProductDTO> productData) {
 		this.productData = productData;
 	}
 }

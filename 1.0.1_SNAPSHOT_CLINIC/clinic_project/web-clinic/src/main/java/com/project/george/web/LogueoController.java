@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.model.TbUser;
 import com.project.george.model.dto.TbUserDTO;
 import com.project.george.model.facade.TableUserManager;
@@ -33,7 +33,7 @@ public class LogueoController {
 		TbUserDTO response=new TbUserDTO();
 		try {
 			response=tableUserMan.validateUserAndPassword(tableUserBean.getUserName(), tableUserBean.getPassword());
-			if(!CommonUtil.Login.RESPONSE_LOGIN_CORRECT.equals(response.getResponse())){
+			if(!CommonConstants.Login.RESPONSE_LOGIN_CORRECT.equals(response.getResponse())){
 				System.out.println("Dentro de responder Mensaje Incorrcto");
 				final TbUser tableUser=new TbUser();
 				model.addAttribute("loginUsuForm", tableUser);
@@ -53,7 +53,7 @@ public class LogueoController {
 		final TbUser tableUser=new TbUser();
 		model.addAttribute("loginUsuForm", tableUser);
 
-		return CommonUtil.Login.RESPONS_LOGIN_OPEN;
+		return CommonConstants.Login.RESPONS_LOGIN_OPEN;
 	}
 
 }

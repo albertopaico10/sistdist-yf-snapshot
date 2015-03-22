@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.model.TbArea;
 import com.project.george.model.dto.TbAreasDTO;
 import com.project.george.model.facade.TableAreasManager;
@@ -32,7 +32,7 @@ public class MantenienceAreaController {
 		final TbArea tableArea=new TbArea();
 		model.addAttribute("maintenanceAreaForm", tableArea);
 		
-		String responseStr=CommonUtil.MantenienceArea.RESPONSE_MANTENIENCE_AREA;
+		String responseStr=CommonConstants.MantenienceArea.RESPONSE_MANTENIENCE_AREA;
 		
 		try {
 			List<TbAreasDTO> listAllArea=tableAreaMan.listAllAreas();

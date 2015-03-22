@@ -17,6 +17,7 @@ namespace ProductoService.Persistencia
             }
             return entidad;
         }
+        
         public Entidad Obtener(Id id)
         {
             using (ISession sesion = NHibernateHelper.ObtenerSesion())
@@ -24,6 +25,7 @@ namespace ProductoService.Persistencia
                 return sesion.Get<Entidad>(id);
             }
         }
+        
         public Entidad Modificar(Entidad entidad)
         {
             using (ISession sesion = NHibernateHelper.ObtenerSesion())
@@ -33,6 +35,7 @@ namespace ProductoService.Persistencia
             }
             return entidad;
         }
+        
         public void Eliminar(Entidad entidad)
         {
             using (ISession sesion = NHibernateHelper.ObtenerSesion())
@@ -41,6 +44,7 @@ namespace ProductoService.Persistencia
                 sesion.Flush();
             }
         }
+        
         public ICollection<Entidad> ListarTodos()
         {
             using (ISession sesion = NHibernateHelper.ObtenerSesion())

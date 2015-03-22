@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.model.dto.TbDetailKardexDTO;
 import com.project.george.model.dto.TbKardexDTO;
 
@@ -61,12 +61,12 @@ public class ResponseUtilManagerImpl implements ResponseUtilManager {
 		responseDetailKardex.append("</tr>");
 		for(TbDetailKardexDTO beanDetailForm : beanKardexDTO){
 			responseDetailKardex.append("<tr>");
-			String classTable=CommonUtil.classTable;
+			String classTable=CommonConstants.classTable;
 			if("1".equals(beanDetailForm.getTypeOperation())){
-				classTable=CommonUtil.classTableRed;
+				classTable=CommonConstants.classTableRed;
 			}
 			else{
-				classTable=CommonUtil.classTableBlue;
+				classTable=CommonConstants.classTableBlue;
 			}
 			responseDetailKardex.append("<td class='"+classTable+"'>"+beanDetailForm.getId()+"</td>");
 			responseDetailKardex.append("<td class='"+classTable+"'>"+beanDetailForm.getCantidad()+"</td>");

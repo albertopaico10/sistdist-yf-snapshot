@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.model.TbDetailKardex;
 import com.project.george.model.TbKardex;
@@ -27,7 +27,7 @@ import com.project.george.model.dao.TableProductDao;
 import com.project.george.model.dao.TableProductDaoImpl;
 import com.project.george.model.dto.TbDetailKardexDTO;
 import com.project.george.model.dto.TbKardexDTO;
-import com.project.george.model.dto.TbProductDTO;
+import com.project.george.model.dto.ProductDTO;
 
 
 @Service
@@ -65,7 +65,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 	public String addNewRegisterKardex(String idProduct,
 			String cantidad,String comprobanteClase,
 			String comprobanteNumber,String idKardexController,String typeOperation)throws Exception{
-		String responsesAjax=CommonUtil.RegisterKardex.RESPONSES_SUCCESS;
+		String responsesAjax=CommonConstants.RegisterKardex.RESPONSES_SUCCESS;
 		int idKardex=0;
 		TbKardex beanKardex=new TbKardex();
 		System.out.println("Estoy aqui addNewRegisterKardex");
@@ -73,7 +73,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		TbProduct beanProuctKardex=customTableProductDao.beanProductSpecific(Integer.parseInt(idProduct));
 		
 		beanKardex.setTbProduct(beanProuctKardex);
-		beanKardex.setStatus(CommonUtil.STATUS_ACTIVE);
+		beanKardex.setStatus(CommonConstants.STATUS_ACTIVE);
 		System.out.println("SALI DE BUSCAR PRODUCTO ESPECIFICO");
 		
 		beanKardex.setPriceTotalProduct(BigDecimal.valueOf(0));
@@ -94,7 +94,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		beanDetailKardex.setTypeOperation(typeOperation);
 		beanDetailKardex.setComprobante_clase(comprobanteClase);
 		beanDetailKardex.setComprobante_number(Integer.parseInt(comprobanteNumber));
-		beanDetailKardex.setStatus(CommonUtil.STATUS_ACTIVE);
+		beanDetailKardex.setStatus(CommonConstants.STATUS_ACTIVE);
 		beanDetailKardex.setPrice_Product(beanProuctKardex.getPrice_Product());
 		beanDetailKardex.setPrice_sale(beanProuctKardex.getPrice_sale());
 		beanDetailKardex.setTbKardex(beanKardex);
@@ -110,7 +110,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 			updateHeaderMasterKardex(beanKardex, listDetailKardex);			
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
-			responsesAjax=CommonUtil.ERROR;
+			responsesAjax=CommonConstants.ERROR;
 			e.printStackTrace();
 		}		
 		System.out.println("RESPONSE FROM MANAGER : "+responsesAjax);
@@ -125,7 +125,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		BigDecimal totalSale=new BigDecimal("0.0");
 		BigDecimal partialTotalSale=new BigDecimal("0.0");
 		for (TbDetailKardex beanDetail:listDetailKardex) {
-			if(CommonUtil.RegisterKardex.TYPE_OPERATION_ENTRY.equals(beanDetail.getTypeOperation())){
+			if(CommonConstants.RegisterKardex.TYPE_OPERATION_ENTRY.equals(beanDetail.getTypeOperation())){
 				totalEntry+=beanDetail.getCantidad();
 //				dTotalProduct+=beanDetail.getCantidad()*beanDetail.getPrice_Product().longValue();
 				partialTotalProduct=beanDetail.getPrice_Product().multiply(new BigDecimal(beanDetail.getCantidad()));

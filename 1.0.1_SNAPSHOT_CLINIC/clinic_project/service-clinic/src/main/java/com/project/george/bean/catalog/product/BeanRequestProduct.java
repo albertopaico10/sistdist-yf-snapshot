@@ -1,6 +1,7 @@
 package com.project.george.bean.catalog.product;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class BeanRequestProduct {
 
@@ -11,7 +12,7 @@ public class BeanRequestProduct {
 	public String namePresentation;
 	public BigDecimal price;
 	public BigDecimal priceSale;
-	public String expirationDate;
+	public Date expirationDate;
 	public int getId() {
 		return id;
 	}
@@ -54,10 +55,10 @@ public class BeanRequestProduct {
 	public void setPriceSale(BigDecimal priceSale) {
 		this.priceSale = priceSale;
 	}
-	public String getExpirationDate() {
+	public Date getExpirationDate() {
 		return expirationDate;
 	}
-	public void setExpirationDate(String expirationDate) {
+	public void setExpirationDate(Date expirationDate) {
 		this.expirationDate = expirationDate;
 	}
 	

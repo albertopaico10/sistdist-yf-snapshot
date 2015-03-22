@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import com.project.george.bean.catalog.presentation.canonical.BeanResponseCanonicalPresentation;
 import com.project.george.model.TbArea;
 import com.project.george.model.TbDetailKardex;
 import com.project.george.model.TbKardex;
@@ -22,9 +23,9 @@ import com.project.george.model.dto.TbDetailKardexDTO;
 import com.project.george.model.dto.TbKardexDTO;
 import com.project.george.model.dto.TbNewPatientDTO;
 import com.project.george.model.dto.TbPatientDTO;
-import com.project.george.model.dto.TbPresentationDTO;
+import com.project.george.model.dto.PresentationDTO;
 import com.project.george.model.dto.TbRoleDTO;
-import com.project.george.model.dto.TbProductDTO;
+import com.project.george.model.dto.ProductDTO;
 import com.project.george.model.dto.TbUserDTO;
 
 public class UtilMethods {
@@ -54,7 +55,7 @@ public class UtilMethods {
 		return beanTo;
 	}
 	
-	public TbProductDTO copyValuesTypeProductDTO(TbProduct beanFrom,TbProductDTO beanTo){
+	public ProductDTO copyValuesTypeProductDTO(TbProduct beanFrom,ProductDTO beanTo){
 		beanTo.setId(beanFrom.getId());
 		beanTo.setNameProduct(beanFrom.getNameProduct());
 		beanTo.setStatus(beanFrom.getStatus());
@@ -62,15 +63,23 @@ public class UtilMethods {
 		beanTo.setIdPresentation(beanFrom.getTbPresentation().getId());
 		beanTo.setPrice(beanFrom.getPrice_Product());
 		beanTo.setPriceSale(beanFrom.getPrice_sale());
-		beanTo.setExpirationDate(convertFormatString(beanFrom.getExpirationDate(), CommonUtil.FormatDate.MM_DD_YYYY));
+		beanTo.setExpirationDate(convertFormatString(beanFrom.getExpirationDate(), CommonConstants.FormatDate.MM_DD_YYYY));
 		return beanTo;
 		
 	}
 	
-	public TbPresentationDTO copyValuesPresentationDTO(TbPresentation beanFrom,TbPresentationDTO beanTo){
+	public PresentationDTO copyValuesPresentationDTO(TbPresentation beanFrom,PresentationDTO beanTo){
 		beanTo.setId(beanFrom.getId());
 		beanTo.setNamePresentation(beanFrom.getNamePresentation());
 		beanTo.setStatus(beanFrom.getStatus());
+		return beanTo;
+		
+	}
+	
+	public PresentationDTO copyValuesPresentationDTOfromService(BeanResponseCanonicalPresentation beanFrom,PresentationDTO beanTo){
+		beanTo.setId(beanFrom.Id);
+		beanTo.setNamePresentation(beanFrom.NamePresentation);
+		beanTo.setStatus(beanFrom.Status);
 		return beanTo;
 		
 	}
@@ -85,7 +94,7 @@ public class UtilMethods {
 		beanTo.setUserCreated(beanFrom.getUserCreated());
 		beanTo.setUserName(beanFrom.getUserName());
 		beanTo.setUserUpdated(beanTo.getUserUpdated());
-		beanTo.setLastLoginFormat(convertFormatString(beanFrom.getLastLoginDate(), CommonUtil.FormatDate.MM_DD_YYYY_HHMMSS));
+		beanTo.setLastLoginFormat(convertFormatString(beanFrom.getLastLoginDate(), CommonConstants.FormatDate.MM_DD_YYYY_HHMMSS));
 		return beanTo;
 	}
 	
@@ -116,7 +125,7 @@ public class UtilMethods {
 		beanTo.setNameAra(beanFrom.getTbArea().getNameArea());
 		beanTo.setDistrictName(beanFrom.getDistrictName());
 		beanTo.setHistoryClinic(beanFrom.getHistoryClinic());
-		beanTo.setBirthDayFormat(convertFormatString(beanFrom.getBirthDay(), CommonUtil.FormatDate.MM_DD_YYYY));
+		beanTo.setBirthDayFormat(convertFormatString(beanFrom.getBirthDay(), CommonConstants.FormatDate.MM_DD_YYYY));
 		return beanTo;
 	}
 	
@@ -131,7 +140,7 @@ public class UtilMethods {
 		beanTo.setAddress(beanFrom.getAdress());
 		beanTo.setDistrictName(beanFrom.getDistrictName());
 		beanTo.setCodeHistoryClinic(beanFrom.getCodeHistoryClinic());
-		beanTo.setBirthDayFormat(convertFormatString(beanFrom.getBirthDay(), CommonUtil.FormatDate.MM_DD_YYYY));
+		beanTo.setBirthDayFormat(convertFormatString(beanFrom.getBirthDay(), CommonConstants.FormatDate.MM_DD_YYYY));
 		beanTo.setIdSexo(beanFrom.getSex());
 		if(beanFrom.getNameReference()==null){
 			beanTo.setNameReference("");

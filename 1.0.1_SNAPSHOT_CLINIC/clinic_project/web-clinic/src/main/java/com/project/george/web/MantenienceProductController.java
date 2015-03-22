@@ -19,14 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.project.george.common.CommonUtil;
-import com.project.george.model.TbArea;
-import com.project.george.model.TbPresentation;
+import com.project.george.bean.catalog.product.BeanProduct;
+import com.project.george.common.CommonConstants;
+import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbProduct;
 import com.project.george.model.bean.PatientJson;
-import com.project.george.model.dto.TbNewPatientDTO;
-import com.project.george.model.dto.TbPresentationDTO;
-import com.project.george.model.dto.TbProductDTO;
+import com.project.george.model.dto.PresentationDTO;
+import com.project.george.model.dto.ProductDTO;
 import com.project.george.model.facade.TablePresentationManager;
 import com.project.george.model.facade.TableProductManager;
 
@@ -45,7 +44,7 @@ public class MantenienceProductController {
 		final TbProduct tbTypeProduct=new TbProduct();
 		model.addAttribute("maintenanceForm", tbTypeProduct);
 		
-		String responseStr=CommonUtil.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT;
+		String responseStr=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT;
 //		
 //		try {
 //			List<TbProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
@@ -59,10 +58,10 @@ public class MantenienceProductController {
 	}
 	
 	@ModelAttribute("listAllPresentation")
-  public final List<TbPresentationDTO> presentationList(
+  public final List<PresentationDTO> presentationList(
           final HttpServletRequest request) {
 		try {
-			List<TbPresentationDTO> listAllPresentation=tablePresentationMan.listAllPresentation();
+			List<PresentationDTO> listAllPresentation=tablePresentationMan.listAllPresentation();
 			System.out.println("Cantidad de areas  para cargar:"+listAllPresentation.size());
 			return listAllPresentation;
 		} catch (Exception e) {
@@ -73,13 +72,14 @@ public class MantenienceProductController {
 	
 	@RequestMapping("registerProduct.htm")
 	public ModelAndView validateUserForm(
-			@ModelAttribute TbProduct tableTypeProductBean,
+			@ModelAttribute ProductDTO beanProductDTO,
 			final BindingResult result, final SessionStatus status,
 			final HttpServletRequest request) {
 		System.out.println("inside registerTypeProduct htm");
 		String valueResponse="";
 		try {
-			valueResponse=tableProduct.addNewTypeProduct(tableTypeProductBean);
+//			valueResponse=tableProduct.addNewTypeProduct(tableTypeProductBean);
+//			BeanProduct responseProduct=tableProduct.saveProduct(beanProductDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,7 +129,7 @@ public class MantenienceProductController {
 		System.out.println("Entre a listar todos los productos");
 		String json2="";
 		try {
-			List<TbProductDTO> listAllProduct=tableProduct.listAllTypeProduct();
+			List<ProductDTO> listAllProduct=tableProduct.listAllTypeProduct();
 			PatientJson beanPatientJson=new PatientJson();
 			beanPatientJson.setiTotalDisplayRecords(listAllProduct.size());
 			beanPatientJson.setiTotalRecords(listAllProduct.size());

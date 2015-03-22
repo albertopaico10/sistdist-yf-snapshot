@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.model.TbArea;
 import com.project.george.model.TbRole;
@@ -39,17 +39,17 @@ public class TableAreasManagerImpl implements TableAreasManager{
 	}
 
 	public String addNewArea(TbArea tbAreaBean) throws Exception {
-		String returnRsponse=CommonUtil.MantenienceArea.RESPONSE_MANTENIENCE_AREA_NEW;
+		String returnRsponse=CommonConstants.MantenienceArea.RESPONSE_MANTENIENCE_AREA_NEW;
 		try {
 			custmTableArea.addNewArea(tbAreaBean);
 		} catch (Exception e) {
-			returnRsponse=CommonUtil.ERROR;
+			returnRsponse=CommonConstants.ERROR;
 		}
 		return returnRsponse;
 	}
 	
 	public String deleteArea(int idArea) throws Exception {
-		String returnRsponse=CommonUtil.MantenienceArea.RESPONSE_MANTENIENCE_AREA_NEW;
+		String returnRsponse=CommonConstants.MantenienceArea.RESPONSE_MANTENIENCE_AREA_NEW;
 		TbArea tbAreaBean=new TbArea();
 		tbAreaBean=custmTableArea.beanAreaSpecific(idArea);
 		tbAreaBean.setId(idArea);

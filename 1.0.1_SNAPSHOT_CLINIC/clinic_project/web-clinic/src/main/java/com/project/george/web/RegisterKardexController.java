@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.george.common.CommonUtil;
+import com.project.george.common.CommonConstants;
 import com.project.george.model.dto.TbDetailKardexDTO;
 import com.project.george.model.dto.TbKardexDTO;
-import com.project.george.model.dto.TbProductDTO;
+import com.project.george.model.dto.ProductDTO;
 import com.project.george.model.facade.ResponseUtilManager;
 import com.project.george.model.facade.TableKardexManager;
 import com.project.george.model.facade.TableProductManager;
@@ -39,7 +39,7 @@ public class RegisterKardexController {
 			HttpServletResponse response,final ModelMap model) {
 		System.out.println("inside registerKardex htm");
 		
-		String responseStr=CommonUtil.RegisterKardex.RESPONSES_REGISTER_KARDEX;
+		String responseStr=CommonConstants.RegisterKardex.RESPONSES_REGISTER_KARDEX;
 		
 		return new ModelAndView(responseStr);
 	}
@@ -49,11 +49,11 @@ public class RegisterKardexController {
 			HttpServletResponse response,final ModelMap model) {
 		System.out.println("inside findProduct htm");		
 //		String returnRsponse=CommonUtil.RegisterKardex.REDIRECT_REGISTER_KARDEX;
-		String returnRsponse=CommonUtil.RegisterKardex.RESPONSES_REGISTER_KARDEX;
+		String returnRsponse=CommonConstants.RegisterKardex.RESPONSES_REGISTER_KARDEX;
 		final String nameProduct = String.valueOf(request.getParameter("nameProduct"));
 		System.out.println("Request Parameter : "+nameProduct);
 		try {
-			List<TbProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
+			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
 			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
 			request.setAttribute("listProduct", listAllProduct);
 			request.setAttribute("nameProduct", nameProduct);
@@ -69,12 +69,12 @@ public class RegisterKardexController {
     public ModelAndView listKardexByProduct (HttpServletRequest request,
 			HttpServletResponse response,final ModelMap model) {
 		System.out.println("inside findProduct htm");		
-		String returnRsponse=CommonUtil.RegisterKardex.RESPONSES_REGISTER_KARDEX;
+		String returnRsponse=CommonConstants.RegisterKardex.RESPONSES_REGISTER_KARDEX;
 		final String nameProduct = String.valueOf(request.getParameter("nameProduct"));
 		final String productId = String.valueOf(request.getParameter("productId"));
 		System.out.println("Request Parameter : "+nameProduct);
 		try {
-			List<TbProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
+			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
 			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
 			request.setAttribute("listProduct", listAllProduct);
 			request.setAttribute("nameProduct", nameProduct);
@@ -93,7 +93,7 @@ public class RegisterKardexController {
     public ModelAndView saveKardexByProduct (HttpServletRequest request,
 			HttpServletResponse response,final ModelMap model) {
 		System.out.println("inside saveKardexByProduct htm");		
-		String returnRsponse=CommonUtil.RegisterKardex.RESPONSES_REGISTER_KARDEX;
+		String returnRsponse=CommonConstants.RegisterKardex.RESPONSES_REGISTER_KARDEX;
 		final String nameProduct = String.valueOf(request.getParameter("nameProduct"));
 		final String productId = String.valueOf(request.getParameter("productId"));
 		final String cantidad = String.valueOf(request.getParameter("cantidad"));
@@ -103,7 +103,7 @@ public class RegisterKardexController {
 		final String typeOperation = String.valueOf(request.getParameter("typeOperation"));
 		//--Validate if exist product in stock.
 		boolean resultStock=false;
-		if(CommonUtil.RegisterKardex.TYPE_OPERATION_EGRESS.equals(typeOperation)){
+		if(CommonConstants.RegisterKardex.TYPE_OPERATION_EGRESS.equals(typeOperation)){
 			try {
 				resultStock=tableKardexManager.validateIfExistProductInStock(cantidad, idKardex);
 			} catch (Exception e) {
@@ -119,7 +119,7 @@ public class RegisterKardexController {
 			for(TbKardexDTO beanKardexDTO:listKardexByProduct){
 				request.setAttribute("idKardexController", beanKardexDTO.getId());	
 			}
-			List<TbProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
+			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
 			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
 			request.setAttribute("listProduct", listAllProduct);
 			request.setAttribute("nameProduct", nameProduct);
@@ -149,7 +149,7 @@ public class RegisterKardexController {
 		}
 		if(listDetailKardexByProduct==null){
 			System.out.println("ES NULL");
-			responseJSP=CommonUtil.ReturnAJAX.IS_NULL;
+			responseJSP=CommonConstants.ReturnAJAX.IS_NULL;
 		}else if(listDetailKardexByProduct.size()>0){
 			try {
 				responseJSP=responseUtilManager.responsesDetailKardex(listDetailKardexByProduct);
