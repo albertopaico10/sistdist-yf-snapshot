@@ -43,8 +43,8 @@ public class PresentationServiceImpl {
 	@Test
 	public void testUpdatePresentation()throws Exception{
 		BeanRequestPresentation request=new BeanRequestPresentation();
-		request.setNamePresentation("termometro jejejeje");
-		request.setStatus(1);
+		request.setNamePresentation("Bolsas");
+		request.setStatus(7);
 		request.setDateCreated("2015-09-11");
 		request.setId(54);
 		BeanResponsePresentation response=presentationService.updatePresentationService(request);

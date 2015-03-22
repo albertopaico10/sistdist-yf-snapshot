@@ -176,7 +176,7 @@ namespace ProductoService
                 Presentation presentacionNueva = new ProductoService.Dominio.Presentation()
                 {
                     NamePresentation = namePresentation,
-                    Status = 1,
+                    Status = status,
                     Id = idPresentation
                 };
                 PresentationDAO.Modificar(presentacionNueva);

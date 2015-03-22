@@ -85,12 +85,15 @@ public class ManteniencePresentationController {
 		final int idPresentation = Integer.parseInt(request.getParameter("idPresentation"));
 		System.out.println("ID Presentation : "+idPresentation);
 		String valueResponse="";
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
 		try {
-			valueResponse=tablePresentationMan.deletePresentation(idPresentation);
+//			valueResponse=tablePresentationMan.deletePresentation(idPresentation);
+			beanResponseWeb=tablePresentationMan.deletePresentationWS(idPresentation);
+			request.setAttribute("messages", beanResponseWeb.getStatusResponse());
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
 		} 
-		return valueResponse;
+		return beanResponseWeb.getRedirectTo();
 	}
 	
 	@RequestMapping("updatePresentation.htm")

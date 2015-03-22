@@ -198,7 +198,7 @@ public class TablePresentationManagerImpl implements TablePresentationManager {
 //		}
 //		beanResponseWeb.setListPresentationDTO(newListAllPresentation);
 		logger.info(CommonConstants.Logger.LOGGER_END);
-		return null;
+		return beanResponseWeb;
 	}
 
 }
