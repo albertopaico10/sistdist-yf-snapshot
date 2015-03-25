@@ -54,5 +54,16 @@ namespace ProductoService.Persistencia
             }
         }
 
+        public ICollection<Entidad> ListarTodosStatusActive(string table)
+        {
+            using (ISession sesion = NHibernateHelper.ObtenerSesion())
+            {
+                //ICriteria busqueda = sesion.CreateCriteria(typeof(Entidad));
+                string query = "from " + table+" where status=1";
+                IQuery busqueda = sesion.CreateQuery(query);
+                return busqueda.List<Entidad>();
+            }
+        }
+
     }
 }

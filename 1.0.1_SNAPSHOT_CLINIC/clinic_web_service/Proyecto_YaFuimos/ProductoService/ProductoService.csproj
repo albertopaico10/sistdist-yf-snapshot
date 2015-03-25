@@ -76,7 +76,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="boolean.cs" />
     <Compile Include="Dominio\CustomException.cs" />
     <Compile Include="Dominio\ListPresentation.cs" />
     <Compile Include="Dominio\MyExceptionContainer.cs" />

@@ -123,7 +123,7 @@ namespace ProductoService
             ListPresentation beanListPresentation = new ListPresentation();
             try
             {
-                ICollection<Presentation> iCollectionPresentation = PresentationDAO.ListarTodos();
+                ICollection<Presentation> iCollectionPresentation = PresentationDAO.ListarTodosStatusActive("Presentation");
                 Debug.WriteLine("Cantidad de Datos DEBUG: " + iCollectionPresentation.Count);
                 Console.WriteLine("Cantidad de Datos : " + iCollectionPresentation.Count);
 
