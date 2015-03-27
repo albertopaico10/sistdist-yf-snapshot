@@ -1,14 +1,16 @@
 package com.george.project;
 
+
 import com.project.george.facade.business.ClinicApplicationBusiness;
-import com.project.george.facade.business.impl.ClinicApplicationBussinesImpl;
+import com.project.george.facade.business.impl.ClinicApplicationBusinessImpl;
+
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
-
+//	Logger logger=Logger.getLogger(MainActivity.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,7 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
     	System.out.println("HOLAAAAAAAAAAAAAAAaa");
-    	ClinicApplicationBusiness clinicApplicationBusiness=new ClinicApplicationBussinesImpl();
+    	ClinicApplicationBusiness clinicApplicationBusiness=new ClinicApplicationBusinessImpl();
     	try {
 			String value=clinicApplicationBusiness.mensajeTest("Alberto");
 			System.out.println("Value : "+value);
