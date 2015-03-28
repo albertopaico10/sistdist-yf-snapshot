@@ -161,13 +161,13 @@ public final class JsonUtils {
 		return newJson;
 	}
 	
-	public static Map<String, Object> transformToValidMap(String json) {
-		Map<String, Object> map = null;
-		if (!StringUtils.isEmpty(json)) {
-			map = JsonUtils.jsonToJavaObject(json, Map.class);
-		}
-		return map;
-	}
+//	public static Map<String, Object> transformToValidMap(String json) {
+//		Map<String, Object> map = null;
+//		if (!StringUtils.isEmpty(json)) {
+//			map = JsonUtils.jsonToJavaObject(json, Map.class);
+//		}
+//		return map;
+//	}
 	
 	
 	/*public static Object extractPath(String json, String path) throws IOException {

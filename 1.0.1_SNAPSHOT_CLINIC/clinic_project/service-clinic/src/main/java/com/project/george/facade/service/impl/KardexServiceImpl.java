@@ -13,7 +13,7 @@ public class KardexServiceImpl implements KardexService {
 	
 	public BeanResponseKardex saveKardex(BeanRequestKardex beanRequestKardex)
 			throws Exception {
-		RestTemplate restTemplate=new RestTemplate();
+//		RestTemplate restTemplate=new RestTemplate();
 		return null;
 	}
 

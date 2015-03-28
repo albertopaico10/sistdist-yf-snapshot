@@ -5,6 +5,9 @@ import javax.xml.rpc.ParameterMode;
 import javax.xml.rpc.encoding.XMLType;
 
 import org.apache.axis.client.Call;
+import org.apache.axis.encoding.ser.BeanDeserializerFactory;
+import org.apache.axis.encoding.ser.BeanSerializerFactory;
+import org.apache.axis.message.IDResolver;
 import org.springframework.stereotype.Service;
 
 import com.project.george.bean.catalog.product.BeanProduct;
