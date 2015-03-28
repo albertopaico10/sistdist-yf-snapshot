@@ -7,7 +7,7 @@ import javax.xml.rpc.encoding.XMLType;
 import org.apache.axis.client.Call;
 import org.apache.axis.encoding.ser.BeanDeserializerFactory;
 import org.apache.axis.encoding.ser.BeanSerializerFactory;
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
@@ -24,11 +24,11 @@ import com.project.george.util.UtilWebService;
 @Service
 public class PresentationServiceImpl implements PresentationService {
 	
-	private static Logger logger = Logger.getLogger(PresentationServiceImpl.class);
+//	private static Logger logger = Logger.getLogger(PresentationServiceImpl.class);
 	public String rucService = CommonConstants.PRODUCT_SOAP;
 	
 	public BeanResponsePresentation savePresentationService(BeanRequestPresentation beanRequestPresentation) throws Exception {
-		logger.info(CommonConstants.Logger.LOGGER_START);
+//		logger.info(CommonConstants.Logger.LOGGER_START);
 		BeanResponsePresentation beanResponsePresentation=new BeanResponsePresentation();
 		BeanResponseCanonicalPresentation beanResponseWS=null;
 		try {
@@ -58,12 +58,12 @@ public class PresentationServiceImpl implements PresentationService {
 	         e.printStackTrace();
 	         beanResponsePresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_NOTWORKING);
 		}
-		logger.info(CommonConstants.Logger.LOGGER_END);
+//		logger.info(CommonConstants.Logger.LOGGER_END);
 		return beanResponsePresentation;
 	}
 
 	public BeanResponseListPresentation listAllPresentation()throws Exception {
-		logger.info(CommonConstants.Logger.LOGGER_START);
+//		logger.info(CommonConstants.Logger.LOGGER_START);
 		BeanResponseListPresentation responseListPresentation=new BeanResponseListPresentation();
 		BeanResponseCanonicalListPresentation beanResponseWS=null;
 		try {
@@ -91,15 +91,15 @@ public class PresentationServiceImpl implements PresentationService {
 			}
 			
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+//			logger.error(e.getMessage());
 			responseListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_NOTWORKING);
 		}
-		logger.info(CommonConstants.Logger.LOGGER_END);
+//		logger.info(CommonConstants.Logger.LOGGER_END);
 		return responseListPresentation;
 	}
 	
 	public BeanResponsePresentation consultPresentationService(BeanRequestPresentation beanRequestPresentation) throws Exception {
-	logger.info(CommonConstants.Logger.LOGGER_START);
+//	logger.info(CommonConstants.Logger.LOGGER_START);
 	
 	BeanResponsePresentation beanResponsePresentation=new BeanResponsePresentation();
 	BeanResponseCanonicalPresentation beanResponseWS=null;
@@ -130,12 +130,12 @@ public class PresentationServiceImpl implements PresentationService {
          e.printStackTrace();
          beanResponsePresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_NOTWORKING);
 	}
-	logger.info(CommonConstants.Logger.LOGGER_END);
+//	logger.info(CommonConstants.Logger.LOGGER_END);
 	return beanResponsePresentation;
 	}
 
 	public BeanResponsePresentation updatePresentationService(BeanRequestPresentation beanRequestPresentation) throws Exception {
-		logger.info(CommonConstants.Logger.LOGGER_START);
+//		logger.info(CommonConstants.Logger.LOGGER_START);
 		BeanResponsePresentation beanResponsePresentation=new BeanResponsePresentation();
 		BeanResponseCanonicalPresentation beanResponseWS=null;
 		try {
@@ -155,8 +155,8 @@ public class PresentationServiceImpl implements PresentationService {
 			objCall.addParameter("idPresentation", XMLType.XSD_INT, ParameterMode.IN);
 			
 			objCall.setReturnClass(BeanResponseCanonicalPresentation.class);
-			logger.info("***** Name by Updated: "+beanRequestPresentation.getNamePresentation()+"****"+beanRequestPresentation.getId()
-					+"*****"+beanRequestPresentation.getStatus()+"******"+beanRequestPresentation.getDateCreated());
+//			logger.info("***** Name by Updated: "+beanRequestPresentation.getNamePresentation()+"****"+beanRequestPresentation.getId()
+//					+"*****"+beanRequestPresentation.getStatus()+"******"+beanRequestPresentation.getDateCreated());
 			
 			beanResponseWS =  (BeanResponseCanonicalPresentation) objCall.invoke(
 					new Object[]{
@@ -179,7 +179,7 @@ public class PresentationServiceImpl implements PresentationService {
 	         e.printStackTrace();
 	         beanResponsePresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_NOTWORKING);
 		}
-		logger.info(CommonConstants.Logger.LOGGER_END);
+//		logger.info(CommonConstants.Logger.LOGGER_END);
 		return beanResponsePresentation;
 	}
 	
