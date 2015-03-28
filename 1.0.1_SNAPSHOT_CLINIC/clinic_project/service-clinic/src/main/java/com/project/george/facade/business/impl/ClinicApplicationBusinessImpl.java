@@ -1,6 +1,6 @@
 package com.project.george.facade.business.impl;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import com.project.george.util.CommonConstants;
 
 @Service
 public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness {
-	public Logger logger=Logger.getLogger(ClinicApplicationBusinessImpl.class);
+//	public Logger logger=Logger.getLogger(ClinicApplicationBusinessImpl.class);
 	
 	@Autowired
 	public ProductService productService;
@@ -24,12 +24,12 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	public PresentationService presentationService;
 	
 	public String mensajeTest(String value) throws Exception {
-		logger.info(CommonConstants.Logger.LOGGER_START);
+//		logger.info(CommonConstants.Logger.LOGGER_START);
 		return "HOLA .... "+value;
 	}
 
 	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
-		logger.info(CommonConstants.Logger.LOGGER_START);
+//		logger.info(CommonConstants.Logger.LOGGER_START);
 		//--Validate if Exist Producto with same Presentation
 		boolean validationProduct=productService.verificationExistProduct(beanProduct.getNameProduct(),beanProduct.getIdPresentation());
 		//--End
@@ -39,7 +39,7 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 			responseProduct=productService.saveProduct(beanProduct);
 			responseProduct.setResult("redirect:/listProduct.htm");
 		}		
-		logger.info(CommonConstants.Logger.LOGGER_END);
+//		logger.info(CommonConstants.Logger.LOGGER_END);
 		return responseProduct;
 	}
 
@@ -56,7 +56,7 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	}
 	
 	public BeanResponseListPresentation listAllPresentation()throws Exception{
-		logger.info(CommonConstants.Logger.LOGGER_START);
+//		logger.info(CommonConstants.Logger.LOGGER_START);
 		//--List Presentation in Status 1
 		return presentationService.listAllPresentation();
 	}

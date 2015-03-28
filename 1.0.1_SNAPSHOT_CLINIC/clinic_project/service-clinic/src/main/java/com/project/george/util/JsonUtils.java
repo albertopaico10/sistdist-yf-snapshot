@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -22,7 +22,7 @@ import com.project.george.facade.service.impl.PresentationServiceImpl;
 //import net.minidev.json.JSONObject;
 
 public final class JsonUtils {
-	private static Logger LOG = Logger.getLogger(PresentationServiceImpl.class);
+//	private static Logger LOG = Logger.getLogger(PresentationServiceImpl.class);
 
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private static final String BLANCK_CHARACTER = "";
@@ -114,11 +114,11 @@ public final class JsonUtils {
 			output = (T) mapper.readValue(json.replaceAll(
 					UNICODE_CHARACTER_EXPRESSION, BLANCK_CHARACTER), obj);
 		} catch (JsonGenerationException e) {
-			LOG.error(e.getMessage());
+//			LOG.error(e.getMessage());
 		} catch (JsonMappingException e) {
-			LOG.error(e.getMessage());
+//			LOG.error(e.getMessage());
 		} catch (IOException e) {
-			LOG.error(e.getMessage());
+//			LOG.error(e.getMessage());
 		}
 		return output;
 	}
@@ -137,9 +137,9 @@ public final class JsonUtils {
 			newJson = mapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(object);
 		} catch (Exception e) {
-			LOG.error(e.getMessage());
+//			LOG.error(e.getMessage());
 		}
-		LOG.debug("jsonFormatted = " + newJson);
+//		LOG.debug("jsonFormatted = " + newJson);
 		return newJson;
 	}
 
@@ -157,19 +157,19 @@ public final class JsonUtils {
 			newJson = mapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(object);
 		} catch (Exception e) {
-			LOG.error(e.getMessage());
+//			LOG.error(e.getMessage());
 		}
-		LOG.debug("jsonFormatted = " + newJson);
+//		LOG.debug("jsonFormatted = " + newJson);
 		return newJson;
 	}
 	
-	public static Map<String, Object> transformToValidMap(String json) {
-		Map<String, Object> map = null;
-		if (!StringUtils.isEmpty(json)) {
-			map = JsonUtils.jsonToJavaObject(json, Map.class);
-		}
-		return map;
-	}
+//	public static Map<String, Object> transformToValidMap(String json) {
+//		Map<String, Object> map = null;
+//		if (!StringUtils.isEmpty(json)) {
+//			map = JsonUtils.jsonToJavaObject(json, Map.class);
+//		}
+//		return map;
+//	}
 	
 	
 	/*public static Object extractPath(String json, String path) throws IOException {

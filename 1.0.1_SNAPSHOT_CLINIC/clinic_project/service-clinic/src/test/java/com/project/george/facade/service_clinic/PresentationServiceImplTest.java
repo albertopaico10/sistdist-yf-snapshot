@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -12,9 +13,9 @@ import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.util.CommonConstants;
 
+@ContextConfiguration(locations = {"/service-clinic-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:/service-clinic-context.xml")
-public class PresentationServiceImpl {
+public class PresentationServiceImplTest {
 	@Autowired
 	public PresentationService presentationService;
 	@Test
@@ -29,6 +30,7 @@ public class PresentationServiceImpl {
 	@Test
 	public void testListPresentation()throws Exception{
 		System.out.println("ENTREEEEEEEEEEEEEEEEEEEE");
+		
 		presentationService.listAllPresentation();
 	}
 	
