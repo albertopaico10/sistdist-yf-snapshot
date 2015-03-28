@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -14,7 +13,6 @@ import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.project.george.facade.service.impl.PresentationServiceImpl;
 
 //import com.jayway.jsonpath.JsonPath;
 //import com.jayway.jsonpath.PathNotFoundException;
@@ -22,7 +20,7 @@ import com.project.george.facade.service.impl.PresentationServiceImpl;
 //import net.minidev.json.JSONObject;
 
 public final class JsonUtils {
-	private static Logger LOG = Logger.getLogger(PresentationServiceImpl.class);
+//	private static Logger LOG = Logger.getLogger(PresentationServiceImpl.class);
 
 	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	private static final String BLANCK_CHARACTER = "";
@@ -114,11 +112,11 @@ public final class JsonUtils {
 			output = (T) mapper.readValue(json.replaceAll(
 					UNICODE_CHARACTER_EXPRESSION, BLANCK_CHARACTER), obj);
 		} catch (JsonGenerationException e) {
-			LOG.error(e.getMessage());
+			System.out.println(e.getMessage());
 		} catch (JsonMappingException e) {
-			LOG.error(e.getMessage());
+			System.out.println(e.getMessage());
 		} catch (IOException e) {
-			LOG.error(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 		return output;
 	}
@@ -137,9 +135,9 @@ public final class JsonUtils {
 			newJson = mapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(object);
 		} catch (Exception e) {
-			LOG.error(e.getMessage());
+			System.out.println(e.getMessage());
 		}
-		LOG.debug("jsonFormatted = " + newJson);
+		System.out.println("jsonFormatted = " + newJson);
 		return newJson;
 	}
 
@@ -157,9 +155,9 @@ public final class JsonUtils {
 			newJson = mapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(object);
 		} catch (Exception e) {
-			LOG.error(e.getMessage());
+			System.out.println(e.getMessage());
 		}
-		LOG.debug("jsonFormatted = " + newJson);
+		System.out.println("jsonFormatted = " + newJson);
 		return newJson;
 	}
 	

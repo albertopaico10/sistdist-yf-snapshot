@@ -1,17 +1,10 @@
 package com.project.george.facade.service.impl;
 
-import java.net.URL;
-import java.util.Date;
-
 import javax.xml.namespace.QName;
 import javax.xml.rpc.ParameterMode;
 import javax.xml.rpc.encoding.XMLType;
 
 import org.apache.axis.client.Call;
-import org.apache.axis.encoding.ser.BeanDeserializerFactory;
-import org.apache.axis.encoding.ser.BeanSerializerFactory;
-import org.apache.axis.message.IDResolver;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.project.george.bean.catalog.product.BeanProduct;
@@ -23,11 +16,11 @@ import com.project.george.util.UtilWebService;
 @Service
 public class ProductServiceImpl implements ProductService {
 	
-	private static Logger logger = Logger.getLogger(ProductServiceImpl.class);
+//	private static Logger logger = Logger.getLogger(ProductServiceImpl.class);
 	public String rucService = CommonConstants.PRODUCT_SOAP;
 	
 	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
-		logger.info(CommonConstants.Logger.LOGGER_START);
+		System.out.println(CommonConstants.Logger.LOGGER_START);
 		try {
 			
 			Call objCall = UtilWebService.getCallService(rucService);
@@ -59,13 +52,13 @@ public class ProductServiceImpl implements ProductService {
 					beanProduct.getPriceSale(),
 					"2015-03-16"};
 			
-			 logger.info(" getNameProduct ---> "+paramValues[0]);
-			    logger.info(" getStatus ---> "+paramValues[1]);
-			    logger.info(" getIdPresentation ---> "+paramValues[2]);
-			    logger.info(" getPrice ---> "+paramValues[3]);
-			    logger.info(" getExpirationDate ---> "+paramValues[4]);
-			    logger.info(" getPriceSale ---> "+paramValues[5]);
-			    logger.info(" getExpirationDate ---> "+paramValues[6]);
+			 System.out.println(" getNameProduct ---> "+paramValues[0]);
+			    System.out.println(" getStatus ---> "+paramValues[1]);
+			    System.out.println(" getIdPresentation ---> "+paramValues[2]);
+			    System.out.println(" getPrice ---> "+paramValues[3]);
+			    System.out.println(" getExpirationDate ---> "+paramValues[4]);
+			    System.out.println(" getPriceSale ---> "+paramValues[5]);
+			    System.out.println(" getExpirationDate ---> "+paramValues[6]);
 			
 //			Object resultado=(Object)objCall.invoke(paramValues);
 			int resultado=(Integer)objCall.invoke(paramValues);
@@ -77,7 +70,7 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
 //            resultado = -1;
 		}
-		logger.info(CommonConstants.Logger.LOGGER_END);
+		System.out.println(CommonConstants.Logger.LOGGER_END);
 		
 		return null;
 	}
