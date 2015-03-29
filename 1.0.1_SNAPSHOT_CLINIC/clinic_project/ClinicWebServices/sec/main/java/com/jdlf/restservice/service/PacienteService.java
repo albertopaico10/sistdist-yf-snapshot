@@ -13,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import antlr.collections.List;
+
 import com.jdlf.restservice.dao.PacienteDao;
 import com.jdlf.restservice.model.Paciente;
 
@@ -22,6 +24,16 @@ public class PacienteService {
 	private static PacienteDao dao;
 	public PacienteService() {
 		dao = new PacienteDao();
+	}
+	
+	@GET
+	@Path("/getAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPacientes (){	
+		dao.openCurrentSessionwithTransaction();
+		java.util.List<Paciente> pacientes = dao.findAll(); 
+		dao.closeCurrentSessionwithTransaction();
+		return Response.status(200).entity(pacientes).build();
 	}
 
 	

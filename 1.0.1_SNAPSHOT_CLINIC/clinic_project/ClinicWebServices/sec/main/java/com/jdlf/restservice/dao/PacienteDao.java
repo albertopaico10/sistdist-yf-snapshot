@@ -87,7 +87,7 @@ public class PacienteDao implements PacienteDaoInterface<Paciente, Integer> {
 
 	@SuppressWarnings("unchecked")
 	public List<Paciente> findAll() {
-		List<Paciente> books = (List<Paciente>) getCurrentSession().createQuery("from Book").list();
+		List<Paciente> books = (List<Paciente>) getCurrentSession().createQuery("from Paciente").list();
 		return books;
 	}
 
