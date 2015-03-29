@@ -1,6 +1,5 @@
 package com.george.project;
 
-
 import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.facade.business.impl.ClinicApplicationBusinessImpl;
 
