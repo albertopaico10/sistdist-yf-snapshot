@@ -1,15 +1,20 @@
 package com.project.george.model.facade;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.axis.types.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.george.bean.catalog.paciente.Patient;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
+import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbPatient;
 import com.project.george.model.TbSystemParam;
 import com.project.george.model.dao.TablePatientDao;
@@ -28,6 +33,9 @@ public class TablePatientManagerImpl implements TablePatientManager {
 	
 	@Autowired
 	TableSystemParamManager tbSystemMan;
+	
+	@Autowired
+	public ClinicApplicationBusiness clinicApplicationBusiness;
 
 	public String addNewPatient(TbPatient tbPatientBean) throws Exception {
 		String returnRsponse=CommonConstants.ManteniencePatient.RESPONSE_MANTENIENCE_PATIENT_NEW;
@@ -56,7 +64,31 @@ public class TablePatientManagerImpl implements TablePatientManager {
 	
 	public List<TbPatientDTO> listAllPatient() throws Exception {
 		System.out.println("Inside listAllPatient");
-		List<TbPatient> listAllPatient=custmTablePatient.listAllPatient();
+		//List<TbPatient> listAllPatient=custmTablePatient.listAllPatient();
+		List<TbPatient> listAllPatient = new ArrayList<TbPatient>();
+		List<Patient> patients = clinicApplicationBusiness.getPatients();
+		
+		Date date = new Date();//TODO: to refactor
+		
+		for (Patient patient : patients) {
+			TbPatient tbPatient = new TbPatient();
+			tbPatient.setId(patient.getId());
+			tbPatient.setAdress(patient.getAddress());
+			tbPatient.setBirthDay(patient.getBirthDay());
+			//tbPatient.setDateCreated(patient.getDateCreated());
+			tbPatient.setDateCreated(new Timestamp(date.getTime()));
+			//tbPatient.setDateUpdated(patient.getDateUpdated());
+			tbPatient.setDateUpdated(new Timestamp(date.getTime()));
+			tbPatient.setDistrictName(patient.getDistrictName());
+			tbPatient.setDni(patient.getDni());
+			tbPatient.setLastNamePatient(patient.getLastNamePatient());
+			tbPatient.setNamePatient(patient.getNamePatient());
+			tbPatient.setStatusPatient(patient.getStatusPatient());
+			tbPatient.setUserCreated(patient.getUserCreated());
+			tbPatient.setUserUpdated(patient.getUserUpdated());
+			listAllPatient.add(tbPatient);
+			
+		}
 		
 		List<TbPatientDTO> newListPatient=new ArrayList<TbPatientDTO>();
 		//--Add Reference Code History
