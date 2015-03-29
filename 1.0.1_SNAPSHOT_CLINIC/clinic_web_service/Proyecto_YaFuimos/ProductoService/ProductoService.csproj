@@ -77,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dominio\CustomException.cs" />
+    <Compile Include="Dominio\DetalleKardex.cs" />
+    <Compile Include="Dominio\Kardex.cs" />
     <Compile Include="Dominio\ListPresentation.cs" />
     <Compile Include="Dominio\MyExceptionContainer.cs" />
     <Compile Include="Dominio\Paciente.cs" />
@@ -89,6 +91,7 @@
     </Compile>
     <Compile Include="Persistencia\BaseDAO.cs" />
     <Compile Include="Persistencia\ConexionUtil.cs" />
+    <Compile Include="Persistencia\KardexDAO.cs" />
     <Compile Include="Persistencia\NHibernateHelper.cs" />
     <Compile Include="Persistencia\PacienteDAO.cs" />
     <Compile Include="Persistencia\PresentationDAO.cs" />
