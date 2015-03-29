@@ -77,7 +77,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dominio\CustomException.cs" />
+<<<<<<< HEAD
     <Compile Include="Dominio\Response\ListPresentation.cs" />
+=======
+    <Compile Include="Dominio\DetalleKardex.cs" />
+    <Compile Include="Dominio\Kardex.cs" />
+    <Compile Include="Dominio\ListPresentation.cs" />
+>>>>>>> 808fc6e92b9c350e716333c3a1a8519ed9a7a40b
     <Compile Include="Dominio\MyExceptionContainer.cs" />
     <Compile Include="Dominio\Paciente.cs" />
     <Compile Include="Dominio\Presentation.cs" />
@@ -91,6 +97,7 @@
     </Compile>
     <Compile Include="Persistencia\BaseDAO.cs" />
     <Compile Include="Persistencia\ConexionUtil.cs" />
+    <Compile Include="Persistencia\KardexDAO.cs" />
     <Compile Include="Persistencia\NHibernateHelper.cs" />
     <Compile Include="Persistencia\PacienteDAO.cs" />
     <Compile Include="Persistencia\PresentationDAO.cs" />

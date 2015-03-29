@@ -13,6 +13,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import antlr.collections.List;
+
 import com.jdlf.restservice.dao.PacienteDao;
 import com.jdlf.restservice.model.Paciente;
 
@@ -23,16 +25,27 @@ public class PacienteService {
 	public PacienteService() {
 		dao = new PacienteDao();
 	}
+	
+	@GET
+	@Path("/getAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPacientes (){	
+		dao.openCurrentSessionwithTransaction();
+		java.util.List<Paciente> pacientes = dao.findAll(); 
+		dao.closeCurrentSessionwithTransaction();
+		return Response.status(200).entity(pacientes).build();
+	}
 
 	
 	@GET
 	@Path("/get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Paciente getPaciente (@PathParam("id") String id){	
+	public Response getPaciente (@PathParam("id") String id){	
 		dao.openCurrentSessionwithTransaction();
 		Paciente paciente = dao.findById(Integer.valueOf(id)); 
 		dao.closeCurrentSessionwithTransaction();
-		return paciente;
+		//return paciente;
+		return Response.status(200).entity(paciente).build();
 	}
 	
 	@POST
@@ -52,9 +65,9 @@ public class PacienteService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente actualizarPaciente (Paciente paciente){	
 		dao.openCurrentSessionwithTransaction();
-		Paciente paciente2 = dao.update(paciente);
+		Paciente pac = dao.update(paciente);
 		dao.closeCurrentSessionwithTransaction();
-		return paciente2;
+		return pac;
 	}
 	
 	@DELETE

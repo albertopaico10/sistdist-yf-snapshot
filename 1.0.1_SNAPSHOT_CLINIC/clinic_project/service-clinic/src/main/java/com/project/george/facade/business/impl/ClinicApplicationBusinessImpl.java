@@ -1,8 +1,11 @@
 package com.project.george.facade.business.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.george.bean.catalog.paciente.Patient;
 import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
 import com.project.george.bean.catalog.presentation.BeanResponseListPresentation;
 import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
@@ -10,6 +13,7 @@ import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
 import com.project.george.bean.catalog.product.BeanResponseListProduct;
 import com.project.george.facade.business.ClinicApplicationBusiness;
+import com.project.george.facade.service.PatientService;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.facade.service.ProductService;
 import com.project.george.util.CommonConstants;
@@ -22,6 +26,8 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	public ProductService productService;
 	@Autowired
 	public PresentationService presentationService;
+	@Autowired
+	public PatientService patientService;
 	
 	public String mensajeTest(String value) throws Exception {
 //		logger.info(CommonConstants.Logger.LOGGER_START);
@@ -107,5 +113,24 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return productService.listProductByName(nameProduct);
 	}
 	
-	
+	public Patient savePatient(Patient patient) {
+		return patientService.savePatient(patient);
+	}
+
+	public Patient updatePatient(Patient patient) {
+		return patientService.updatePatient(patient);
+	}
+
+	public Patient getPatient(Integer id) {
+		return patientService.getPatient(id);
+	}
+
+	public String removePatient(Integer id) {
+		return patientService.removePatient(id);
+	}
+
+	public List<Patient> getPatients() {
+		return patientService.getPatients();
+	}
+
 }
