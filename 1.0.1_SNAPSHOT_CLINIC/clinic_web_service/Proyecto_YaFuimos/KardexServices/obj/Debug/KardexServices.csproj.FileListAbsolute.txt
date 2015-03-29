@@ -6,3 +6,5 @@ C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_servi
 C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\bin\KardexServices.pdb
 C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\obj\Debug\KardexServices.dll
 C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\obj\Debug\KardexServices.pdb
+C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\bin\Iesi.Collections.dll
+C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\KardexServices\bin\NHibernate.dll

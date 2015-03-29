@@ -65,5 +65,17 @@ namespace ProductoService.Persistencia
             }
         }
 
+
+        public ICollection<Entidad> ObtenerProductByName(string name)
+        {
+            using (ISession sesion = NHibernateHelper.ObtenerSesion())
+            {
+                //ICriteria busqueda = sesion.CreateCriteria(typeof(Entidad));
+                string query = "from Producto where status=1 and name like '%"+name+"%'";
+                IQuery busqueda = sesion.CreateQuery(query);
+                return busqueda.List<Entidad>();
+            }
+        }
+
     }
 }

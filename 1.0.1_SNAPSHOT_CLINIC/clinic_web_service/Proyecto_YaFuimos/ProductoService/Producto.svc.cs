@@ -8,6 +8,7 @@ using System.Text;
 using ProductoService.Persistencia;
 using System.Diagnostics;
 using ProductoService.Dominio;
+using ProductoService.Dominio.Response;
 
 namespace ProductoService
 {
@@ -53,16 +54,38 @@ namespace ProductoService
             ProductoDAO.Crear(productoNuevo);
             return 1;
         }
-        
-        public Dominio.Producto consultarProducto(int id)
-        {
-            return ProductoDAO.Obtener(id);
-        }
 
         public Boolean validarExistenciaProducto(int idPresentacion, string nombreProduct)
         {
             return false;
         }
+
+        //Create by : Karina
+        //Update by : ------
+        //Name : consultarProducto
+        //Description : Return a Object from Product
+        public Dominio.Producto consultarProducto(int id)
+        {
+            return ProductoDAO.Obtener(id);
+        }
+
+        //Create by : Alberto Paico
+        //Update by : Alberto Paico
+        //Name : consultarProductoPorNombre
+        //Description : Return a Object from Product by Product
+        //public ListProduct consultarProductoPorNombre(string name)
+        //{
+        //    ListProduct beanListProduct = new ListProduct();
+        //    try
+        //    {
+        //        ICollection<ProductoService.Dominio.Producto> iCollectionProducto = ProductoDAO.ObtenerProductByName(name);
+        //        Debug.WriteLine("Cantidad de Datos DEBUG: " + iCollectionProducto.Count);
+        //    }
+        //    catch { 
+            
+        //    }
+        //    return null;
+        //}
 
         //Create by : Cesar
         //Update by : Alberto Paico

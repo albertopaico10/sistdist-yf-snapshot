@@ -77,12 +77,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dominio\CustomException.cs" />
-    <Compile Include="Dominio\ListPresentation.cs" />
+    <Compile Include="Dominio\Response\ListPresentation.cs" />
     <Compile Include="Dominio\MyExceptionContainer.cs" />
     <Compile Include="Dominio\Paciente.cs" />
     <Compile Include="Dominio\Presentation.cs" />
-    <Compile Include="Dominio\PresentationResponse.cs" />
+    <Compile Include="Dominio\Response\ListProduct.cs" />
+    <Compile Include="Dominio\Response\PresentationResponse.cs" />
     <Compile Include="Dominio\Producto.cs" />
+    <Compile Include="Dominio\Response\ProductoResponse.cs" />
     <Compile Include="IPacientes.cs" />
     <Compile Include="Pacientes.svc.cs">
       <DependentUpon>Pacientes.svc</DependentUpon>

@@ -32,7 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\Librerias\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Librerias\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\Librerias\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -52,6 +62,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="KardexService.svc" />
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -62,6 +73,21 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dominio\DetailKardex.cs" />
+    <Compile Include="Dominio\Kardex.cs" />
+    <Compile Include="Dominio\KardexRequest.cs" />
+    <Compile Include="IKardexService.cs" />
+    <Compile Include="KardexService.svc.cs">
+      <DependentUpon>KardexService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Persistencia\ConexionUtil.cs" />
+    <Compile Include="Persistencia\DetailKardexDAO.cs" />
+    <Compile Include="Persistencia\KardexDAO.cs" />
+    <Compile Include="Persistencia\ProductoDAO.cs" />
+    <Compile Include="Response\DetailKardexResponse.cs" />
+    <Compile Include="Response\KardexResponse.cs" />
+    <Compile Include="Response\ProductListResponse.cs" />
+    <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>

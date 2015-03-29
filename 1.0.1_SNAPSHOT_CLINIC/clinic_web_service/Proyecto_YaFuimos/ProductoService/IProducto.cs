@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using ProductoService.Dominio;
+using ProductoService.Dominio.Response;
 
 namespace ProductoService
 {
@@ -36,8 +37,8 @@ namespace ProductoService
         [OperationContract]
         PresentationResponse actualizarPresentacion(string namePresentation, int status,
                                     string dateCreated, int idPresentation);
-
-       
+        //[OperationContract]
+        //ListProduct consultarProductoPorNombre(string name);
     }
 
 
