@@ -28,11 +28,12 @@ public class PacienteService {
 	@GET
 	@Path("/get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Paciente getPaciente (@PathParam("id") String id){	
+	public Response getPaciente (@PathParam("id") String id){	
 		dao.openCurrentSessionwithTransaction();
 		Paciente paciente = dao.findById(Integer.valueOf(id)); 
 		dao.closeCurrentSessionwithTransaction();
-		return paciente;
+		//return paciente;
+		return Response.status(200).entity(paciente).build();
 	}
 	
 	@POST
@@ -52,9 +53,9 @@ public class PacienteService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente actualizarPaciente (Paciente paciente){	
 		dao.openCurrentSessionwithTransaction();
-		Paciente paciente2 = dao.update(paciente);
+		Paciente pac = dao.update(paciente);
 		dao.closeCurrentSessionwithTransaction();
-		return paciente2;
+		return pac;
 	}
 	
 	@DELETE
