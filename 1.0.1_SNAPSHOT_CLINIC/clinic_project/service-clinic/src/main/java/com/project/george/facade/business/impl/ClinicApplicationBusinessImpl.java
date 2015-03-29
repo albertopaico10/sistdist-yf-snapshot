@@ -8,6 +8,7 @@ import com.project.george.bean.catalog.presentation.BeanResponseListPresentation
 import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
+import com.project.george.bean.catalog.product.BeanResponseListProduct;
 import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.facade.service.ProductService;
@@ -56,7 +57,7 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	}
 	
 	public BeanResponseListPresentation listAllPresentation()throws Exception{
-		System.out.println(CommonConstants.Logger.LOGGER_START);
+		System.out.println(CommonConstants.Logger.LOGGER_START+"*** ClinicApplicationBusinessImpl.class");
 		//--List Presentation in Status 1
 		return presentationService.listAllPresentation();
 	}
@@ -100,5 +101,11 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		}	
 		return beanListPresentation;
 	}
-
+	
+	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+		
+		return productService.listProductByName(nameProduct);
+	}
+	
+	
 }

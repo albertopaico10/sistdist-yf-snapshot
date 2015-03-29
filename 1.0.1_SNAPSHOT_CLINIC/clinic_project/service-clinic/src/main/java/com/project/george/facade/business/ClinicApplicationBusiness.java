@@ -7,6 +7,7 @@ import com.project.george.bean.catalog.presentation.BeanResponseListPresentation
 import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
+import com.project.george.bean.catalog.product.BeanResponseListProduct;
 
 @Service
 public interface ClinicApplicationBusiness {
@@ -22,4 +23,6 @@ public interface ClinicApplicationBusiness {
 	public BeanResponseListPresentation updatePresentation(BeanRequestPresentation beanRequestPresentation)throws Exception;
 	
 	public BeanResponseListPresentation deletePresentation(BeanRequestPresentation beanRequestPresentation)throws Exception;
+
+	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception;
 }

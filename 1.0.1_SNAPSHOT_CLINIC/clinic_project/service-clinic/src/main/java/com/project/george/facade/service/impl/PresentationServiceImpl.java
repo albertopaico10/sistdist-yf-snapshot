@@ -27,7 +27,7 @@ public class PresentationServiceImpl implements PresentationService {
 	public String rucService = CommonConstants.PRODUCT_SOAP;
 	
 	public BeanResponsePresentation savePresentationService(BeanRequestPresentation beanRequestPresentation) throws Exception {
-		System.out.println(CommonConstants.Logger.LOGGER_START);
+		System.out.println(CommonConstants.Logger.LOGGER_START+"***PresentationServiceImpl");
 		BeanResponsePresentation beanResponsePresentation=new BeanResponsePresentation();
 		BeanResponseCanonicalPresentation beanResponseWS=null;
 		try {
@@ -66,19 +66,21 @@ public class PresentationServiceImpl implements PresentationService {
 		BeanResponseListPresentation responseListPresentation=new BeanResponseListPresentation();
 		BeanResponseCanonicalListPresentation beanResponseWS=null;
 		try {
+			System.out.println("1");
 			Call objCall = UtilWebService.getCallService(rucService);
-			
+			System.out.println("2");
 			objCall.setSOAPActionURI("http://tempuri.org/IProducto/listarPresentacionObj");
-			
+			System.out.println("3");
 			objCall.setOption( org.apache.axis.AxisEngine.PROP_DOMULTIREFS, new java.lang.Boolean( false) );
-			
+			System.out.println("4");
 			objCall.registerTypeMapping(BeanResponseCanonicalListPresentation.class, new QName("http://tempuri.org/"), BeanSerializerFactory.class, BeanDeserializerFactory.class);
-						
+			System.out.println("5");
 			objCall.setOperationName(new QName("http://tempuri.org/","listarPresentacionObj"));
-			
+			System.out.println("6");
 			objCall.setReturnClass(BeanResponseCanonicalListPresentation.class);
-			
+			System.out.println("7");
 			beanResponseWS =  (BeanResponseCanonicalListPresentation) objCall.invoke(new Object[]{});
+			System.out.println("8");
 			if(CommonConstants.ResponseWebService.RESP_WS_SUCCESS.equals(beanResponseWS.Result)){
 				BeanListPresentation listBean=JsonUtils.jsonToJavaObject(beanResponseWS.strCadenaValues, BeanListPresentation.class);
 				System.out.println("Cantida de registros Integration Layer : "+listBean.getResponse().size());
@@ -91,6 +93,7 @@ public class PresentationServiceImpl implements PresentationService {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 			responseListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_NOTWORKING);
 		}
 		System.out.println(CommonConstants.Logger.LOGGER_END);

@@ -8,4 +8,6 @@ import com.project.george.bean.catalog.kardex.BeanResponseKardex;
 @Service
 public interface KardexService {
 	public BeanResponseKardex saveKardex(BeanRequestKardex beanRequestKardex)throws Exception;
+	
+	
 }

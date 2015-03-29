@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.george.bean.catalog.product.BeanRequestProduct;
+import com.project.george.bean.catalog.product.BeanResponseListProduct;
 import com.project.george.facade.service.ProductService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,5 +43,11 @@ public class ProductServiceImpl {
 		beanRequest.setNameProduct("Test Producto");
 		beanRequest.setStatus(1);
 		productService.verificationExistProduct(beanRequest.getNameProduct(), beanRequest.getIdPresentation());
+	}
+	
+	@Test
+	public void testListProduct()throws Exception{
+		BeanResponseListProduct beanResponse=new BeanResponseListProduct();
+		beanResponse=productService.listProductByName("producto");
 	}
 }

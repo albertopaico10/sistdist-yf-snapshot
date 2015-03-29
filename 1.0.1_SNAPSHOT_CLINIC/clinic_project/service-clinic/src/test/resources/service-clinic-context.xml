@@ -11,4 +11,6 @@
 	<context:component-scan base-package="com.project.george.facade.business"></context:component-scan>
 	<context:component-scan base-package="com.project.george.facade.service"></context:component-scan>
 	
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+	
 </beans>

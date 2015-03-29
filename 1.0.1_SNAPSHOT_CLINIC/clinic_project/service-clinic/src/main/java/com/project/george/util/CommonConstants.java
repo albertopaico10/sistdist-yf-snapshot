@@ -2,7 +2,8 @@ package com.project.george.util;
 
 public class CommonConstants {
 
-	public final static String PRODUCT_SOAP = "http://localhost:2766/Producto.svc";
+	public final static String PRODUCT_SOAP = "http://Alberto-LENO-PC:2766/Producto.svc";
+	public final static String KARDEX_REST = "http://localhost:53924/KardexService.svc/Kardex";
 	
 	public class Logger{
 		public final static String LOGGER_START="********START********";
