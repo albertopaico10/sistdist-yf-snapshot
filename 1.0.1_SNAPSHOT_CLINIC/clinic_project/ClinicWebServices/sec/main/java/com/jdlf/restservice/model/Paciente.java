@@ -1,5 +1,6 @@
 package com.jdlf.restservice.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +13,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.jdlf.restservice.util.TimestampAdapter;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name="paciente")
@@ -46,11 +50,13 @@ public class Paciente {
 	@Column(name = "statusPatient")
 	public Integer statusPatient;
 	@XmlElement
-	@Column(name = "date_created")
-	public Date dateCreated;
+	@XmlJavaTypeAdapter(TimestampAdapter.class)
+	@Column(name = "date_created")	
+	public Timestamp dateCreated;
 	@XmlElement
+	@XmlJavaTypeAdapter(TimestampAdapter.class)
 	@Column(name = "date_updated")
-	public Date dateUpdated;
+	public Timestamp dateUpdated;
 	@XmlElement
 	@Column(name = "user_created")
 	public Integer userCreated;
@@ -116,16 +122,16 @@ public class Paciente {
 	public void setStatusPatient(Integer statusPatient) {
 		this.statusPatient = statusPatient;
 	}
-	public Date getDateCreated() {
+	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(Timestamp dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public Date getDateUpdated() {
+	public Timestamp getDateUpdated() {
 		return dateUpdated;
 	}
-	public void setDateUpdated(Date dateUpdated) {
+	public void setDateUpdated(Timestamp dateUpdated) {
 		this.dateUpdated = dateUpdated;
 	}
 	public Integer getUserCreated() {

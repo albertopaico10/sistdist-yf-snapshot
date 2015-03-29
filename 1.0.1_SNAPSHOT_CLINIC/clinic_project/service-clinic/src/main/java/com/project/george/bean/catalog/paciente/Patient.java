@@ -1,11 +1,15 @@
 package com.project.george.bean.catalog.paciente;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.project.george.util.TimestampAdapter;
 
 @XmlAccessorType
 @XmlRootElement(name="paciente")
@@ -28,9 +32,11 @@ public class Patient {
 	@XmlElement
 	public Integer statusPatient;
 	@XmlElement
-	public Date dateCreated;
+	@XmlJavaTypeAdapter(TimestampAdapter.class)
+	public Timestamp dateCreated;
 	@XmlElement
-	public Date dateUpdated;
+	@XmlJavaTypeAdapter(TimestampAdapter.class)
+	public Timestamp dateUpdated;
 	@XmlElement
 	public Integer userCreated;
 	@XmlElement
@@ -90,16 +96,16 @@ public class Patient {
 	public void setStatusPatient(Integer statusPatient) {
 		this.statusPatient = statusPatient;
 	}
-	public Date getDateCreated() {
+	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(Timestamp dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public Date getDateUpdated() {
+	public Timestamp getDateUpdated() {
 		return dateUpdated;
 	}
-	public void setDateUpdated(Date dateUpdated) {
+	public void setDateUpdated(Timestamp dateUpdated) {
 		this.dateUpdated = dateUpdated;
 	}
 	public Integer getUserCreated() {

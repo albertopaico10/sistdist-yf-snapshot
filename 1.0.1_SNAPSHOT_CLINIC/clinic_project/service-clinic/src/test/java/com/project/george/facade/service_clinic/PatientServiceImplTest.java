@@ -1,4 +1,5 @@
 package com.project.george.facade.service_clinic;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class PatientServiceImplTest {
 	@Autowired
 	public PatientService patientService;
 	
+	Date date = new Date();
 	
 	@Test
 	public void getPatient(){
@@ -39,8 +41,8 @@ public class PatientServiceImplTest {
 		patient.setDni("66666669");
 		patient.setDistrictName("Los Olivos");
 		patient.setBirthDay(new Date());
-		patient.setDateCreated(new Date());
-		patient.setDateUpdated(new Date());
+		patient.setDateCreated(new Timestamp(date.getTime()));
+		patient.setDateUpdated(new Timestamp(date.getTime()));
 		
 		Patient patientSaved = patientService.savePatient(patient);
 		Assert.assertEquals("martin", patientSaved.getNamePatient());
@@ -58,8 +60,8 @@ public class PatientServiceImplTest {
 		patient.setLastNamePatient("de san martin");
 		patient.setDni("666666655");
 		patient.setBirthDay(new Date());
-		patient.setDateCreated(new Date());
-		patient.setDateUpdated(new Date());
+		patient.setDateCreated(new Timestamp(date.getTime()));
+		patient.setDateUpdated(new Timestamp(date.getTime()));
 		
 		Patient patientUpdated = patientService.updatePatient(patient);
 		Assert.assertEquals(new Integer(5), patientUpdated.getId());

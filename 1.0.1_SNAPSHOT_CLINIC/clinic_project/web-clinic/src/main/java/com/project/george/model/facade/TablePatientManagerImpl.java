@@ -75,10 +75,8 @@ public class TablePatientManagerImpl implements TablePatientManager {
 			tbPatient.setId(patient.getId());
 			tbPatient.setAdress(patient.getAddress());
 			tbPatient.setBirthDay(patient.getBirthDay());
-			//tbPatient.setDateCreated(patient.getDateCreated());
-			tbPatient.setDateCreated(new Timestamp(date.getTime()));
-			//tbPatient.setDateUpdated(patient.getDateUpdated());
-			tbPatient.setDateUpdated(new Timestamp(date.getTime()));
+			tbPatient.setDateCreated(patient.getDateCreated());
+			tbPatient.setDateUpdated(patient.getDateUpdated());
 			tbPatient.setDistrictName(patient.getDistrictName());
 			tbPatient.setDni(patient.getDni());
 			tbPatient.setLastNamePatient(patient.getLastNamePatient());

@@ -1,6 +1,7 @@
 package com.jdlf.restservice.service;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
@@ -21,6 +22,8 @@ import com.sun.jersey.api.client.WebResource;
 public class PacienteServiceTest {
 	
 	ObjectMapper mapper = new ObjectMapper();
+	
+	Date date = new Date();
 	
 	@Test
 	public void testGetPaciente(){
@@ -55,8 +58,8 @@ public class PacienteServiceTest {
 		paciente.setLastNamePatient("diegoLN");
 		paciente.setDni("6666667");
 		paciente.setBirthDay(new Date());
-		paciente.setDateCreated(new Date());
-		paciente.setDateUpdated(new Date());
+		paciente.setDateCreated(new Timestamp(date.getTime()));
+		paciente.setDateUpdated(new Timestamp(date.getTime()));
 		
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, paciente);
 		
@@ -82,8 +85,8 @@ public class PacienteServiceTest {
 		paciente.setLastNamePatient("diegoff5");
 		paciente.setDni("666666655");
 		paciente.setBirthDay(new Date());
-		paciente.setDateCreated(new Date());
-		paciente.setDateUpdated(new Date());
+		paciente.setDateCreated(new Timestamp(date.getTime()));
+		paciente.setDateUpdated(new Timestamp(date.getTime()));
 		
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).put(ClientResponse.class, paciente);
 		
