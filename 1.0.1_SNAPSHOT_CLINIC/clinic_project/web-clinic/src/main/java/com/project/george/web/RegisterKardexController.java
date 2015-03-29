@@ -53,7 +53,8 @@ public class RegisterKardexController {
 		final String nameProduct = String.valueOf(request.getParameter("nameProduct"));
 		System.out.println("Request Parameter : "+nameProduct);
 		try {
-			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
+//			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
+			List<ProductDTO> listAllProduct=tableProduct.findProductByName(nameProduct);
 			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
 			request.setAttribute("listProduct", listAllProduct);
 			request.setAttribute("nameProduct", nameProduct);

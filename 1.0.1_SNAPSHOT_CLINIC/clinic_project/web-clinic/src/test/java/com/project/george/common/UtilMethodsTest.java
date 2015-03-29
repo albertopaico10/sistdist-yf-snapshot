@@ -17,7 +17,7 @@ public class UtilMethodsTest {
 	@Test
 	public void testStringPassword()throws Exception{
 		UtilMethods util=new UtilMethods();
-		String valor=util.getStringMessageDigest("1963","MD5");
+		String valor=util.getStringMessageDigest("holaaaaa","MD5");
 		System.out.println("Valor final "+valor);
 	}
 	@Test

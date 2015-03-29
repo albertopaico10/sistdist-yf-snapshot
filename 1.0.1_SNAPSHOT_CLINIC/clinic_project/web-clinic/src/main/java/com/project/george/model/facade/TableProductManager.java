@@ -18,5 +18,5 @@ public interface TableProductManager {
 	
 	//-----------------------------------
 	public BeanResponseWeb setBeanProduct(ProductDTO beanProductDTO)throws Exception;
-
+	public List<ProductDTO> findProductByName(String nameProduct)throws Exception;
 }

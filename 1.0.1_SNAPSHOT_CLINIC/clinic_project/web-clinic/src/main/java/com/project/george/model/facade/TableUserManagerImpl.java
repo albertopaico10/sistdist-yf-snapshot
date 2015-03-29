@@ -24,8 +24,7 @@ public class TableUserManagerImpl implements TableUserManager {
 		System.out.println("Inside de Manager validateUserAndPassword");
 		String newPass=UtilMethods.getStringMessageDigest(pass, CommonConstants.Login.ALGORITHM_MD5);
 		System.out.println("New password : "+newPass);
-		List<TbUser> listTbUserByParam = customTableUser.validateUserAndPass(
-				user, newPass);
+		List<TbUser> listTbUserByParam = customTableUser.validateUserAndPass(user, newPass);
 		TbUserDTO tbUserDto = new TbUserDTO();
 		UtilMethods utilMethods=new UtilMethods();
 		

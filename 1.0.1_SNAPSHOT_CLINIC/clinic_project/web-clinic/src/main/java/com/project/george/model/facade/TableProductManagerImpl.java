@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
+import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.facade.business.ClinicApplicationBusiness;
@@ -76,7 +78,6 @@ public class TableProductManagerImpl implements TableProductManager {
 		return returnRsponse;
 	}
 
-
 	public String deleteTypeProduct(int idTypeProduct) throws Exception {
 		String returnRsponse=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW;
 		TbProduct tbTypeProduct=new TbProduct();
@@ -87,6 +88,7 @@ public class TableProductManagerImpl implements TableProductManager {
 		return returnRsponse;
 	}
 
+	//------------------------------------------------------------------------
 	public BeanResponseWeb setBeanProduct(ProductDTO beanProductDTO) throws Exception {
 		BeanRequestProduct beanProduct=new BeanRequestProduct();
 		beanProduct.setNamePresentation(beanProduct.getNameProduct());
@@ -110,6 +112,22 @@ public class TableProductManagerImpl implements TableProductManager {
 			beanResponseWeb.setMessage("Hubo un Error en los Servicios. Comuniquese con el Administrador");
 		}
 		return beanResponseWeb;
+	}
+
+	public List<ProductDTO> findProductByName(String nameProduct)
+			throws Exception {
+		BeanResponseListProduct beanListProduct=clinicApplicationBusiness.listProductByName(nameProduct);
+		List<ProductDTO> beanListDTO=new ArrayList<ProductDTO>();
+		for(BeanResponseCanonicalProduct beanResponseProduct : beanListProduct.getListResponseProduct()){
+			ProductDTO beanProductDTO=new ProductDTO();
+			beanProductDTO.setId(beanResponseProduct.getId());
+			beanProductDTO.setNameProduct(beanResponseProduct.getNameProduct());
+			beanProductDTO.setNamePresentation(beanResponseProduct.getNamePresentation());
+			beanProductDTO.setPriceSale(beanResponseProduct.getPriceSale());
+			beanProductDTO.setExpirationDate(beanResponseProduct.getExpirationDate());
+			beanListDTO.add(beanProductDTO);
+		}
+		return beanListDTO;
 	}
 
 

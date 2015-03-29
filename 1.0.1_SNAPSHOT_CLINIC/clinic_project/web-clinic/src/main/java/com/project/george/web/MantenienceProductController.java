@@ -45,14 +45,14 @@ public class MantenienceProductController {
 		model.addAttribute("maintenanceForm", tbTypeProduct);
 		
 		String responseStr=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT;
-//		
-//		try {
-//			List<TbProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
-//			System.out.println("Cantidad de filas que trae :"+listAllTypeProduct.size());
-//			request.setAttribute("listTypeProduct", listAllTypeProduct);
-//		} catch (Exception e) {
-//			System.out.println("Error : "+e.toString());
-//		}
+		
+		try {
+			List<ProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
+			System.out.println("Cantidad de filas que trae :"+listAllTypeProduct.size());
+			request.setAttribute("listTypeProduct", listAllTypeProduct);
+		} catch (Exception e) {
+			System.out.println("Error : "+e.toString());
+		}
 		
 		return new ModelAndView(responseStr);
 	}
@@ -72,13 +72,13 @@ public class MantenienceProductController {
 	
 	@RequestMapping("registerProduct.htm")
 	public ModelAndView validateUserForm(
-			@ModelAttribute ProductDTO beanProductDTO,
+			@ModelAttribute TbProduct beanProductDTO,
 			final BindingResult result, final SessionStatus status,
 			final HttpServletRequest request) {
 		System.out.println("inside registerTypeProduct htm");
 		String valueResponse="";
 		try {
-//			valueResponse=tableProduct.addNewTypeProduct(tableTypeProductBean);
+			valueResponse=tableProduct.addNewTypeProduct(beanProductDTO);
 //			BeanProduct responseProduct=tableProduct.saveProduct(beanProductDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
