@@ -18,6 +18,8 @@ namespace KardexServices.Response
         [DataMember]
         public int typeOperation { get; set; }
         [DataMember]
+        public DateTime dateCreated { get; set; }
+        [DataMember]
         public int status { get; set; }
         [DataMember]
         public string comprobanteClase { get; set; }

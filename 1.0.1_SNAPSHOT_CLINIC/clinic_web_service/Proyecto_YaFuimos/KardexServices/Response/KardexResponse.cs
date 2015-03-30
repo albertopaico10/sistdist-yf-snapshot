@@ -13,6 +13,12 @@ namespace KardexServices.Response
         public int id { get; set; }
         [DataMember]
         public int idProduct { get; set; }
+        //Descripción de producto
+        [DataMember]
+        public string nameProduct { get; set; }
+        //Descripcion de presentación
+        [DataMember]
+        public string namePresentation{ get; set; }
         [DataMember]
         public decimal priceProductKardex { get; set; }
         [DataMember]

@@ -162,5 +162,24 @@ namespace KardexServices
             beanResponseList.result = "SUCCESS";
             return beanResponseList;
         }
+
+        //Create by : César Quispe Carrión
+        //Update by : César Quispe Carrión
+        //Name : getKardex
+        //Description : This method was created for get Kardex
+        public KardexResponse getKardex(int idProduct)
+        {
+            return dao.obtenerKardex(idProduct);
+        }
+
+
+        //Create by : César Quispe Carrión
+        //Update by : César Quispe Carrión
+        //Name : getDetailKardex
+        //Description : This method was created for get detail Kardex
+        public List<DetailKardexResponse> getDetailKardex(int idProduct)
+        {
+            return dao.listarDetalleKardex(idProduct);
+        }
     }
 }
