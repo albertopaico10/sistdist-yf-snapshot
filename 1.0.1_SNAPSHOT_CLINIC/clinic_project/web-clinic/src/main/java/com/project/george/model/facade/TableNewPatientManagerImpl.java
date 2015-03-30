@@ -1,14 +1,17 @@
 package com.project.george.model.facade;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.george.bean.catalog.paciente.Patient;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
+import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbNewPatient;
 import com.project.george.model.TbPatient;
 import com.project.george.model.TbSystemParam;
@@ -24,6 +27,8 @@ public class TableNewPatientManagerImpl implements TableNewPatientManager {
 	TableNewPatientDao custmTableNewPatient;
 	@Autowired
 	TableSystemParamManager tbSystemMan;
+	@Autowired
+	public ClinicApplicationBusiness clinicApplicationBusiness;
 
 	public String addNewPatient(TbNewPatient tbNewPatientBean) throws Exception {
 		String returnRsponse=CommonConstants.MantenienceNewPatient.RESPONSE_MANTENIENCE_PATIENT_NEW;
@@ -39,7 +44,29 @@ public class TableNewPatientManagerImpl implements TableNewPatientManager {
 			beanSystemParam.setValueParam(String.valueOf(intNextCodeHistory));
 		}
 		try {
-			custmTableNewPatient.addNewPatient(tbNewPatientBean);
+			
+			Patient tbPatient = new Patient();
+			tbPatient.setId(tbNewPatientBean.getId());
+			tbPatient.setAddress(tbNewPatientBean.getAdress());
+			tbPatient.setBirthDay(tbNewPatientBean.getBirthDay());
+			tbPatient.setDateCreated(tbNewPatientBean.getDateCreated());
+			tbPatient.setDateUpdated(tbNewPatientBean.getDateUpdated());
+			tbPatient.setDistrictName(tbNewPatientBean.getDistrictName());
+			tbPatient.setDni(tbNewPatientBean.getDni());
+			tbPatient.setLastNamePatient(tbNewPatientBean.getLastNamePatient());
+			tbPatient.setNamePatient(tbNewPatientBean.getNamePatient());
+			tbPatient.setStatusPatient(tbNewPatientBean.getStatusPatient());
+			tbPatient.setUserCreated(tbNewPatientBean.getUserCreated());
+			tbPatient.setUserUpdated(tbNewPatientBean.getUserUpdated());
+			
+			if(tbNewPatientBean.getId()==0){
+				//custmTableNewPatient.addNewPatient(tbNewPatientBean);
+				tbPatient = clinicApplicationBusiness.savePatient(tbPatient);
+			} else {
+				tbPatient = clinicApplicationBusiness.updatePatient(tbPatient);
+			}
+			
+			
 			if(saveSytemParam){
 				tbSystemMan.updateSystemParam(beanSystemParam);
 			}
@@ -52,19 +79,57 @@ public class TableNewPatientManagerImpl implements TableNewPatientManager {
 
 	public List<TbNewPatientDTO> listAllPatient() throws Exception {
 		System.out.println("Inside listAllPatient");
-		List<TbNewPatient> listAllPatient=custmTableNewPatient.listAllPatient();
+		//List<TbNewPatient> listAllPatient=custmTableNewPatient.listAllPatient();
 		
+		List<TbNewPatient> listAllPatient = new ArrayList<TbNewPatient>();
+		List<Patient> patients = clinicApplicationBusiness.getPatients();
+		
+		Date date = new Date();//TODO: to refactor
 		List<TbNewPatientDTO> newListPatient=new ArrayList<TbNewPatientDTO>();
-		//--Add Reference Code History
-		TbSystemParam beanSystemParam=tbSystemMan.getValueSystemParam(CommonConstants.SystemParam.NAME_PARAM_HISTORY_CLINIC);
-		
-		UtilMethods utilMethods=new UtilMethods();
-		for(TbNewPatient beanPatient:listAllPatient){
-			TbNewPatientDTO beanPatientDTO=new TbNewPatientDTO();			
-			beanPatientDTO=utilMethods.copyValuesNewPatientDTO(beanPatient, beanPatientDTO);
-			beanPatientDTO.setCodeHistoryClinic(beanSystemParam.getValueParam()+beanPatientDTO.getCodeHistoryClinic());
-			newListPatient.add(beanPatientDTO);
+		try {
+			for (Patient patient : patients) {
+				TbNewPatient tbPatient = new TbNewPatient();
+				tbPatient.setId(patient.getId());
+				tbPatient.setAdress(patient.getAddress());
+				tbPatient.setBirthDay(patient.getBirthDay());
+				tbPatient.setDateCreated(patient.getDateCreated());
+				tbPatient.setDateUpdated(patient.getDateUpdated());
+				tbPatient.setDistrictName(patient.getDistrictName());
+				tbPatient.setDni(patient.getDni());
+				tbPatient.setLastNamePatient(patient.getLastNamePatient());
+				tbPatient.setNamePatient(patient.getNamePatient());
+				
+				if(patient.getStatusPatient()!=null)
+					tbPatient.setStatusPatient(patient.getStatusPatient());
+				
+				if(patient.getUserCreated()!=null)
+					tbPatient.setUserCreated(patient.getUserCreated());
+				
+				if(patient.getUserUpdated()!=null)
+					tbPatient.setUserUpdated(patient.getUserUpdated());
+				
+				listAllPatient.add(tbPatient);
+				
+			}
+			
+			
+			//--Add Reference Code History
+			TbSystemParam beanSystemParam=tbSystemMan.getValueSystemParam(CommonConstants.SystemParam.NAME_PARAM_HISTORY_CLINIC);
+			
+			UtilMethods utilMethods=new UtilMethods();
+			for(TbNewPatient beanPatient:listAllPatient){
+				TbNewPatientDTO beanPatientDTO=new TbNewPatientDTO();			
+				beanPatientDTO=utilMethods.copyValuesNewPatientDTO(beanPatient, beanPatientDTO);
+				beanPatientDTO.setCodeHistoryClinic(beanSystemParam.getValueParam()+beanPatientDTO.getCodeHistoryClinic());
+				newListPatient.add(beanPatientDTO);
+			}	
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}	
+		
+		
+		
 		
 		return newListPatient;
 	}
@@ -74,7 +139,29 @@ public class TableNewPatientManagerImpl implements TableNewPatientManager {
 		TbNewPatient tbPatintBean=new TbNewPatient();
 		tbPatintBean=custmTableNewPatient.beanNewPatientSpecific(idPatient);
 		tbPatintBean.setStatusPatient(2);//--2 is Inactive
-		custmTableNewPatient.deleteArea(tbPatintBean);
+		//custmTableNewPatient.deleteArea(tbPatintBean);
+		
+		Patient tbPatient = new Patient();
+		tbPatient.setId(tbPatintBean.getId());
+		tbPatient.setAddress(tbPatintBean.getAdress());
+		tbPatient.setBirthDay(tbPatintBean.getBirthDay());
+		tbPatient.setDateCreated(tbPatintBean.getDateCreated());
+		tbPatient.setDateUpdated(tbPatintBean.getDateUpdated());
+		tbPatient.setDistrictName(tbPatintBean.getDistrictName());
+		tbPatient.setDni(tbPatintBean.getDni());
+		tbPatient.setLastNamePatient(tbPatintBean.getLastNamePatient());
+		tbPatient.setNamePatient(tbPatintBean.getNamePatient());
+		
+		//if(tbPatintBean.getStatusPatient()!=null)
+			tbPatient.setStatusPatient(tbPatintBean.getStatusPatient());
+		
+		//if(tbPatintBean.getUserCreated()!=null)
+			tbPatient.setUserCreated(tbPatintBean.getUserCreated());
+		
+		//if(tbPatintBean.getUserUpdated()!=null)
+			tbPatient.setUserUpdated(tbPatintBean.getUserUpdated());
+		
+		clinicApplicationBusiness.updatePatient(tbPatient);
 		return returnRsponse;
 	}
 	
