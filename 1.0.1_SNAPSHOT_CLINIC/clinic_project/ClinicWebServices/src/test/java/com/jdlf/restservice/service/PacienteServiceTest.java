@@ -113,6 +113,17 @@ public class PacienteServiceTest {
 		
 	}
 	
+	@Test
+	public void testDeleteUnExistingPaciente(){
+	
+		Client client = Client.create();
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/remove/0");
+			
+		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
+		String output = clientResponse.getEntity(String.class);
+		Assert.assertTrue(output.contains("userId does not Exist"));
+	}
+	
 	private Paciente parsePaciente(String output, Paciente paciente) {
 		try {
 			paciente = mapper.readValue(output, Paciente.class);
