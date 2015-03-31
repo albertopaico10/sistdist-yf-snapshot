@@ -131,35 +131,47 @@ namespace KardexServices
 
         //Create by : Alberto Paico
         //Update by : Alberto Paico
-        //Name : insertarDetail
+        //Name : findProductByName
         //Description : This method was created for list all the presentation from DB
         public ProductListResponse findProductByName(string nameProduct)
         {
             ProductListResponse beanResponseList = new ProductListResponse();
             List<ProductResponse> beanResponseListProduct = daoProduct.findProductPresentationByNameProduct(nameProduct);
-            string response = "{" + "\"listResponseProduct\":[";
-            ProductResponse last = beanResponseListProduct.Last();
-            foreach (ProductResponse beanResponseProduct in beanResponseListProduct) {
-                if (beanResponseProduct.Equals(last))
+
+            if (beanResponseListProduct.Count > 0)
+            {
+                ProductResponse last = beanResponseListProduct.Last();
+
+                string response = "{" + "\"listResponseProduct\":[";
+
+                foreach (ProductResponse beanResponseProduct in beanResponseListProduct)
                 {
-                    response = response + "{\"id\":" + beanResponseProduct.id + ",";
-                    response = response + "\"nameProduct\":" + "\"" + beanResponseProduct.nameProduct + "\",";
-                    response = response + "\"namePresentation\":" + "\"" + beanResponseProduct.namePresentation + "\",";
-                    response = response + "\"priceSale\":" + "\"" + beanResponseProduct.priceSale + "\",";
-                    response = response + "\"expirationDate\":" + "\"" + beanResponseProduct.expirationDate + "\"}";
+                    if (beanResponseProduct.Equals(last))
+                    {
+                        response = response + "{\"id\":" + beanResponseProduct.id + ",";
+                        response = response + "\"nameProduct\":" + "\"" + beanResponseProduct.nameProduct + "\",";
+                        response = response + "\"namePresentation\":" + "\"" + beanResponseProduct.namePresentation + "\",";
+                        response = response + "\"priceSale\":" + "\"" + beanResponseProduct.priceSale + "\",";
+                        response = response + "\"expirationDate\":" + "\"" + beanResponseProduct.expirationDate + "\"}";
+                    }
+                    else
+                    {
+                        response = response + "{\"id\":" + beanResponseProduct.id + ",";
+                        response = response + "\"nameProduct\":" + "\"" + beanResponseProduct.nameProduct + "\",";
+                        response = response + "\"namePresentation\":" + "\"" + beanResponseProduct.namePresentation + "\",";
+                        response = response + "\"priceSale\":" + "\"" + beanResponseProduct.priceSale + "\",";
+                        response = response + "\"expirationDate\":" + "\"" + beanResponseProduct.expirationDate + "\"},";
+                    }
                 }
-                else {
-                    response = response + "{\"id\":" + beanResponseProduct.id + ",";
-                    response = response + "\"nameProduct\":" + "\"" + beanResponseProduct.nameProduct + "\",";
-                    response = response + "\"namePresentation\":" + "\"" + beanResponseProduct.namePresentation + "\",";
-                    response = response + "\"priceSale\":" + "\"" + beanResponseProduct.priceSale + "\",";
-                    response = response + "\"expirationDate\":" + "\"" + beanResponseProduct.expirationDate + "\"},";
-                }
+                response = response + "]}";
+                Debug.WriteLine("RESPONSE : ------->>  " + response);
+                beanResponseList.listCadenaProduct = response;
+                beanResponseList.result = "SUCCESS_LIST";
             }
-            response = response + "]}";
-            Debug.WriteLine("RESPONSE : ------->>  " + response);
-            beanResponseList.listCadenaProduct = response;
-            beanResponseList.result = "SUCCESS";
+            else {
+                beanResponseList.result = "PRODUCT_NOT_EXIST";
+            }
+            
             return beanResponseList;
         }
 
@@ -167,7 +179,7 @@ namespace KardexServices
         //Update by : César Quispe Carrión
         //Name : getKardex
         //Description : This method was created for get Kardex
-        public KardexResponse getKardex(int idProduct)
+        public KardexResponse getKardex(string idProduct)
         {
             return dao.obtenerKardex(idProduct);
         }
@@ -177,9 +189,9 @@ namespace KardexServices
         //Update by : César Quispe Carrión
         //Name : getDetailKardex
         //Description : This method was created for get detail Kardex
-        public List<DetailKardexResponse> getDetailKardex(int idProduct)
+        public List<DetailKardexResponse> getDetailKardex(string idKardex)
         {
-            return dao.listarDetalleKardex(idProduct);
+            return daoDetail.listarDetalleKardex(idKardex);
         }
     }
 }

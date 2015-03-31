@@ -81,5 +81,53 @@ namespace KardexServices.Persistencia
 
             return listDetailKardex;
         }
+
+        //Método para obtener el detalle de un kardex enviando el código de kardex
+        public List<DetailKardexResponse> listarDetalleKardex(string idKardex)
+        {
+            List<DetailKardexResponse> listaDetalleKardex = new List<DetailKardexResponse>();
+            DetailKardexResponse detalleKardex = new DetailKardexResponse();
+            string query = "select id,cantidad,typeOperation,date_created,comprobante_clase,comprobante_number,price_sale" +
+                            "from tb_detail_kardex" +
+                            "where idKardex = @idKardex";
+
+            MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
+            MySqlCommand mysqlCommand;
+            MySqlDataReader mysqlDataReader;
+
+            mysqlConnection.Open();
+
+            try
+            {
+
+                mysqlCommand = mysqlConnection.CreateCommand();
+                mysqlCommand.CommandText = query;
+                mysqlCommand.Parameters.AddWithValue("@idKardex", idKardex);
+
+                mysqlDataReader = mysqlCommand.ExecuteReader();
+
+                while (mysqlDataReader.Read())
+                {
+                    detalleKardex.id = mysqlDataReader.GetInt32(0);
+                    detalleKardex.cantidad = mysqlDataReader.GetInt32(1);
+                    detalleKardex.typeOperation = mysqlDataReader.GetInt32(2);
+                    detalleKardex.dateCreated = mysqlDataReader.GetDateTime(3);
+                    detalleKardex.comprobanteClase = mysqlDataReader.GetString(4);
+                    detalleKardex.comprobanteNumber = mysqlDataReader.GetInt32(5);
+                    detalleKardex.priceSale = mysqlDataReader.GetDecimal(6);
+                    listaDetalleKardex.Add(detalleKardex);
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                detalleKardex.result = "ERROR";
+                detalleKardex.messages = e.Message;
+            }
+
+            return listaDetalleKardex;
+
+        }
     }
 }
