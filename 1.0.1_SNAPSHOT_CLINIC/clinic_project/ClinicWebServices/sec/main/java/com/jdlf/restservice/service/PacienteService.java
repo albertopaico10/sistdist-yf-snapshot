@@ -40,10 +40,14 @@ public class PacienteService {
 	@GET
 	@Path("/get/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPaciente (@PathParam("id") String id){	
+	public Response getPaciente (@PathParam("id") String id) throws Exception{	
 		dao.openCurrentSessionwithTransaction();
 		Paciente paciente = dao.findById(Integer.valueOf(id)); 
 		dao.closeCurrentSessionwithTransaction();
+		
+		if(paciente==null)
+			throw new Exception("userId does not Exist");
+		
 		//return paciente;
 		return Response.status(200).entity(paciente).build();
 	}
@@ -52,7 +56,7 @@ public class PacienteService {
 	@Path("/create")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Paciente crearPaciente (Paciente paciente){
+	public Paciente crearPaciente (Paciente paciente) throws Exception{
 		dao.openCurrentSessionwithTransaction();
 		paciente = dao.persist(paciente);
 		dao.closeCurrentSessionwithTransaction();
@@ -63,7 +67,7 @@ public class PacienteService {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Paciente actualizarPaciente (Paciente paciente){	
+	public Paciente actualizarPaciente (Paciente paciente) throws Exception{	
 		dao.openCurrentSessionwithTransaction();
 		Paciente pac = dao.update(paciente);
 		dao.closeCurrentSessionwithTransaction();
@@ -72,9 +76,13 @@ public class PacienteService {
 	
 	@DELETE
 	@Path("/remove/{id}")
-	public Response eliminarPaciente (@PathParam("id") String id){
+	public Response eliminarPaciente (@PathParam("id") String id) throws Exception{
 		dao.openCurrentSessionwithTransaction();
 		Paciente paciente = dao.findById(Integer.valueOf(id));
+		
+		if(paciente==null)
+			throw new Exception("userId does not Exist");
+		
 		dao.delete(paciente);
 		dao.closeCurrentSessionwithTransaction();
 		return Response.status(200).entity("eliminado").build();
