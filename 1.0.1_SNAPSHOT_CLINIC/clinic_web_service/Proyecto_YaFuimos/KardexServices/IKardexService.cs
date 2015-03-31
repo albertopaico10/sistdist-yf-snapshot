@@ -36,5 +36,13 @@ namespace KardexServices
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "FindProductByName/{nameProduct}", ResponseFormat = WebMessageFormat.Json)]
         ProductListResponse findProductByName(string nameProduct);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "GetKardex/{idProduct}", ResponseFormat = WebMessageFormat.Json)]
+        KardexResponse getKardex(int idProduct);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "GetDetailKardex/{idKardex}", ResponseFormat = WebMessageFormat.Json)]
+        DetailKardexResponse getDetailKardex(int idKardex);
     }
 }
