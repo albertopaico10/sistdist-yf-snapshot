@@ -76,6 +76,7 @@
     <Compile Include="Dominio\DetailKardex.cs" />
     <Compile Include="Dominio\Kardex.cs" />
     <Compile Include="Dominio\KardexRequest.cs" />
+    <Compile Include="Dominio\Product.cs" />
     <Compile Include="IKardexService.cs" />
     <Compile Include="KardexService.svc.cs">
       <DependentUpon>KardexService.svc</DependentUpon>

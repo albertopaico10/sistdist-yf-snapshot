@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
 import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.catalog.product.BeanResponseProduct;
 import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
@@ -90,14 +91,14 @@ public class TableProductManagerImpl implements TableProductManager {
 
 	//------------------------------------------------------------------------
 	public BeanResponseWeb setBeanProduct(ProductDTO beanProductDTO) throws Exception {
-		BeanRequestProduct beanProduct=new BeanRequestProduct();
-		beanProduct.setNamePresentation(beanProduct.getNameProduct());
-		beanProduct.setIdPresentation(beanProductDTO.getIdPresentation());
-		beanProduct.setNameProduct(beanProductDTO.getNameProduct());
-		beanProduct.setPrice(beanProductDTO.getPrice());
-		beanProduct.setPriceSale(beanProductDTO.getPriceSale());
+		BeanRequestProduct beanRequestProduct=new BeanRequestProduct();
+		beanRequestProduct.setNamePresentation(beanRequestProduct.getNameProduct());
+		beanRequestProduct.setIdPresentation(beanProductDTO.getIdPresentation());
+		beanRequestProduct.setNameProduct(beanProductDTO.getNameProduct());
+		beanRequestProduct.setPrice(beanProductDTO.getPrice());
+		beanRequestProduct.setPriceSale(beanProductDTO.getPriceSale());
 		
-		BeanProduct beanResponseProduct=clinicApplicationBusiness.saveProduct(beanProduct);
+		BeanResponseProduct beanResponseProduct=clinicApplicationBusiness.saveProduct(beanRequestProduct);
 		
 		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
 		if(CommonConstants.ResponseIdResult.RESULT_CORRECT.equals(beanResponseProduct.getResult())){

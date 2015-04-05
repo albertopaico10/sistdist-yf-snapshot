@@ -10,13 +10,14 @@ import com.project.george.bean.catalog.presentation.BeanResponseListPresentation
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
 import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.catalog.product.BeanResponseProduct;
 
 @Service
 public interface ClinicApplicationBusiness {
 
 	public String mensajeTest(String value)throws Exception;
 	
-	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
+	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
 	
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation)throws Exception;
 	

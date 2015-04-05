@@ -11,9 +11,12 @@ import org.apache.axis.message.IDResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.project.george.bean.catalog.kardex.BeanRequestKardex;
+import com.project.george.bean.catalog.kardex.BeanResponseKardex;
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
 import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.catalog.product.BeanResponseProduct;
 import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalListProduct;
 import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.facade.service.ProductService;
@@ -25,7 +28,34 @@ import com.project.george.util.UtilWebService;
 public class ProductServiceImpl implements ProductService {
 	
 //	private static Logger logger = Logger.getLogger(ProductServiceImpl.class);
-	public String rucService = CommonConstants.PRODUCT_SOAP;
+	
+	
+	public BeanResponseProduct saveProduct(BeanRequestProduct beanRequestProduct) throws Exception {
+		
+		String gson=JsonUtils.toJson(beanRequestProduct);
+		System.out.println("**** GSON : " + gson);
+		
+		RestTemplate restTemplate=new RestTemplate();
+		BeanResponseProduct beanResponseProduct=restTemplate.postForObject(CommonConstants.PRODUCT_REST, beanRequestProduct, BeanResponseProduct.class);
+		
+		return beanResponseProduct;
+	}
+
+public boolean verificationExistProduct(String name, int idPresentation)
+		throws Exception {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+public BeanResponseListProduct listProductByName(String nameProduct)
+		throws Exception {
+	// TODO Auto-generated method stub
+	return null;
+}	
+
+/*	public String rucService = CommonConstants.PRODUCT_SOAP;
+	
+	
 	
 	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
 		System.out.println(CommonConstants.Logger.LOGGER_START);
@@ -121,4 +151,5 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return beanListProduct;
 	}
+*/
 }

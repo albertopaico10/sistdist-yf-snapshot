@@ -12,6 +12,7 @@ import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
 import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.bean.catalog.product.BeanRequestProduct;
 import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.catalog.product.BeanResponseProduct;
 import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.facade.service.PatientService;
 import com.project.george.facade.service.PresentationService;
@@ -35,19 +36,20 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return "HOLA .... "+value;
 	}
 
-	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
-		System.out.println(CommonConstants.Logger.LOGGER_START);
+	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
+	/*	System.out.println(CommonConstants.Logger.LOGGER_START);
 		//--Validate if Exist Producto with same Presentation
 		boolean validationProduct=productService.verificationExistProduct(beanProduct.getNameProduct(),beanProduct.getIdPresentation());
 		//--End
-		BeanProduct responseProduct=new BeanProduct();
+		BeanResponseProduct responseProduct=new BeanResponseProduct();
 		if(!validationProduct){
 			//--Save Product
 			responseProduct=productService.saveProduct(beanProduct);
 			responseProduct.setResult("redirect:/listProduct.htm");
 		}		
 		System.out.println(CommonConstants.Logger.LOGGER_END);
-		return responseProduct;
+		return responseProduct;*/
+		return productService.saveProduct(beanProduct);
 	}
 
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation) throws Exception {

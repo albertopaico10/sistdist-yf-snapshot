@@ -10,7 +10,7 @@ namespace KardexServices.Persistencia
         public static string ObtenerCadenaMysql
         {
             get{
-                return "Server=localhost;Database=db_corazondejesus;User ID=root;Password=root";
+                return "Server=localhost;Database=db_corazondejesus;User ID=root;Password=karina";
             }
             
         }

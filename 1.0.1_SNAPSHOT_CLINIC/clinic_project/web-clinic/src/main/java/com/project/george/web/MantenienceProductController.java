@@ -80,11 +80,14 @@ public class MantenienceProductController {
 		try {
 			valueResponse=tableProduct.addNewTypeProduct(beanProductDTO);
 //			BeanProduct responseProduct=tableProduct.saveProduct(beanProductDTO);
+			if(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW.equals(valueResponse)){				
+				request.setAttribute("messages", "success");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		System.out.println("**** "+valueResponse);
-		System.out.println("Save User Data");
+		System.out.println("Save Product");
 		return new ModelAndView(valueResponse);
 	}
 	

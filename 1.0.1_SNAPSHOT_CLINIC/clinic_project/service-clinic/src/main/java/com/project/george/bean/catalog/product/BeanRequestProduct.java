@@ -13,6 +13,7 @@ public class BeanRequestProduct {
 	public BigDecimal price;
 	public BigDecimal priceSale;
 	public Date expirationDate;
+	
 	public int getId() {
 		return id;
 	}

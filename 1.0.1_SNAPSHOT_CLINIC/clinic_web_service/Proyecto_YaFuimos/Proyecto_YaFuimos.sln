@@ -12,7 +12,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librerias", "Librerias", "{
 		Librerias\NHibernate.dll = Librerias\NHibernate.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductTest", "ProductTest\ProductTest.csproj", "{0B6CC2F6-8201-46F3-AD60-8AF3DBFE506B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{508633BC-8465-464D-8218-3929129E21AB}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Proyecto_YaFuimos.vsmdi = Proyecto_YaFuimos.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Proyecto_YaFuimos.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -26,6 +38,10 @@ Global
 		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE063258-3BF0-4D63-A4CB-A36D45F0730F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6CC2F6-8201-46F3-AD60-8AF3DBFE506B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6CC2F6-8201-46F3-AD60-8AF3DBFE506B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6CC2F6-8201-46F3-AD60-8AF3DBFE506B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6CC2F6-8201-46F3-AD60-8AF3DBFE506B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

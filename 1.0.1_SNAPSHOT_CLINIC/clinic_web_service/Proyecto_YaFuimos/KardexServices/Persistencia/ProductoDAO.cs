@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using KardexServices.Response;
+using KardexServices.Dominio;
 
 namespace KardexServices.Persistencia
 {
@@ -77,6 +78,41 @@ namespace KardexServices.Persistencia
             }
            
             return listResponseProduct;
+        }
+
+        public ProductResponse registrarProducto(Product beanProducto)
+        {
+            ProductResponse beanResponseProducto = new ProductResponse();
+            string query = "insert into tb_product (nameProduct,status,idPresentation," +
+            "price_Product,date_created,price_sale,expiration_date) values (" +
+            "@nameProduct,@status,@idPresentation,@price_Product,@date_created," +
+            "@price_sale,@expiration_date)";
+
+            MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
+
+            MySqlCommand mysqlCommand;
+
+            mysqlConnection.Open();
+            try
+            {
+                mysqlCommand = mysqlConnection.CreateCommand();
+                mysqlCommand.CommandText = query;
+                mysqlCommand.Parameters.AddWithValue("@nameProduct", beanProducto.NameProduct);
+                mysqlCommand.Parameters.AddWithValue("@status", beanProducto.Status);
+                mysqlCommand.Parameters.AddWithValue("@idPresentation", beanProducto.IdPresentation);
+                mysqlCommand.Parameters.AddWithValue("@price_Product", beanProducto.PriceProduct);
+                mysqlCommand.Parameters.AddWithValue("@date_created", beanProducto.DateCreated);
+                mysqlCommand.Parameters.AddWithValue("@price_sale", beanProducto.PriceSale);
+                mysqlCommand.Parameters.AddWithValue("@expiration_date", beanProducto.ExpirationDate);
+                mysqlCommand.ExecuteNonQuery();
+                beanResponseProducto.result = "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                beanResponseProducto.result = "ERROR";
+                beanResponseProducto.messages = e.Message;
+            }
+            return beanResponseProducto;
         }
     }
 }
