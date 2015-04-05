@@ -13,7 +13,7 @@ namespace KardexServices.Persistencia
         public ProductResponse findProductById(int idProduct)
         {
             ProductResponse beanResponseProducto = new ProductResponse();
-            string query = "select * from tb_product where id=@idProduct where status = 1";
+            string query = "select * from tb_product where id=@idProduct and status = 1";
 
             MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
 

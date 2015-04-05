@@ -1,4 +1,4 @@
-package com.project.george.bean.catalog.product.canonical;
+package com.project.george.bean.product.canonical;
 
 import java.math.BigDecimal;
 

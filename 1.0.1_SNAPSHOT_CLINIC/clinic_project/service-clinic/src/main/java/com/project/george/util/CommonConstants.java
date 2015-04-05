@@ -14,7 +14,12 @@ public class CommonConstants {
 	
 	public class ResponseWebService{
 		public final static String RESP_WS_SUCCESS="SUCCESS";
+		public final static String RESP_WS_SUCCESS_SAVE="SUCCESS_SAVE";
+		public final static String RESP_WS_SUCCESS_LIST="SUCCESS_LIST";
 		public final static String RESP_WS_ERROR="ERROR";
+		public final static String RESP_WS_EXIST="EXIST";
+		public final static String RESP_WS_NOT_EXIST="NOT_EXIST";
+		public final static String RESP_WS_CONNECTION_REFUSE="CONNECTION_REFUSE";
 	}
 	
 	public class ResponseWebLayer{

@@ -1,17 +1,14 @@
 package com.project.george.model.facade;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.axis.types.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.bean.catalog.paciente.Patient;
+import com.project.george.bean.paciente.Patient;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.facade.business.ClinicApplicationBusiness;

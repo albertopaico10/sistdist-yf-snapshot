@@ -1,6 +1,6 @@
-package com.project.george.bean.catalog.presentation.canonical;
+package com.project.george.bean.presentation.canonical;
 
-import com.project.george.bean.catalog.GenericBean;
+import com.project.george.bean.GenericBean;
 
 public class BeanResponseCanonicalPresentation extends GenericBean{
 

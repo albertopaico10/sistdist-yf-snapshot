@@ -1,8 +1,8 @@
-package com.project.george.bean.catalog.product;
+package com.project.george.bean.product;
 
 import java.util.List;
 
-import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalProduct;
+import com.project.george.bean.product.canonical.BeanResponseCanonicalProduct;
 
 public class BeanResponseListProduct {
 	public List<BeanResponseCanonicalProduct> listResponseProduct;

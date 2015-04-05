@@ -2,32 +2,31 @@ package com.project.george.model.facade;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import com.project.george.bean.kardex.BeanResponseKardex;
+import com.project.george.bean.kardex.BeanResponseKardexDetail;
+import com.project.george.bean.kardex.BeanResponseListKardexDetail;
+import com.project.george.bean.kardex.canonical.BeanRequestCanonicalKardex;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
+import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbDetailKardex;
 import com.project.george.model.TbKardex;
 import com.project.george.model.TbProduct;
-import com.project.george.model.custom.dao.CustomTableProductDao;
-import com.project.george.model.custom.dao.CustomTableProductDaoImpl;
+import com.project.george.model.bean.BeanResponseWeb;
 import com.project.george.model.dao.TableDetailKardexDao;
 import com.project.george.model.dao.TableKardexDao;
-import com.project.george.model.dao.TableKardexDaoImpl;
 import com.project.george.model.dao.TableProductDao;
-import com.project.george.model.dao.TableProductDaoImpl;
-import com.project.george.model.dto.TbDetailKardexDTO;
-import com.project.george.model.dto.TbKardexDTO;
-import com.project.george.model.dto.ProductDTO;
+import com.project.george.model.dto.KardexDTO;
+import com.project.george.model.dto.DetailKardexDTO;
 
 
 @Service
@@ -42,16 +41,19 @@ public class TableKardexManagerImpl implements TableKardexManager{
 	
 	@Autowired
 	TableProductDao customTableProductDao;
+	
+	@Autowired
+	ClinicApplicationBusiness clinicApplicationBusiness;
 
-	public List<TbKardexDTO> listKardexByProduct(int idProduct) throws Exception{
+	public List<KardexDTO> listKardexByProduct(int idProduct) throws Exception{
 		System.out.println("Inside listKardexByProduct");
 		List<TbKardex> listKardex=customTableKardexDao.listKardexByProduct(idProduct);
 		
-		List<TbKardexDTO> newListKardex=new ArrayList<TbKardexDTO>();
+		List<KardexDTO> newListKardex=new ArrayList<KardexDTO>();
 		
 		UtilMethods utilMethods=new UtilMethods();
 		for (TbKardex beanKardex:listKardex){
-			TbKardexDTO beanKardexDTO=new TbKardexDTO();
+			KardexDTO beanKardexDTO=new KardexDTO();
 			beanKardexDTO=utilMethods.copyValuesTbKardexDTO(beanKardex, beanKardexDTO);
 			System.out.println("Valores que envia : "+beanKardexDTO.getId()+"**"+beanKardexDTO.getNameProduct()+"***"+beanKardexDTO.getCountProduct());
 			newListKardex.add(beanKardexDTO);
@@ -154,14 +156,14 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		
 	}
 
-	public List<TbDetailKardexDTO> listDetailKardex(int kardexId)
+	public List<DetailKardexDTO> listDetailKardex(int kardexId)
 			throws Exception {
 		List<TbDetailKardex> listDetailKardex=customTableDetailKardexDao.listDetailKardexByKardexId(kardexId);
 		
-		List<TbDetailKardexDTO> listBeanDetailKardexDTO=new ArrayList<TbDetailKardexDTO>();
+		List<DetailKardexDTO> listBeanDetailKardexDTO=new ArrayList<DetailKardexDTO>();
 		UtilMethods utilMethods=new UtilMethods();
 		for(TbDetailKardex beanDetailKardex:listDetailKardex){
-			TbDetailKardexDTO beanDetailKardexDTO=new TbDetailKardexDTO();
+			DetailKardexDTO beanDetailKardexDTO=new DetailKardexDTO();
 			beanDetailKardexDTO=utilMethods.copyValuesTbDetailKardexDTO(beanDetailKardex, beanDetailKardexDTO);
 			listBeanDetailKardexDTO.add(beanDetailKardexDTO);
 		}
@@ -181,7 +183,93 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		}
 		return result;
 	}
+	//=======================================================================================
+	public BeanResponseWeb findKardexByIdProduct(String idProduct)throws Exception {
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		System.out.println(CommonConstants.Logger.LOGGER_START+"** findKardexByIdProduct");
+		List<KardexDTO> newListKardex=new ArrayList<KardexDTO>();
+		
+		BeanResponseKardex beanResponseKardex=clinicApplicationBusiness.findKardexByIdProduct(idProduct);
+		if(CommonConstants.ResponseIdResult.RESULT_EXIST.equals(beanResponseKardex.getResult())){
+			KardexDTO beanKardexDTO=new KardexDTO();
+			beanKardexDTO.setId(beanResponseKardex.getId());
+			beanKardexDTO.setNameProduct(beanResponseKardex.getNameProduct());
+			beanKardexDTO.setNamePresentation(beanResponseKardex.getNamePresentation());
+			beanKardexDTO.setTotalEgress(beanResponseKardex.getTotalProductEgress());
+			beanKardexDTO.setTotalEntry(beanResponseKardex.getTotalProductEntry());
+			beanKardexDTO.setCountProduct(beanResponseKardex.getCountProduct());
+			beanKardexDTO.setPriceTotalProduct(beanResponseKardex.getPriceTotalProduct());
+			beanKardexDTO.setPriceTotalSale(beanResponseKardex.getPriceTotalSale());
+			newListKardex.add(beanKardexDTO);
+			beanResponseWeb.setListKardexDTO(newListKardex);
+		}
+		beanResponseWeb.setStatusResponse(beanResponseKardex.getResult());
+		System.out.println(CommonConstants.Logger.LOGGER_END);
+		return beanResponseWeb;
+	}
+	
+	public BeanResponseWeb saveKardex(String productId,String cantidad,String comprobanteClase,String comprobanteNumber,
+			String idKardex,String typeOperation)throws Exception{
+		System.out.println(CommonConstants.Logger.LOGGER_START+"** saveKardex");
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		BeanRequestCanonicalKardex beanRequestCanonicalKardex=new BeanRequestCanonicalKardex();
+		beanRequestCanonicalKardex.setIdProduct(Integer.parseInt(productId));
+		beanRequestCanonicalKardex.setCountProduct(Integer.parseInt(cantidad));
+		beanRequestCanonicalKardex.setComprobanteClase(comprobanteClase);
+		beanRequestCanonicalKardex.setComprobanteNumber(Integer.parseInt(comprobanteNumber));
+		if(!StringUtils.isEmpty(idKardex)){
+			beanRequestCanonicalKardex.setIdKardex(Integer.parseInt(idKardex));
+		}		
+		beanRequestCanonicalKardex.setTypeOperation(Integer.parseInt(typeOperation));
+		
+		BeanResponseKardex beanResponseKardex=clinicApplicationBusiness.saveKardex(beanRequestCanonicalKardex);
+		
+		List<KardexDTO> newListKardex=new ArrayList<KardexDTO>();
+		
+		if(CommonConstants.ResponseIdResult.RESULT_CORRECT_SAVE.equals(beanResponseKardex.getResult())){
+			KardexDTO beanKardexDTO=new KardexDTO();
+			beanKardexDTO.setId(beanResponseKardex.getId());
+			beanKardexDTO.setNameProduct(beanResponseKardex.getNameProduct());
+			beanKardexDTO.setNamePresentation(beanResponseKardex.getNamePresentation());
+			beanKardexDTO.setTotalEgress(beanResponseKardex.getTotalProductEgress());
+			beanKardexDTO.setTotalEntry(beanResponseKardex.getTotalProductEntry());
+			beanKardexDTO.setCountProduct(beanResponseKardex.getCountProduct());
+			beanKardexDTO.setPriceTotalProduct(beanResponseKardex.getPriceTotalProduct());
+			beanKardexDTO.setPriceTotalSale(beanResponseKardex.getPriceTotalSale());
+			beanKardexDTO.setMessages(beanResponseKardex.getMessages());
+			newListKardex.add(beanKardexDTO);
+			beanResponseWeb.setListKardexDTO(newListKardex);
+		}
+		beanResponseWeb.setStatusResponse(beanResponseKardex.getResult());
+		
+		System.out.println(CommonConstants.Logger.LOGGER_END);
+		return beanResponseWeb;
+	}
 
+	public BeanResponseWeb getListKardexDetail(String idKardex)throws Exception{
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		//--Call Service
+		List<DetailKardexDTO> listKardexDetail=new ArrayList<DetailKardexDTO>();
+		BeanResponseListKardexDetail beanListKardexDetail=clinicApplicationBusiness.listDetailKardex(idKardex);
+		for(BeanResponseKardexDetail beanRespListKardexDetail : beanListKardexDetail.getListDetailKardex()){
+			DetailKardexDTO beanDetailKardexDTO=new DetailKardexDTO();
+			beanDetailKardexDTO.setId(beanRespListKardexDetail.getId());
+			beanDetailKardexDTO.setCantidad(beanRespListKardexDetail.getCantidad());
+			beanDetailKardexDTO.setTypeOperation(String.valueOf(beanRespListKardexDetail.getTypeOperation()));
+			beanDetailKardexDTO.setComprobanteClase(beanRespListKardexDetail.getComprobanteClase());
+			beanDetailKardexDTO.setComprobanteNumero(beanRespListKardexDetail.getComprobanteNumero());
+			beanDetailKardexDTO.setCantidad(beanRespListKardexDetail.getCantidad());
+			beanDetailKardexDTO.setPriceProduct(beanRespListKardexDetail.getPriceProduct());
+			beanDetailKardexDTO.setPriceSale(beanRespListKardexDetail.getPriceSale());
+			beanDetailKardexDTO.setDateCreated(beanRespListKardexDetail.getDateCreated());
+			listKardexDetail.add(beanDetailKardexDTO);
+		}
+		beanResponseWeb.setListDetailKardexDTO(listKardexDetail);
+		return beanResponseWeb;
+	}
+	
+	
+	
 }
 
 

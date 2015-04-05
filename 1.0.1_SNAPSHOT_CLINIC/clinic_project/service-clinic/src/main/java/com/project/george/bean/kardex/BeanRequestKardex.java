@@ -1,20 +1,24 @@
-package com.project.george.bean.catalog.kardex;
+package com.project.george.bean.kardex;
 
-public class BeanResponseKardex {
+import java.math.BigDecimal;
 
+public class BeanRequestKardex {
 	public int id;
 	public int idProduct;
-	public double priceProductKardex;
+//	public double priceProductKardex;
+	public BigDecimal priceProductKardex;
 	public int countProduct;
 	public int status;
 	public int totalProductEntry;
 	public int totalProductEgress;
 	public String description;
 	public String dateCreated;
-	public double priceTotalProduct;
-	public double priceTotalSale;
-	public String result;
-	public String messages;
+//	public double priceTotalProduct;
+//	public double priceTotalSale;
+	public BigDecimal priceTotalProduct;
+	public BigDecimal priceTotalSale;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -27,10 +31,10 @@ public class BeanResponseKardex {
 	public void setIdProduct(int idProduct) {
 		this.idProduct = idProduct;
 	}
-	public double getPriceProductKardex() {
+	public BigDecimal getPriceProductKardex() {
 		return priceProductKardex;
 	}
-	public void setPriceProductKardex(double priceProductKardex) {
+	public void setPriceProductKardex(BigDecimal priceProductKardex) {
 		this.priceProductKardex = priceProductKardex;
 	}
 	public int getCountProduct() {
@@ -69,31 +73,16 @@ public class BeanResponseKardex {
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public double getPriceTotalProduct() {
+	public BigDecimal getPriceTotalProduct() {
 		return priceTotalProduct;
 	}
-	public void setPriceTotalProduct(double priceTotalProduct) {
+	public void setPriceTotalProduct(BigDecimal priceTotalProduct) {
 		this.priceTotalProduct = priceTotalProduct;
 	}
-	public double getPriceTotalSale() {
+	public BigDecimal getPriceTotalSale() {
 		return priceTotalSale;
 	}
-	public void setPriceTotalSale(double priceTotalSale) {
+	public void setPriceTotalSale(BigDecimal priceTotalSale) {
 		this.priceTotalSale = priceTotalSale;
 	}
-	public String getResult() {
-		return result;
-	}
-	public void setResult(String result) {
-		this.result = result;
-	}
-	public String getMessages() {
-		return messages;
-	}
-	public void setMessages(String messages) {
-		this.messages = messages;
-	}
-	
-	
-	
 }

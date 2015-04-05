@@ -1,9 +1,13 @@
-package com.project.george.bean.catalog.kardex.canonical;
+package com.project.george.bean.kardex.canonical;
+
+import java.math.BigDecimal;
 
 public class BeanResponseCanonicalKardex {
 
 	public int id;
 	public int idProduct;
+	public String nameProduct;
+	public String namePresentation;
 	public double priceProductKardex;
 	public int countProduct;
 	public int status;
@@ -11,8 +15,8 @@ public class BeanResponseCanonicalKardex {
 	public int totalProductEgress;
 	public String description;
 	public String dateCreated;
-	public double priceTotalProduct;
-	public double priceTotalSale;
+	public BigDecimal priceTotalProduct;
+	public BigDecimal priceTotalSale;
 	public String result;
 	public String messages;
 	
@@ -71,16 +75,17 @@ public class BeanResponseCanonicalKardex {
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-	public double getPriceTotalProduct() {
+	
+	public BigDecimal getPriceTotalProduct() {
 		return priceTotalProduct;
 	}
-	public void setPriceTotalProduct(double priceTotalProduct) {
+	public void setPriceTotalProduct(BigDecimal priceTotalProduct) {
 		this.priceTotalProduct = priceTotalProduct;
 	}
-	public double getPriceTotalSale() {
+	public BigDecimal getPriceTotalSale() {
 		return priceTotalSale;
 	}
-	public void setPriceTotalSale(double priceTotalSale) {
+	public void setPriceTotalSale(BigDecimal priceTotalSale) {
 		this.priceTotalSale = priceTotalSale;
 	}
 	public String getResult() {
@@ -95,4 +100,17 @@ public class BeanResponseCanonicalKardex {
 	public void setMessages(String messages) {
 		this.messages = messages;
 	}
+	public String getNameProduct() {
+		return nameProduct;
+	}
+	public void setNameProduct(String nameProduct) {
+		this.nameProduct = nameProduct;
+	}
+	public String getNamePresentation() {
+		return namePresentation;
+	}
+	public void setNamePresentation(String namePresentation) {
+		this.namePresentation = namePresentation;
+	}
+	
 }

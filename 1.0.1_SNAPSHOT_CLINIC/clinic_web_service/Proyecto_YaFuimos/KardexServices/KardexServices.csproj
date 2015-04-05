@@ -87,6 +87,7 @@
     <Compile Include="Persistencia\ProductoDAO.cs" />
     <Compile Include="Response\DetailKardexResponse.cs" />
     <Compile Include="Response\KardexResponse.cs" />
+    <Compile Include="Response\ListResponseDetailKardex.cs" />
     <Compile Include="Response\ProductListResponse.cs" />
     <Compile Include="Response\ProductResponse.cs" />
     <Compile Include="Service1.svc.cs">

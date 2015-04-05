@@ -8,16 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.bean.catalog.paciente.Patient;
+import com.project.george.bean.paciente.Patient;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbNewPatient;
-import com.project.george.model.TbPatient;
 import com.project.george.model.TbSystemParam;
 import com.project.george.model.dao.TableNewPatientDao;
 import com.project.george.model.dto.TbNewPatientDTO;
-import com.project.george.model.dto.TbPatientDTO;
 
 @Service
 @Transactional

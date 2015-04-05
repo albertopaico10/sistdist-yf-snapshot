@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import com.project.george.bean.catalog.presentation.canonical.BeanResponseCanonicalPresentation;
+import com.project.george.bean.presentation.canonical.BeanResponseCanonicalPresentation;
 import com.project.george.model.TbArea;
 import com.project.george.model.TbDetailKardex;
 import com.project.george.model.TbKardex;
@@ -19,8 +19,8 @@ import com.project.george.model.TbRole;
 import com.project.george.model.TbProduct;
 import com.project.george.model.TbUser;
 import com.project.george.model.dto.TbAreasDTO;
-import com.project.george.model.dto.TbDetailKardexDTO;
-import com.project.george.model.dto.TbKardexDTO;
+import com.project.george.model.dto.DetailKardexDTO;
+import com.project.george.model.dto.KardexDTO;
 import com.project.george.model.dto.TbNewPatientDTO;
 import com.project.george.model.dto.TbPatientDTO;
 import com.project.george.model.dto.PresentationDTO;
@@ -30,7 +30,7 @@ import com.project.george.model.dto.TbUserDTO;
 
 public class UtilMethods {
 	
-	public TbDetailKardexDTO copyValuesTbDetailKardexDTO(TbDetailKardex beanFrom,TbDetailKardexDTO beanTo){
+	public DetailKardexDTO copyValuesTbDetailKardexDTO(TbDetailKardex beanFrom,DetailKardexDTO beanTo){
 		beanTo.setId(beanFrom.getId());
 		beanTo.setComprobanteClase(beanFrom.getComprobante_clase());
 		beanTo.setComprobanteNumero(beanFrom.getComprobante_number());
@@ -38,11 +38,11 @@ public class UtilMethods {
 		beanTo.setTypeOperation(beanFrom.getTypeOperation());
 		beanTo.setPriceProduct(beanFrom.getPrice_Product());
 		beanTo.setPriceSale(beanFrom.getPrice_sale());
-		beanTo.setDateCreated(beanFrom.getDateCreated());
+//		beanTo.setDateCreated(beanFrom.getDateCreated());
 		return beanTo;
 	}
 	
-	public TbKardexDTO copyValuesTbKardexDTO(TbKardex beanFrom,TbKardexDTO beanTo){
+	public KardexDTO copyValuesTbKardexDTO(TbKardex beanFrom,KardexDTO beanTo){
 		beanTo.setId(beanFrom.getId());
 		beanTo.setCountProduct(beanFrom.getCountProduct());
 		beanTo.setTotalEgress(beanFrom.getTotalEgress());

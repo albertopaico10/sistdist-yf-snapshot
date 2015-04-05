@@ -43,6 +43,7 @@ namespace KardexServices
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "GetDetailKardex/{idKardex}", ResponseFormat = WebMessageFormat.Json)]
+<<<<<<< HEAD
         List<DetailKardexResponse> getDetailKardex(string idKardex);
 
         [OperationContract]
@@ -50,5 +51,8 @@ namespace KardexServices
         ProductResponse insertarProducto(Product beanRequest);
 
      
+=======
+        ListResponseDetailKardex getDetailKardex(string idKardex);
+>>>>>>> 067fb94f48b26357dc35c9b20350655520e0280d
     }
 }

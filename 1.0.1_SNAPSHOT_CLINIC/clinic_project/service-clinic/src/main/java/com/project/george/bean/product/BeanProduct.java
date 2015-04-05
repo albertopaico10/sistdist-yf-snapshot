@@ -1,4 +1,4 @@
-package com.project.george.bean.catalog.product;
+package com.project.george.bean.product;
 
 public class BeanProduct {
 

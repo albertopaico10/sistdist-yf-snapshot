@@ -8,15 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponseListPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
-import com.project.george.bean.catalog.presentation.canonical.BeanListPresentation;
-import com.project.george.bean.catalog.presentation.canonical.BeanResponseCanonicalPresentation;
+import com.project.george.bean.presentation.BeanRequestPresentation;
+import com.project.george.bean.presentation.BeanResponseListPresentation;
+import com.project.george.bean.presentation.canonical.BeanResponseCanonicalPresentation;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.facade.business.ClinicApplicationBusiness;
-import com.project.george.facade.service.impl.PresentationServiceImpl;
 import com.project.george.model.TbPresentation;
 import com.project.george.model.bean.BeanResponseWeb;
 import com.project.george.model.dao.TablePresentationDao;

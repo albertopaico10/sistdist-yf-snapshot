@@ -1,10 +1,7 @@
 package com.george.project;
 
-<<<<<<< HEAD
 
 import com.project.george.bean.catalog.presentation.BeanResponseListPresentation;
-=======
->>>>>>> 808fc6e92b9c350e716333c3a1a8519ed9a7a40b
 import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.facade.business.impl.ClinicApplicationBusinessImpl;
 

@@ -9,12 +9,12 @@ import org.apache.axis.encoding.ser.BeanDeserializerFactory;
 import org.apache.axis.encoding.ser.BeanSerializerFactory;
 import org.springframework.stereotype.Service;
 
-import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponseListPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
-import com.project.george.bean.catalog.presentation.canonical.BeanListPresentation;
-import com.project.george.bean.catalog.presentation.canonical.BeanResponseCanonicalListPresentation;
-import com.project.george.bean.catalog.presentation.canonical.BeanResponseCanonicalPresentation;
+import com.project.george.bean.presentation.BeanRequestPresentation;
+import com.project.george.bean.presentation.BeanResponseListPresentation;
+import com.project.george.bean.presentation.BeanResponsePresentation;
+import com.project.george.bean.presentation.canonical.BeanListPresentation;
+import com.project.george.bean.presentation.canonical.BeanResponseCanonicalListPresentation;
+import com.project.george.bean.presentation.canonical.BeanResponseCanonicalPresentation;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.util.CommonConstants;
 import com.project.george.util.JsonUtils;

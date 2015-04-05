@@ -1,8 +1,8 @@
-package com.project.george.bean.catalog.presentation;
+package com.project.george.bean.presentation;
 
 import java.util.List;
 
-import com.project.george.bean.catalog.presentation.canonical.BeanResponseCanonicalPresentation;
+import com.project.george.bean.presentation.canonical.BeanResponseCanonicalPresentation;
 
 public class BeanResponseListPresentation {
 	public List<BeanResponseCanonicalPresentation> beanListPresentation;

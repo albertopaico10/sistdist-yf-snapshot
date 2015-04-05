@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.george.common.CommonConstants;
-import com.project.george.model.dto.TbDetailKardexDTO;
-import com.project.george.model.dto.TbKardexDTO;
+import com.project.george.model.dto.DetailKardexDTO;
+import com.project.george.model.dto.KardexDTO;
 
 @Service
 @Transactional
 public class ResponseUtilManagerImpl implements ResponseUtilManager {
 
-	public String responsesKardex(List<TbKardexDTO> beanKardexDTO)throws Exception {
+	public String responsesKardex(List<KardexDTO> beanKardexDTO)throws Exception {
 		StringBuilder responseKardex= new StringBuilder();
 		responseKardex.append("<br/>");
 		responseKardex.append("<div id='idTitleList'><label class='titlePage'>Maestro Kardex</label></div>");
@@ -29,7 +29,7 @@ public class ResponseUtilManagerImpl implements ResponseUtilManager {
 		responseKardex.append("<th >Total Egreso</th>");
 		responseKardex.append("<th >Detalle</th>");
 		responseKardex.append("</tr>");
-		for(TbKardexDTO beanKardexLocal:beanKardexDTO){
+		for(KardexDTO beanKardexLocal:beanKardexDTO){
 			responseKardex.append("<tr>");
 			responseKardex.append("<td class='tdDatatable'>"+beanKardexLocal.getId()+"</td>");
 			responseKardex.append("<td class='tdDatatable'>"+beanKardexLocal.getNameProduct()+"</td>");
@@ -45,7 +45,7 @@ public class ResponseUtilManagerImpl implements ResponseUtilManager {
 		return responseKardex.toString();
 	}
 	
-	public String responsesDetailKardex(List<TbDetailKardexDTO> beanKardexDTO)throws Exception {
+	public String responsesDetailKardex(List<DetailKardexDTO> beanKardexDTO)throws Exception {
 		StringBuilder responseDetailKardex= new StringBuilder();
 		responseDetailKardex.append("<div id='idTitleList'><label class='titlePage'>Detalle del Kardex</label></div>");
 		responseDetailKardex.append("<table class='tableStyle' border='1'>");
@@ -59,7 +59,7 @@ public class ResponseUtilManagerImpl implements ResponseUtilManager {
 		responseDetailKardex.append("<th >Comprobante numero</th>");
 		responseDetailKardex.append("<th >Venta Diaria</th>");
 		responseDetailKardex.append("</tr>");
-		for(TbDetailKardexDTO beanDetailForm : beanKardexDTO){
+		for(DetailKardexDTO beanDetailForm : beanKardexDTO){
 			responseDetailKardex.append("<tr>");
 			String classTable=CommonConstants.classTable;
 			if("1".equals(beanDetailForm.getTypeOperation())){

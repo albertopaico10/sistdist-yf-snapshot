@@ -35,7 +35,7 @@ namespace KardexServices
         //Description : This method was created for list all the presentation from DB
         public KardexResponse existProductKardex(string idProduct)
         {
-            return dao.findProductById(idProduct);
+            return dao.findKardexProductById(idProduct);
         }
 
         //Create by : Alberto Paico
@@ -67,11 +67,12 @@ namespace KardexServices
             ProductResponse beanResponseProduct = daoProduct.findProductById(beanRequest.idProduct);
             //--Find Product in Kardex
             KardexResponse beanLocalKardexResponse = new KardexResponse();
-            beanLocalKardexResponse = dao.findProductById(beanRequest.idProduct.ToString());
+            ////beanLocalKardexResponse = dao.findProductById(beanRequest.idProduct.ToString());
             
             Kardex beanKardexRequest = new Kardex();
-            beanKardexRequest.id = beanLocalKardexResponse.id;
-            if (beanResponse.result=="NOT_EXIST") { 
+            //beanKardexRequest.id = beanLocalKardexResponse.id;
+            if (beanRequest.idKardex == null || beanRequest.idKardex == 0)
+            { 
                 //Set Values for Kardex
                 
                 beanKardexRequest.idProduct = beanRequest.idProduct;
@@ -83,11 +84,23 @@ namespace KardexServices
                 beanKardexRequest.priceTotalProduct = beanRequest.countProduct*beanResponseProduct.priceProduct;
                 beanKardexRequest.priceTotalSale = 0;
                 beanResponse=dao.registrarKardex(beanKardexRequest);
-
-                //--recover IdKardex
-                beanLocalKardexResponse = dao.findProductById(beanRequest.idProduct.ToString());
-
             }
+            if (beanResponse.result == "ERROR") {
+                return beanResponse;
+            }
+            //--Recover IdKardex
+            beanLocalKardexResponse = dao.findKardexProductById(beanRequest.idProduct.ToString());
+            beanKardexRequest.id = beanLocalKardexResponse.id;
+            //--Validate if Exist Product in Stock
+            if (beanRequest.typeOperation == 2) {
+                if (beanRequest.countProduct > beanLocalKardexResponse.countProduct)
+                {
+                    beanResponse.messages = "INSUFFICIENT_PRODUCT";
+                    beanResponse.result = "SUCCESS";
+                    return beanResponse;
+                }
+            }
+           
             //--Insert int Detail Kardex
             DetailKardex beanDetailKardexRequest = new DetailKardex();
             beanDetailKardexRequest.idKardex = beanLocalKardexResponse.id;
@@ -100,6 +113,7 @@ namespace KardexServices
             beanDetailKardexRequest.priceSale = beanResponseProduct.priceSale;
 
             DetailKardexResponse beanResponseDetailKardex = daoDetail.saveDetailKardex(beanDetailKardexRequest);
+            
             int totalEntry = 0;
             int totalEgress = 0;
             int countTotalKardex=0;
@@ -127,7 +141,12 @@ namespace KardexServices
             beanKardexRequest.priceTotalSale=priceTotalEgress;
             //--Update Master Kardex
             beanResponse = dao.actualizarKardex(beanKardexRequest);
-
+            
+            //--Last Validation RN_Minimun 5
+            beanLocalKardexResponse = dao.findKardexProductById(beanRequest.idProduct.ToString());
+            if (beanLocalKardexResponse.countProduct<5) {
+                beanResponse.messages = "MINIMUN_PRODUCT";
+            }
             return beanResponse;
         }
 
@@ -191,7 +210,7 @@ namespace KardexServices
         //Update by : César Quispe Carrión
         //Name : getDetailKardex
         //Description : This method was created for get detail Kardex
-        public List<DetailKardexResponse> getDetailKardex(string idKardex)
+        public ListResponseDetailKardex getDetailKardex(string idKardex)
         {
             return daoDetail.listarDetalleKardex(idKardex);
         }

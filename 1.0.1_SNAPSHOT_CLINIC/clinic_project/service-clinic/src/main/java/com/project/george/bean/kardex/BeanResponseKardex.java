@@ -1,22 +1,25 @@
-package com.project.george.bean.catalog.kardex;
+package com.project.george.bean.kardex;
 
 import java.math.BigDecimal;
 
-public class BeanRequestKardex {
+public class BeanResponseKardex {
+
 	public int id;
 	public int idProduct;
-//	public double priceProductKardex;
-	public BigDecimal priceProductKardex;
+	public String nameProduct;
+	public String namePresentation;
+	public double priceProductKardex;
 	public int countProduct;
 	public int status;
 	public int totalProductEntry;
 	public int totalProductEgress;
 	public String description;
 	public String dateCreated;
-//	public double priceTotalProduct;
-//	public double priceTotalSale;
 	public BigDecimal priceTotalProduct;
 	public BigDecimal priceTotalSale;
+	public String result;
+	public String messages;
+	
 	
 	
 	public int getId() {
@@ -31,10 +34,10 @@ public class BeanRequestKardex {
 	public void setIdProduct(int idProduct) {
 		this.idProduct = idProduct;
 	}
-	public BigDecimal getPriceProductKardex() {
+	public double getPriceProductKardex() {
 		return priceProductKardex;
 	}
-	public void setPriceProductKardex(BigDecimal priceProductKardex) {
+	public void setPriceProductKardex(double priceProductKardex) {
 		this.priceProductKardex = priceProductKardex;
 	}
 	public int getCountProduct() {
@@ -85,4 +88,31 @@ public class BeanRequestKardex {
 	public void setPriceTotalSale(BigDecimal priceTotalSale) {
 		this.priceTotalSale = priceTotalSale;
 	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
+	public String getMessages() {
+		return messages;
+	}
+	public void setMessages(String messages) {
+		this.messages = messages;
+	}
+	public String getNameProduct() {
+		return nameProduct;
+	}
+	public void setNameProduct(String nameProduct) {
+		this.nameProduct = nameProduct;
+	}
+	public String getNamePresentation() {
+		return namePresentation;
+	}
+	public void setNamePresentation(String namePresentation) {
+		this.namePresentation = namePresentation;
+	}
+	
+	
+	
 }

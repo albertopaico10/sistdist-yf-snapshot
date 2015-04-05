@@ -1,4 +1,4 @@
-package com.project.george.bean.catalog.paciente;
+package com.project.george.bean.paciente;
 
 import java.sql.Timestamp;
 import java.util.Date;

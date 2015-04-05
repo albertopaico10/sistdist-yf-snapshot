@@ -1,4 +1,4 @@
-package com.project.george.bean.catalog.presentation;
+package com.project.george.bean.presentation;
 
 public class BeanResponsePresentation{
 	public int id;

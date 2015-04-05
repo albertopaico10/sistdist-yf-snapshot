@@ -46,7 +46,7 @@ namespace KardexServices.Persistencia
             return beanResponseKardex;
         }
 
-        public KardexResponse findProductById(string idProduct)
+        public KardexResponse findKardexProductById(string idProduct)
         {
             KardexResponse beanResponseKardex = new KardexResponse();
             string query = "select * from tb_Kardex where idProduct=@idProduct";
@@ -68,6 +68,7 @@ namespace KardexServices.Persistencia
                 int cantidadRegistros = 0;
                 while (mysqlDataReader.Read()) {
                     beanResponseKardex.id = mysqlDataReader.GetInt32(0);
+                    beanResponseKardex.countProduct = mysqlDataReader.GetInt32(3);
                     cantidadRegistros++;
                 }
                 if (cantidadRegistros > 0)
@@ -126,7 +127,7 @@ namespace KardexServices.Persistencia
         public KardexResponse obtenerKardex(string idProduct)
         {
             KardexResponse beanResponseKardex = new KardexResponse();
-            string query = "select k.id, p.nameProduct,pr.namePresentation,k.total_entry,k.total_egress,k.countProduct " +
+            string query = "select k.id, p.nameProduct,pr.namePresentation,k.total_entry,k.total_egress,k.countProduct,k.priceTotalProduct,k.priceTotalSale " +
                             "from tb_kardex k,tb_product p, tb_presentation pr " + 
                             "where k.idProduct = p.id " + 
                             "and p.idPresentation = pr.id " + 
@@ -154,6 +155,8 @@ namespace KardexServices.Persistencia
                     beanResponseKardex.totalProductEntry = mysqlDataReader.GetInt32(3);
                     beanResponseKardex.totalProductEgress = mysqlDataReader.GetInt32(4);
                     beanResponseKardex.countProduct = mysqlDataReader.GetInt32(5);
+                    beanResponseKardex.priceTotalProduct = mysqlDataReader.GetDecimal(6);
+                    beanResponseKardex.priceTotalSale = mysqlDataReader.GetDecimal(7);
                     cantidadRegistros++;
                 }
                 if (cantidadRegistros > 0)
@@ -162,6 +165,9 @@ namespace KardexServices.Persistencia
                 }
                 else {
                     beanResponseKardex.result = "NOT_EXIST";
+                }
+                if (beanResponseKardex.countProduct < 5) {
+                    beanResponseKardex.messages = "MINIMUN_PRODUCT";
                 }
 
             }catch(Exception e){

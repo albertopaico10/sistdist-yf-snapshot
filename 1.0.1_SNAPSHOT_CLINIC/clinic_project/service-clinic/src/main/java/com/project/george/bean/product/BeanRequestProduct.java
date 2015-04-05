@@ -1,9 +1,9 @@
-package com.project.george.bean.catalog.product;
+package com.project.george.bean.product;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class BeanResponseProduct {
+public class BeanRequestProduct {
 
 	public int id;
 	public String nameProduct;
@@ -13,21 +13,6 @@ public class BeanResponseProduct {
 	public BigDecimal price;
 	public BigDecimal priceSale;
 	public Date expirationDate;
-	public String result;
-	public String messages;
-	
-	public String getResult() {
-		return result;
-	}
-	public void setResult(String result) {
-		this.result = result;
-	}
-	public String getMessages() {
-		return messages;
-	}
-	public void setMessages(String messages) {
-		this.messages = messages;
-	}
 	public int getId() {
 		return id;
 	}

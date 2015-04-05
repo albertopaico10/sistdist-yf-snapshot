@@ -1,28 +1,14 @@
 package com.project.george.facade.service.impl;
 
-import javax.xml.namespace.QName;
-import javax.xml.rpc.ParameterMode;
-import javax.xml.rpc.encoding.XMLType;
-
-import org.apache.axis.client.Call;
-import org.apache.axis.encoding.ser.BeanDeserializerFactory;
-import org.apache.axis.encoding.ser.BeanSerializerFactory;
-import org.apache.axis.message.IDResolver;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.project.george.bean.catalog.kardex.BeanRequestKardex;
-import com.project.george.bean.catalog.kardex.BeanResponseKardex;
-import com.project.george.bean.catalog.product.BeanProduct;
-import com.project.george.bean.catalog.product.BeanRequestProduct;
-import com.project.george.bean.catalog.product.BeanResponseListProduct;
-import com.project.george.bean.catalog.product.BeanResponseProduct;
-import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalListProduct;
-import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalProduct;
+import com.project.george.bean.product.BeanRequestProduct;
+import com.project.george.bean.product.BeanResponseListProduct;
+import com.project.george.bean.product.BeanResponseProduct;
 import com.project.george.facade.service.ProductService;
 import com.project.george.util.CommonConstants;
 import com.project.george.util.JsonUtils;
-import com.project.george.util.UtilWebService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -47,11 +33,16 @@ public boolean verificationExistProduct(String name, int idPresentation)
 	return false;
 }
 
-public BeanResponseListProduct listProductByName(String nameProduct)
-		throws Exception {
+public BeanResponseListProduct listProductByName(String nameProduct) {
 	// TODO Auto-generated method stub
 	return null;
-}	
+}
+
+//public BeanResponseListProduct listProductByName(String nameProduct)
+//		throws Exception {
+//	// TODO Auto-generated method stub
+//	return null;
+//}	
 
 /*	public String rucService = CommonConstants.PRODUCT_SOAP;
 	
@@ -136,19 +127,26 @@ public BeanResponseListProduct listProductByName(String nameProduct)
 		return false;
 	}
 	
-	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+	public BeanResponseListProduct listProductByName(String nameProduct){
 		RestTemplate restTemplate=new RestTemplate();
 		BeanResponseListProduct beanListProduct=new BeanResponseListProduct();
 		
 		String URL="http://localhost:53924/KardexService.svc/FindProductByName/";
-		BeanResponseCanonicalListProduct listProduct=restTemplate.getForObject(URL+nameProduct, BeanResponseCanonicalListProduct.class);
-		
-		System.out.println("Respuesta del servicio : "+listProduct.getListCadenaProduct());
-		System.out.println("Respuesta RESULT del servicio : "+listProduct.getResult());
-		if(CommonConstants.ResponseWebService.RESP_WS_SUCCESS.equals(listProduct.getResult())){
-			beanListProduct=JsonUtils.jsonToJavaObject(listProduct.getListCadenaProduct(),BeanResponseListProduct.class);
-			beanListProduct.setResult(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS);
+		try {
+			BeanResponseCanonicalListProduct listProduct=restTemplate.getForObject(URL+nameProduct, BeanResponseCanonicalListProduct.class);
+			System.out.println("Respuesta del servicio : "+listProduct.getListCadenaProduct());
+			System.out.println("Respuesta RESULT del servicio : "+listProduct.getResult());
+			if(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_LIST.equals(listProduct.getResult())){
+				beanListProduct=JsonUtils.jsonToJavaObject(listProduct.getListCadenaProduct(),BeanResponseListProduct.class);
+			}
+			beanListProduct.setResult(listProduct.getResult());
+		} catch (Exception e) {
+			beanListProduct.setResult(CommonConstants.ResponseWebService.RESP_WS_CONNECTION_REFUSE);
+			System.out.println("Error : "+e.getMessage());
 		}
+		
+		
+		
 		return beanListProduct;
 	}
 */

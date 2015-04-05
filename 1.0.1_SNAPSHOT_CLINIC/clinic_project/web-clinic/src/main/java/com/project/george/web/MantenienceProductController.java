@@ -19,9 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.project.george.bean.catalog.product.BeanProduct;
 import com.project.george.common.CommonConstants;
-import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.model.TbProduct;
 import com.project.george.model.bean.PatientJson;
 import com.project.george.model.dto.PresentationDTO;

@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
+import com.project.george.bean.presentation.BeanRequestPresentation;
+import com.project.george.bean.presentation.BeanResponsePresentation;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.util.CommonConstants;
 

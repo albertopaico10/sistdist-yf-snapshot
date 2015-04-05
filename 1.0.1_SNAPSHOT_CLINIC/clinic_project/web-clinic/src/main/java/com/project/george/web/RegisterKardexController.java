@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.george.common.CommonConstants;
-import com.project.george.model.dto.TbDetailKardexDTO;
-import com.project.george.model.dto.TbKardexDTO;
+import com.project.george.model.bean.BeanResponseWeb;
+import com.project.george.model.dto.DetailKardexDTO;
+import com.project.george.model.dto.KardexDTO;
 import com.project.george.model.dto.ProductDTO;
 import com.project.george.model.facade.ResponseUtilManager;
 import com.project.george.model.facade.TableKardexManager;
@@ -54,10 +55,10 @@ public class RegisterKardexController {
 		System.out.println("Request Parameter : "+nameProduct);
 		try {
 //			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
-			List<ProductDTO> listAllProduct=tableProduct.findProductByName(nameProduct);
-			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
-			request.setAttribute("listProduct", listAllProduct);
+			BeanResponseWeb beanResponseWeb=tableProduct.findProductByName(nameProduct);
+			request.setAttribute("listProduct", beanResponseWeb.getListProductDTO());
 			request.setAttribute("nameProduct", nameProduct);
+			request.setAttribute("messages", beanResponseWeb.getStatusResponse());
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
 		}
@@ -75,14 +76,17 @@ public class RegisterKardexController {
 		final String productId = String.valueOf(request.getParameter("productId"));
 		System.out.println("Request Parameter : "+nameProduct);
 		try {
-			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
-			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
-			request.setAttribute("listProduct", listAllProduct);
+			BeanResponseWeb beanResponseWeb=tableProduct.findProductByName(nameProduct);
+			request.setAttribute("listProduct", beanResponseWeb.getListProductDTO());
 			request.setAttribute("nameProduct", nameProduct);
 			request.setAttribute("productId", productId);
-			List<TbKardexDTO> listKardexByProduct = tableKardexManager.listKardexByProduct(Integer.parseInt(productId));
-			request.setAttribute("listKardex", listKardexByProduct);
+			
+//			List<KardexDTO> listKardexByProduct = tableKardexManager.listKardexByProduct(Integer.parseInt(productId));
+			BeanResponseWeb beanResponseWebKardex=tableKardexManager.findKardexByIdProduct(productId);
+			request.setAttribute("listKardex", beanResponseWebKardex.getListKardexDTO());
 			request.setAttribute("valueKardexList", "1");
+			System.out.println("MESSAGES : "+beanResponseWebKardex.getStatusResponse());
+			request.setAttribute("messages", beanResponseWebKardex.getStatusResponse());
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
 		}
@@ -103,31 +107,42 @@ public class RegisterKardexController {
 		final String idKardex = String.valueOf(request.getParameter("idKardex"));
 		final String typeOperation = String.valueOf(request.getParameter("typeOperation"));
 		//--Validate if exist product in stock.
-		boolean resultStock=false;
-		if(CommonConstants.RegisterKardex.TYPE_OPERATION_EGRESS.equals(typeOperation)){
-			try {
-				resultStock=tableKardexManager.validateIfExistProductInStock(cantidad, idKardex);
-			} catch (Exception e) {
-				System.out.println("Error : "+e.toString());
-			}
-		}
+//		boolean resultStock=false;
+//		if(CommonConstants.RegisterKardex.TYPE_OPERATION_EGRESS.equals(typeOperation)){
+//			try {
+//				resultStock=tableKardexManager.validateIfExistProductInStock(cantidad, idKardex);
+//			} catch (Exception e) {
+//				System.out.println("Error : "+e.toString());
+//			}
+//		}
 		try {
-			if(!resultStock){
-				tableKardexManager.addNewRegisterKardex(productId, cantidad,comprobanteClase, comprobanteNumber,idKardex,typeOperation);
-			}
-			List<TbKardexDTO> listKardexByProduct = tableKardexManager.listKardexByProduct(Integer.parseInt(productId));
-			request.setAttribute("listKardex", listKardexByProduct);
-			for(TbKardexDTO beanKardexDTO:listKardexByProduct){
+			
+			BeanResponseWeb beanResponseWeb=tableKardexManager.saveKardex(productId, cantidad,
+					comprobanteClase, comprobanteNumber, idKardex, typeOperation);
+			
+//			if(!resultStock){
+//				tableKardexManager.addNewRegisterKardex(productId, cantidad,comprobanteClase, comprobanteNumber,idKardex,typeOperation);
+//			}
+//			List<KardexDTO> listKardexByProduct = tableKardexManager.listKardexByProduct(Integer.parseInt(productId));
+			request.setAttribute("listKardex", beanResponseWeb.getListKardexDTO());
+			for(KardexDTO beanKardexDTO:beanResponseWeb.getListKardexDTO()){
 				request.setAttribute("idKardexController", beanKardexDTO.getId());	
 			}
-			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
-			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
-			request.setAttribute("listProduct", listAllProduct);
+			System.out.println("MESSAGES : "+beanResponseWeb.getStatusResponse());
+			request.setAttribute("messages", beanResponseWeb.getStatusResponse());
+			
+			BeanResponseWeb beanResponseWebProduct=tableProduct.findProductByName(nameProduct);
+			request.setAttribute("listProduct", beanResponseWebProduct.getListProductDTO());
 			request.setAttribute("nameProduct", nameProduct);
 			request.setAttribute("productId", productId);
-			if(resultStock){
-				request.setAttribute("errorStockProduct", "error");	
-			}
+//			List<ProductDTO> listAllProduct=tableProduct.listSpecificProduct(nameProduct);
+//			System.out.println("Cantidad de filas que trae :"+listAllProduct.size());
+//			request.setAttribute("listProduct", listAllProduct);
+//			request.setAttribute("nameProduct", nameProduct);
+//			request.setAttribute("productId", productId);
+//			if(resultStock){
+//				request.setAttribute("errorStockProduct", "error");	
+//			}
 			
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
@@ -140,20 +155,22 @@ public class RegisterKardexController {
 	public @ResponseBody
 	String strDetailKardex(@RequestParam String kardexId) {
 		System.out.println("ENTREEEEEEEEEEEEEE" + kardexId);
-		List<TbDetailKardexDTO> listDetailKardexByProduct = null;
+//		List<TbDetailKardexDTO> listDetailKardexByProduct = null;
 		String responseJSP="";
+		BeanResponseWeb beaResponseWeb=null;
 		try {
-			listDetailKardexByProduct = tableKardexManager.listDetailKardex(Integer.parseInt(kardexId));			
+//			listDetailKardexByProduct = tableKardexManager.listDetailKardex(Integer.parseInt(kardexId));	
+			beaResponseWeb=tableKardexManager.getListKardexDetail(kardexId);
 		} catch (Exception e) {
 			System.out.println("Error : " + e.toString());
 			e.printStackTrace();
 		}
-		if(listDetailKardexByProduct==null){
+		if(beaResponseWeb.getListDetailKardexDTO()==null){
 			System.out.println("ES NULL");
 			responseJSP=CommonConstants.ReturnAJAX.IS_NULL;
-		}else if(listDetailKardexByProduct.size()>0){
+		}else if(beaResponseWeb.getListDetailKardexDTO().size()>0){
 			try {
-				responseJSP=responseUtilManager.responsesDetailKardex(listDetailKardexByProduct);
+				responseJSP=responseUtilManager.responsesDetailKardex(beaResponseWeb.getListDetailKardexDTO());
 			} catch (Exception e) {
 				System.out.println("Error : "+e.toString());
 			}
