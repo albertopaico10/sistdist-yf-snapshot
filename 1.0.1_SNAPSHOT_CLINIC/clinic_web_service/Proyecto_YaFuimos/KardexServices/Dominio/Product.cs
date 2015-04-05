@@ -10,20 +10,20 @@ namespace KardexServices.Dominio
     public class Product
     {
         [DataMember]
-        public int Id { get; set; }
+        public int id { get; set; }
         [DataMember]
-        public string NameProduct { get; set; }
+        public string nameProduct { get; set; }
         [DataMember]
-        public int Status { get; set; }
+        public int status { get; set; }
         [DataMember]
-        public int IdPresentation { get; set; }
+        public int idPresentation { get; set; }
         [DataMember]
-        public decimal PriceProduct { get; set; }
+        public string namePresentation { get; set; }
         [DataMember]
-        public string DateCreated { get; set; }
+        public decimal price { get; set; }
         [DataMember]
-        public decimal PriceSale { get; set; }
+        public decimal priceSale { get; set; }
         [DataMember]
-        public string ExpirationDate { get; set; }
+        public string expirationDate { get; set; }
     }
 }

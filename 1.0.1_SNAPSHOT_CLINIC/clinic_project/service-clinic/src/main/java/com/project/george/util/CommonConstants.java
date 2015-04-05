@@ -5,6 +5,7 @@ public class CommonConstants {
 	public final static String PRODUCT_SOAP = "http://Alberto-LENO-PC:2766/Producto.svc";
 	public final static String KARDEX_REST = "http://localhost:53924/KardexService.svc/Kardex";
 	public final static String PRODUCT_REST = "http://localhost:53924/KardexService.svc/Producto";
+	public final static String PRODUCT_REST_ALL = "http://localhost:53924/KardexService.svc/ProductAll";
 	
 	public class Logger{
 		public final static String LOGGER_START="********START********";

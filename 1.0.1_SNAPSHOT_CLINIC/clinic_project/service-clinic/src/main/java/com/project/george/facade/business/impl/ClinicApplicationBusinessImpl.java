@@ -120,9 +120,13 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return beanListPresentation;
 	}
 	
-	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+//	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+//		
+//		return productService.listProduct();
+//	}
+	public List<BeanResponseProduct> listProduct()throws Exception{
 		
-		return productService.listProductByName(nameProduct);
+		return productService.listProduct();
 	}
 	
 	public Patient savePatient(Patient patient) {
@@ -194,5 +198,11 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		System.out.println("Cantidad de registros : "+listBeanRespKardDet.size());
 		beanRespListKardexDetail.setListDetailKardex(listBeanRespKardDet);
 		return beanRespListKardexDetail;
+	}
+
+	public BeanResponseListProduct listProductByName(String nameProduct)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

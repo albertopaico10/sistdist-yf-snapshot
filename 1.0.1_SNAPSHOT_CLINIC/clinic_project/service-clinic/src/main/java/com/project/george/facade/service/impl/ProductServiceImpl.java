@@ -1,11 +1,15 @@
 package com.project.george.facade.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.project.george.bean.product.BeanRequestProduct;
 import com.project.george.bean.product.BeanResponseListProduct;
 import com.project.george.bean.product.BeanResponseProduct;
+import com.project.george.bean.product.canonical.BeanResponseCanonicalListProduct;
+import com.project.george.bean.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.facade.service.ProductService;
 import com.project.george.util.CommonConstants;
 import com.project.george.util.JsonUtils;
@@ -24,19 +28,24 @@ public class ProductServiceImpl implements ProductService {
 		RestTemplate restTemplate=new RestTemplate();
 		BeanResponseProduct beanResponseProduct=restTemplate.postForObject(CommonConstants.PRODUCT_REST, beanRequestProduct, BeanResponseProduct.class);
 		
+		String gsonResponse=JsonUtils.toJson(beanResponseProduct);
+		System.out.println("**** GSON : " + gsonResponse);
 		return beanResponseProduct;
 	}
 
-public boolean verificationExistProduct(String name, int idPresentation)
+	public boolean verificationExistProduct(String name, int idPresentation)
 		throws Exception {
 	// TODO Auto-generated method stub
 	return false;
 }
 
-public BeanResponseListProduct listProductByName(String nameProduct) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	public List<BeanResponseProduct> listProduct() {
+		RestTemplate restTemplate=new RestTemplate();
+		BeanResponseCanonicalListProduct listProductAll=restTemplate.getForObject(CommonConstants.PRODUCT_REST_ALL, BeanResponseCanonicalListProduct.class);
+		String gsonResponse=JsonUtils.toJson(listProductAll.getListProductObj());
+		System.out.println("**** GSON : " + gsonResponse);
+		return listProductAll.getListProductObj();
+	}
 
 //public BeanResponseListProduct listProductByName(String nameProduct)
 //		throws Exception {
@@ -126,7 +135,7 @@ public BeanResponseListProduct listProductByName(String nameProduct) {
 		
 		return false;
 	}
-	
+*/	
 	public BeanResponseListProduct listProductByName(String nameProduct){
 		RestTemplate restTemplate=new RestTemplate();
 		BeanResponseListProduct beanListProduct=new BeanResponseListProduct();
@@ -149,5 +158,5 @@ public BeanResponseListProduct listProductByName(String nameProduct) {
 		
 		return beanListProduct;
 	}
-*/
+
 }

@@ -46,4 +46,6 @@ public interface ClinicApplicationBusiness {
 	public BeanResponseKardex saveKardex(BeanRequestCanonicalKardex beanReqCanonicalKardex);
 	
 	public BeanResponseListKardexDetail listDetailKardex(String idKardex);
+	
+	public List<BeanResponseProduct> listProduct()throws Exception;
 }

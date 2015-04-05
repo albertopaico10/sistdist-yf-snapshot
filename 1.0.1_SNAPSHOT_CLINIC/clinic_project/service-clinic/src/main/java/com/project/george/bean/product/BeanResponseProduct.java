@@ -10,12 +10,19 @@ public class BeanResponseProduct {
 	public int status;
 	public int idPresentation;
 	public String namePresentation;
-	public BigDecimal price;
+	public BigDecimal priceProduct;
 	public BigDecimal priceSale;
-	public Date expirationDate;
+	public String expirationDate;
 	public String result;
 	public String messages;
+	public String dateCreated;
 	
+	public String getDateCreated() {
+		return dateCreated;
+	}
+	public void setDateCreated(String dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 	public String getResult() {
 		return result;
 	}
@@ -58,11 +65,11 @@ public class BeanResponseProduct {
 	public void setNamePresentation(String namePresentation) {
 		this.namePresentation = namePresentation;
 	}
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getPriceProduct() {
+		return priceProduct;
 	}
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setPriceProduct(BigDecimal priceProduct) {
+		this.priceProduct = priceProduct;
 	}
 	public BigDecimal getPriceSale() {
 		return priceSale;
@@ -70,12 +77,13 @@ public class BeanResponseProduct {
 	public void setPriceSale(BigDecimal priceSale) {
 		this.priceSale = priceSale;
 	}
-	public Date getExpirationDate() {
+	public String getExpirationDate() {
 		return expirationDate;
 	}
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+	
 	
 	
 	

@@ -32,4 +32,12 @@ public class UtilMethodsTest {
 		System.out.println("Años "+valor);
 	}
 	
+	@Test
+	public void testConverFormat()throws Exception{
+		UtilMethods util=new UtilMethods();
+		String format=util.convertDateFormat("04/30/2015");
+		System.out.println("Response : form"+format);
+	}
+	
+	
 }

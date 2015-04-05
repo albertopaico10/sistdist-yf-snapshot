@@ -3,6 +3,7 @@ package com.project.george.common;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -190,6 +191,11 @@ public class UtilMethods {
 		DateFormat df = new SimpleDateFormat(formatTo);
 		String returnDate = df.format(date);
 		return returnDate;
+	}	
+	
+	public String convertDateFormat(String date){
+		String value[]=date.split("/");
+		return value[2]+"-"+value[0]+"-"+value[1];
 	}	
 	
 	public Date getCurrentDate(){

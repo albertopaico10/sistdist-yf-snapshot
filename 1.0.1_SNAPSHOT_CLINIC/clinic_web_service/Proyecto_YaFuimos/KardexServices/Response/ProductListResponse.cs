@@ -12,6 +12,8 @@ namespace KardexServices.Response
         [DataMember]
         public string listCadenaProduct { get; set; }
         [DataMember]
+        public List<ProductResponse> listProductObj { get; set; }
+        [DataMember]
         public string result { get; set; }
         [DataMember]
         public string messages { get; set; }

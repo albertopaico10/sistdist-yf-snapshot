@@ -226,6 +226,10 @@ namespace KardexServices
             return beanResponse;
         }
 
-       
+
+        public ProductListResponse getProduct()
+        {
+            return daoProduct.listProduct();
+        }
     }
 }
