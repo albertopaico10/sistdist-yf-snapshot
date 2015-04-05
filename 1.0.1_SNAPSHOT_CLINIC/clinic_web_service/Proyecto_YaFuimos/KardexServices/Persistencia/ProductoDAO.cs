@@ -97,7 +97,7 @@ namespace KardexServices.Persistencia
                 mysqlCommand = mysqlConnection.CreateCommand();
                 mysqlCommand.CommandText = query;
                 mysqlCommand.Parameters.AddWithValue("@nameProduct", beanProducto.nameProduct);
-                mysqlCommand.Parameters.AddWithValue("@status", beanProducto.status);
+                mysqlCommand.Parameters.AddWithValue("@status", "1");
                 mysqlCommand.Parameters.AddWithValue("@idPresentation", beanProducto.idPresentation);
                 mysqlCommand.Parameters.AddWithValue("@price_Product", beanProducto.price);
                 mysqlCommand.Parameters.AddWithValue("@price_sale", beanProducto.priceSale);
