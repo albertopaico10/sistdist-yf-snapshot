@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.project.george.bean.catalog.paciente.Patient;
+import com.project.george.bean.paciente.Patient;
 
 @Service
 public interface PatientService {

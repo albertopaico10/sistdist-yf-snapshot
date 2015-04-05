@@ -43,6 +43,6 @@ namespace KardexServices
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "GetDetailKardex/{idKardex}", ResponseFormat = WebMessageFormat.Json)]
-        List<DetailKardexResponse> getDetailKardex(string idKardex);
+        ListResponseDetailKardex getDetailKardex(string idKardex);
     }
 }

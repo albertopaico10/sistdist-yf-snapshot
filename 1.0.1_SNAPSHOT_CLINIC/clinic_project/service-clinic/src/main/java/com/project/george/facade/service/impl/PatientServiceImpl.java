@@ -13,7 +13,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Service;
 
-import com.project.george.bean.catalog.paciente.Patient;
+import com.project.george.bean.paciente.Patient;
 import com.project.george.facade.service.PatientService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

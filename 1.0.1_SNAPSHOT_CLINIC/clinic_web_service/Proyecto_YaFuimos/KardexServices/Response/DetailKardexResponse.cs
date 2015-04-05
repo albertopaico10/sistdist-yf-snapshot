@@ -18,7 +18,7 @@ namespace KardexServices.Response
         [DataMember]
         public int typeOperation { get; set; }
         [DataMember]
-        public DateTime dateCreated { get; set; }
+        public string dateCreated { get; set; }
         [DataMember]
         public int status { get; set; }
         [DataMember]

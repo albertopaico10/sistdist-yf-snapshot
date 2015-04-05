@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.project.george.bean.catalog.paciente.Patient;
-import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponseListPresentation;
-import com.project.george.bean.catalog.product.BeanProduct;
-import com.project.george.bean.catalog.product.BeanRequestProduct;
-import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.kardex.BeanResponseKardex;
+import com.project.george.bean.kardex.BeanResponseListKardexDetail;
+import com.project.george.bean.kardex.canonical.BeanRequestCanonicalKardex;
+import com.project.george.bean.paciente.Patient;
+import com.project.george.bean.presentation.BeanRequestPresentation;
+import com.project.george.bean.presentation.BeanResponseListPresentation;
+import com.project.george.bean.product.BeanProduct;
+import com.project.george.bean.product.BeanRequestProduct;
+import com.project.george.bean.product.BeanResponseListProduct;
 
 @Service
 public interface ClinicApplicationBusiness {
@@ -37,4 +40,10 @@ public interface ClinicApplicationBusiness {
 	public String removePatient(Integer id);
 	
 	public List<Patient> getPatients();
+	
+	public BeanResponseKardex findKardexByIdProduct(String idProduct)throws Exception;
+	
+	public BeanResponseKardex saveKardex(BeanRequestCanonicalKardex beanReqCanonicalKardex);
+	
+	public BeanResponseListKardexDetail listDetailKardex(String idKardex);
 }

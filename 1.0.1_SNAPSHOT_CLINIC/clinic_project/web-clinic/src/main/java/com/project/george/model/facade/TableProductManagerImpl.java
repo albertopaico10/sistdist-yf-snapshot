@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.project.george.bean.catalog.product.BeanProduct;
-import com.project.george.bean.catalog.product.BeanRequestProduct;
-import com.project.george.bean.catalog.product.BeanResponseListProduct;
-import com.project.george.bean.catalog.product.canonical.BeanResponseCanonicalProduct;
+import com.project.george.bean.product.BeanProduct;
+import com.project.george.bean.product.BeanRequestProduct;
+import com.project.george.bean.product.BeanResponseListProduct;
+import com.project.george.bean.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
 import com.project.george.facade.business.ClinicApplicationBusiness;
@@ -66,7 +66,6 @@ public class TableProductManagerImpl implements TableProductManager {
 		return newListAll;
 	}
 
-
 	public String addNewTypeProduct(TbProduct tbTypeProductBean)
 			throws Exception {
 		String returnRsponse=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW;
@@ -114,23 +113,24 @@ public class TableProductManagerImpl implements TableProductManager {
 		return beanResponseWeb;
 	}
 
-	public List<ProductDTO> findProductByName(String nameProduct)
-			throws Exception {
+	public BeanResponseWeb findProductByName(String nameProduct)throws Exception {
+		
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
 		BeanResponseListProduct beanListProduct=clinicApplicationBusiness.listProductByName(nameProduct);
-		List<ProductDTO> beanListDTO=new ArrayList<ProductDTO>();
-		for(BeanResponseCanonicalProduct beanResponseProduct : beanListProduct.getListResponseProduct()){
-			ProductDTO beanProductDTO=new ProductDTO();
-			beanProductDTO.setId(beanResponseProduct.getId());
-			beanProductDTO.setNameProduct(beanResponseProduct.getNameProduct());
-			beanProductDTO.setNamePresentation(beanResponseProduct.getNamePresentation());
-			beanProductDTO.setPriceSale(beanResponseProduct.getPriceSale());
-			beanProductDTO.setExpirationDate(beanResponseProduct.getExpirationDate());
-			beanListDTO.add(beanProductDTO);
+		if(CommonConstants.ResponseIdResult.RESULT_SUCCESS_LIST.equals(beanListProduct.getResult())){
+			List<ProductDTO> beanListDTO=new ArrayList<ProductDTO>();
+			for(BeanResponseCanonicalProduct beanResponseProduct : beanListProduct.getListResponseProduct()){
+				ProductDTO beanProductDTO=new ProductDTO();
+				beanProductDTO.setId(beanResponseProduct.getId());
+				beanProductDTO.setNameProduct(beanResponseProduct.getNameProduct());
+				beanProductDTO.setNamePresentation(beanResponseProduct.getNamePresentation());
+				beanProductDTO.setPriceSale(beanResponseProduct.getPriceSale());
+				beanProductDTO.setExpirationDate(beanResponseProduct.getExpirationDate());
+				beanListDTO.add(beanProductDTO);
+			}
+			beanResponseWeb.setListProductDTO(beanListDTO);
 		}
-		return beanListDTO;
+		beanResponseWeb.setStatusResponse(beanListProduct.getResult());		
+		return beanResponseWeb;
 	}
-
-
-	
-	
 }

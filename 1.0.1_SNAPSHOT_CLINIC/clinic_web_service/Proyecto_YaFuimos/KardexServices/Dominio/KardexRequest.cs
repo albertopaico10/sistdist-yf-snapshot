@@ -19,6 +19,8 @@ namespace KardexServices.Dominio
         public string comprobanteClase { get; set; }
         [DataMember]
         public int comprobanteNumber { get; set; }
+        [DataMember]
+        public int idKardex { get; set; }
 
     }
 }

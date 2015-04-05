@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.project.george.bean.catalog.product.BeanRequestProduct;
-import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.product.BeanRequestProduct;
+import com.project.george.bean.product.BeanResponseListProduct;
 import com.project.george.facade.service.ProductService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

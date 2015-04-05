@@ -38,16 +38,16 @@ public class PacienteServiceTest {
 		paciente = parsePaciente(output, paciente);
 		
 		Assert.assertEquals(new Integer(3), paciente.getId());
-		Assert.assertEquals("diego5", paciente.getNamePatient());
-		Assert.assertEquals("diegoff5", paciente.getLastNamePatient());
-		Assert.assertEquals("66666665", paciente.getDni());
+		Assert.assertEquals("Juan Luis", paciente.getNamePatient());
+		Assert.assertEquals("Perez", paciente.getLastNamePatient());
+		Assert.assertEquals("76867867", paciente.getDni());
 		Assert.assertEquals("San Borja", paciente.getDistrictName());	
 		
 	}
 
 	
 	
-	@Test
+	@Test@Ignore
 	public void testPostPaciente(){
 		
 		Client client = Client.create();
@@ -73,7 +73,7 @@ public class PacienteServiceTest {
 		
 	}
 	
-	@Test
+	@Test@Ignore
 	public void testPutPaciente(){
 		
 		Client client = Client.create();

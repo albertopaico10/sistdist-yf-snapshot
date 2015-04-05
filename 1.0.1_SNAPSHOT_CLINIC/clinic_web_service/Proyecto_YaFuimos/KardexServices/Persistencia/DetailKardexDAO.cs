@@ -83,12 +83,12 @@ namespace KardexServices.Persistencia
         }
 
         //Método para obtener el detalle de un kardex enviando el código de kardex
-        public List<DetailKardexResponse> listarDetalleKardex(string idKardex)
+        public ListResponseDetailKardex listarDetalleKardex(string idKardex)
         {
             List<DetailKardexResponse> listaDetalleKardex = new List<DetailKardexResponse>();
-            DetailKardexResponse detalleKardex = new DetailKardexResponse();
-            string query = "select id,cantidad,typeOperation,date_created,comprobante_clase,comprobante_number,price_sale" +
-                            "from tb_detail_kardex" +
+            ListResponseDetailKardex listResponse = new ListResponseDetailKardex();
+            string query = "select id,cantidad,typeOperation,date_created,comprobante_clase,comprobante_number,price_sale,price_Product " +
+                            "from tb_detail_kardex " +
                             "where idKardex = @idKardex";
 
             MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
@@ -108,25 +108,28 @@ namespace KardexServices.Persistencia
 
                 while (mysqlDataReader.Read())
                 {
+                    DetailKardexResponse detalleKardex = new DetailKardexResponse();
                     detalleKardex.id = mysqlDataReader.GetInt32(0);
                     detalleKardex.cantidad = mysqlDataReader.GetInt32(1);
                     detalleKardex.typeOperation = mysqlDataReader.GetInt32(2);
-                    detalleKardex.dateCreated = mysqlDataReader.GetDateTime(3);
+                    detalleKardex.dateCreated = mysqlDataReader.GetString(3);
                     detalleKardex.comprobanteClase = mysqlDataReader.GetString(4);
                     detalleKardex.comprobanteNumber = mysqlDataReader.GetInt32(5);
                     detalleKardex.priceSale = mysqlDataReader.GetDecimal(6);
+                    detalleKardex.priceProduct = mysqlDataReader.GetDecimal(7);
                     listaDetalleKardex.Add(detalleKardex);
                 }
-
+                listResponse.listDetailKardex = listaDetalleKardex;
+                listResponse.result = "SUCCESS";
             }
             catch (Exception e)
             {
 
-                detalleKardex.result = "ERROR";
-                detalleKardex.messages = e.Message;
+                listResponse.result = "ERROR";
+                listResponse.messages = e.Message;
             }
 
-            return listaDetalleKardex;
+            return listResponse;
 
         }
     }

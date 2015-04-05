@@ -98,8 +98,14 @@
 	</div>
 	<br />
 	<div>
-		<c:if test="${listProduct==null}">
-			<spring:message code="maintenance.type.product.list.empty" />
+		<c:if test="${messages=='PRODUCT_NOT_EXIST'}">
+			<label class="error"><spring:message code="maintenance.type.product.list.empty" /></label><br>
+		</c:if>
+		<c:if test="${messages=='CONNECTION_REFUSE'}">
+			<label class="error"><spring:message code="error.message.ws.notworking" /></label><br>
+		</c:if>
+		<c:if test="${messages=='SUCCESS_SAVE'}">
+			<label class="success"><spring:message code="error.message.ws.kardex.success" /></label><br>
 		</c:if>
 		<c:if test="${listProduct!=null}">
 			<table class="tableStyle" border="1">
@@ -131,7 +137,8 @@
 	</div>
 	<br />
 	<div>
-		<c:if test="${listKardex==null && valueKardexList==1}">
+<%-- 		<c:if test="${listKardex==null && valueKardexList==1}"> --%>
+		<c:if test="${messages == 'NOT_EXIST'}">
 			<script type="text/javascript">
 				$("#typeMessagesFormKardex").html('<label><spring:message code="register.kardex.comment.header.form"/></label>');
 				$("#idTypeOperation").prop("disabled", true);
@@ -267,6 +274,7 @@
 	}
 
 	function listDetailKardex(idKardex, nameProduct,priceTotalProduct,priceTotalSale,countTotalProduct) {
+		alert("*****"+priceTotalProduct+"***"+priceTotalSale);
 		$.ajax({
 			url : '${pageContext.request.contextPath}/listDetailKardex.htm',
 			type : 'GET',
@@ -281,11 +289,18 @@
 	}
 	
 	function loadDetailKardex(response,nameProduct,priceTotalProduct,priceTotalSale,countTotalProduct) {
+		alert("*****222"+priceTotalProduct+"***"+priceTotalSale);
 		$("#idDetailKardexData").html(response);
 		$("#idNameProductDetail").html('<label class="labelFormDetail"><spring:message code="maintenance.type.product.name"/></label><label class="labelForm">'+nameProduct+'</label>');
 		$("#idSpanPriceTotalProduct").html('<label class="labelFormDetail"><spring:message code="price.total.product"/></label><label class="labelForm">'+priceTotalProduct+'</label>');
 		$("#idSpanPriceTotalSale").html('<label class="labelFormDetail"><spring:message code="price.total.sale"/></label><label class="labelForm"> '+priceTotalSale+'</label>');
-		$("#idCountProductTotal").html('<label class="labelFormDetail"><spring:message code="register.kardex.count.total"/></label><label class="labelForm"> '+countTotalProduct+'</label>');
+		if(countTotalProduct<5){
+			$("#idCountProductTotal").html('<label class="error"><spring:message code="register.kardex.count.total"/></label><label class="error"> '+countTotalProduct+'</label>');
+		}else{
+			$("#idCountProductTotal").html('<label class="labelFormDetail"><spring:message code="register.kardex.count.total"/></label><label class="labelForm"> '+countTotalProduct+'</label>');
+		}
+		
+		
 		$("#idDetailKardex").dialog({
 			width : 978,
 			height : 321

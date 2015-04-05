@@ -1,18 +1,26 @@
 package com.project.george.facade.business.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.george.bean.catalog.paciente.Patient;
-import com.project.george.bean.catalog.presentation.BeanRequestPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponseListPresentation;
-import com.project.george.bean.catalog.presentation.BeanResponsePresentation;
-import com.project.george.bean.catalog.product.BeanProduct;
-import com.project.george.bean.catalog.product.BeanRequestProduct;
-import com.project.george.bean.catalog.product.BeanResponseListProduct;
+import com.project.george.bean.kardex.BeanResponseKardex;
+import com.project.george.bean.kardex.BeanResponseKardexDetail;
+import com.project.george.bean.kardex.BeanResponseListKardexDetail;
+import com.project.george.bean.kardex.canonical.BeanRequestCanonicalKardex;
+import com.project.george.bean.kardex.canonical.BeanResponseCanonicalKardexDetail;
+import com.project.george.bean.kardex.canonical.BeanResponseCanonicalListDetailKardex;
+import com.project.george.bean.paciente.Patient;
+import com.project.george.bean.presentation.BeanRequestPresentation;
+import com.project.george.bean.presentation.BeanResponseListPresentation;
+import com.project.george.bean.presentation.BeanResponsePresentation;
+import com.project.george.bean.product.BeanProduct;
+import com.project.george.bean.product.BeanRequestProduct;
+import com.project.george.bean.product.BeanResponseListProduct;
 import com.project.george.facade.business.ClinicApplicationBusiness;
+import com.project.george.facade.service.KardexService;
 import com.project.george.facade.service.PatientService;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.facade.service.ProductService;
@@ -29,6 +37,9 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	@Autowired
 	public PatientService patientService;
 	
+	@Autowired
+	public KardexService kardexService;
+		
 	public String mensajeTest(String value) throws Exception {
 //		logger.info(CommonConstants.Logger.LOGGER_START);
 		System.out.println(CommonConstants.Logger.LOGGER_START);
@@ -132,5 +143,55 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	public List<Patient> getPatients() {
 		return patientService.getPatients();
 	}
+	
+	public BeanResponseKardex findKardexByIdProduct(String idProduct)throws Exception{
+		return kardexService.listKardexByProduct(idProduct);
+	}
+	
+	public BeanResponseKardex saveKardex(BeanRequestCanonicalKardex beanReqCanonicalKardex){
+		System.out.println(CommonConstants.Logger.LOGGER_START+"** saveKardex");
+		BeanResponseKardex beanResponse=new BeanResponseKardex();
+		try {
+			 beanResponse=kardexService.saveKardexService(beanReqCanonicalKardex);
+			 //--Listar Kardex
+			 BeanResponseKardex beanResponseListKardex=kardexService.listKardexByProduct(String.valueOf(beanReqCanonicalKardex.getIdProduct()));
+			 if(CommonConstants.ResponseWebService.RESP_WS_EXIST.equals(beanResponseListKardex.getResult())){
+//				 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_NOT_EXIST);
+				 beanResponse=beanResponseListKardex;
+				 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE);
+			 }
+		} catch (Exception e) {
+			System.out.println("Error : "+e.getMessage());
+			beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_ERROR);
+		}
+		System.out.println(CommonConstants.Logger.LOGGER_END);
+		return beanResponse;
+	}
 
+	public BeanResponseListKardexDetail listDetailKardex(String idKardex){
+		
+		BeanResponseListKardexDetail beanRespListKardexDetail=new BeanResponseListKardexDetail();
+		
+		List<BeanResponseKardexDetail> listBeanRespKardDet=new ArrayList<BeanResponseKardexDetail>();
+		BeanResponseCanonicalListDetailKardex beanListKardexDetail=kardexService.listDetailKardex(idKardex);
+		for(BeanResponseCanonicalKardexDetail beanRespCanonicalKardexDetail:beanListKardexDetail.getListDetailKardex()){
+			
+			BeanResponseKardexDetail beanResponseKardexDet=new BeanResponseKardexDetail();
+			beanResponseKardexDet.setId(beanRespCanonicalKardexDetail.getId());
+			beanResponseKardexDet.setCantidad(beanRespCanonicalKardexDetail.getCantidad());
+			beanResponseKardexDet.setComprobanteClase(beanRespCanonicalKardexDetail.getComprobanteClase());
+			beanResponseKardexDet.setComprobanteNumero(beanRespCanonicalKardexDetail.getComprobanteNumber());
+			beanResponseKardexDet.setIdKardex(beanRespCanonicalKardexDetail.getIdKardex());
+			beanResponseKardexDet.setPriceProduct(beanRespCanonicalKardexDetail.getPriceProduct());
+			beanResponseKardexDet.setPriceSale(beanRespCanonicalKardexDetail.getPriceSale());
+			beanResponseKardexDet.setStatus(beanRespCanonicalKardexDetail.getStatus());
+			beanResponseKardexDet.setTypeOperation(beanRespCanonicalKardexDetail.getTypeOperation());
+			beanResponseKardexDet.setDateCreated(beanRespCanonicalKardexDetail.getDateCreated());
+
+			listBeanRespKardDet.add(beanResponseKardexDet);
+		}
+		System.out.println("Cantidad de registros : "+listBeanRespKardDet.size());
+		beanRespListKardexDetail.setListDetailKardex(listBeanRespKardDet);
+		return beanRespListKardexDetail;
+	}
 }
