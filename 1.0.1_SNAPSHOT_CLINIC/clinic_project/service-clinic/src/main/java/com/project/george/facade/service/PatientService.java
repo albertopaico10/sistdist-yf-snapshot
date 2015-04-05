@@ -9,7 +9,7 @@ import com.project.george.bean.paciente.Patient;
 @Service
 public interface PatientService {
 	
-public Patient savePatient(Patient patient);
+	public Patient savePatient(Patient patient);
 	
 	public Patient updatePatient(Patient patient);
 	

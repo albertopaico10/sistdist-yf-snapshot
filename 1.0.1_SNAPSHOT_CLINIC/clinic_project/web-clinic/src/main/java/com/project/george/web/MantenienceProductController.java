@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.project.george.common.CommonConstants;
 import com.project.george.model.TbProduct;
+import com.project.george.model.bean.BeanResponseWeb;
 import com.project.george.model.bean.PatientJson;
 import com.project.george.model.dto.PresentationDTO;
 import com.project.george.model.dto.ProductDTO;
@@ -39,13 +40,14 @@ public class MantenienceProductController {
     public ModelAndView listMantenienceTypeProduct (HttpServletRequest request,
 			HttpServletResponse response,final ModelMap model) {
 		System.out.println("inside listMantenienceTypeProduct htm");
-		final TbProduct tbTypeProduct=new TbProduct();
+		final ProductDTO tbTypeProduct=new ProductDTO();
 		model.addAttribute("maintenanceForm", tbTypeProduct);
 		
 		String responseStr=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT;
 		
 		try {
-			List<ProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
+//			List<ProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
+			List<ProductDTO> listAllTypeProduct=tableProduct.listProduct();
 			System.out.println("Cantidad de filas que trae :"+listAllTypeProduct.size());
 			request.setAttribute("listTypeProduct", listAllTypeProduct);
 		} catch (Exception e) {
@@ -70,20 +72,24 @@ public class MantenienceProductController {
 	
 	@RequestMapping("registerProduct.htm")
 	public ModelAndView validateUserForm(
-			@ModelAttribute TbProduct beanProductDTO,
+			@ModelAttribute ProductDTO beanProductDTO,
 			final BindingResult result, final SessionStatus status,
 			final HttpServletRequest request) {
 		System.out.println("inside registerTypeProduct htm");
-		String valueResponse="";
+		BeanResponseWeb valueResponse=null;
 		try {
-			valueResponse=tableProduct.addNewTypeProduct(beanProductDTO);
+			valueResponse=tableProduct.saveProduct(beanProductDTO);
+//			valueResponse=tableProduct.addNewTypeProduct(beanProductDTO);
 //			BeanProduct responseProduct=tableProduct.saveProduct(beanProductDTO);
+			if(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW.equals(valueResponse.getStatusResponse())){				
+				request.setAttribute("messages", "success");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("**** "+valueResponse);
-		System.out.println("Save User Data");
-		return new ModelAndView(valueResponse);
+		System.out.println("**** "+valueResponse.getStatusResponse());
+		System.out.println("Save Product");
+		return new ModelAndView(valueResponse.getStatusResponse());
 	}
 	
 	@RequestMapping("updateProduct.htm")
@@ -127,7 +133,8 @@ public class MantenienceProductController {
 		System.out.println("Entre a listar todos los productos");
 		String json2="";
 		try {
-			List<ProductDTO> listAllProduct=tableProduct.listAllTypeProduct();
+//			List<ProductDTO> listAllProduct=tableProduct.listAllTypeProduct();
+			List<ProductDTO> listAllProduct=tableProduct.listProduct();
 			PatientJson beanPatientJson=new PatientJson();
 			beanPatientJson.setiTotalDisplayRecords(listAllProduct.size());
 			beanPatientJson.setiTotalRecords(listAllProduct.size());

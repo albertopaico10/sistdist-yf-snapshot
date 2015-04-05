@@ -16,6 +16,8 @@ namespace KardexServices
         private KardexDAO dao = new KardexDAO();
         private DetailKardexDAO daoDetail = new DetailKardexDAO();
         private ProductoDAO daoProduct = new ProductoDAO();
+
+
         //Create by : Alberto Paico
         //Update by : Alberto Paico
         //Name : listarPresentacionObj
@@ -211,6 +213,23 @@ namespace KardexServices
         public ListResponseDetailKardex getDetailKardex(string idKardex)
         {
             return daoDetail.listarDetalleKardex(idKardex);
+        }
+
+        //Create by : Karina Espejo
+        //Name : insertarProducto
+        //Description : This method was created for creating a producto into database
+        public ProductResponse insertarProducto(Product beanRequest)
+        {
+            ProductResponse beanResponse = new ProductResponse();
+            beanResponse = daoProduct.registrarProducto(beanRequest);
+
+            return beanResponse;
+        }
+
+
+        public ProductListResponse getProduct()
+        {
+            return daoProduct.listProduct();
         }
     }
 }

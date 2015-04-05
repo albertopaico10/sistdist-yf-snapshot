@@ -16,9 +16,9 @@ import com.project.george.bean.paciente.Patient;
 import com.project.george.bean.presentation.BeanRequestPresentation;
 import com.project.george.bean.presentation.BeanResponseListPresentation;
 import com.project.george.bean.presentation.BeanResponsePresentation;
-import com.project.george.bean.product.BeanProduct;
 import com.project.george.bean.product.BeanRequestProduct;
 import com.project.george.bean.product.BeanResponseListProduct;
+import com.project.george.bean.product.BeanResponseProduct;
 import com.project.george.facade.business.ClinicApplicationBusiness;
 import com.project.george.facade.service.KardexService;
 import com.project.george.facade.service.PatientService;
@@ -46,19 +46,20 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return "HOLA .... "+value;
 	}
 
-	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
-		System.out.println(CommonConstants.Logger.LOGGER_START);
+	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
+	/*	System.out.println(CommonConstants.Logger.LOGGER_START);
 		//--Validate if Exist Producto with same Presentation
 		boolean validationProduct=productService.verificationExistProduct(beanProduct.getNameProduct(),beanProduct.getIdPresentation());
 		//--End
-		BeanProduct responseProduct=new BeanProduct();
+		BeanResponseProduct responseProduct=new BeanResponseProduct();
 		if(!validationProduct){
 			//--Save Product
 			responseProduct=productService.saveProduct(beanProduct);
 			responseProduct.setResult("redirect:/listProduct.htm");
 		}		
 		System.out.println(CommonConstants.Logger.LOGGER_END);
-		return responseProduct;
+		return responseProduct;*/
+		return productService.saveProduct(beanProduct);
 	}
 
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation) throws Exception {
@@ -119,9 +120,13 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return beanListPresentation;
 	}
 	
-	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+//	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+//		
+//		return productService.listProduct();
+//	}
+	public List<BeanResponseProduct> listProduct()throws Exception{
 		
-		return productService.listProductByName(nameProduct);
+		return productService.listProduct();
 	}
 	
 	public Patient savePatient(Patient patient) {
@@ -193,5 +198,11 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		System.out.println("Cantidad de registros : "+listBeanRespKardDet.size());
 		beanRespListKardexDetail.setListDetailKardex(listBeanRespKardDet);
 		return beanRespListKardexDetail;
+	}
+
+	public BeanResponseListProduct listProductByName(String nameProduct)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

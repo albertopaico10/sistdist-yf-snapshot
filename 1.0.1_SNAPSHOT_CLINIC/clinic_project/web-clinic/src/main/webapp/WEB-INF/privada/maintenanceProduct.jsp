@@ -57,7 +57,7 @@
 						<label for="userName" class="labelForm"><spring:message code="maintenance.product.presentation" /></label>
 					</td>
 					<td>						
-						<html:select path="tbPresentation.id" id="tbPresentation.id">
+						<html:select path="idPresentation" id="idPresentation">
 							<html:option value="0">
 								<spring:message code="maintenance.product.option.0"/>
 							</html:option>
@@ -70,7 +70,7 @@
 						<label for="userName" class="labelForm"><spring:message code="maintenance.product.price.unit" /></label>
 					</td>
 					<td>
-						<html:input path="price_Product" maxlength="60" id="price"/>
+						<html:input path="price" maxlength="60" id="price"/>
 					</td>
 				</tr>
 				<tr>
@@ -78,7 +78,7 @@
 						<label for="userName" class="labelForm"><spring:message code="maintenance.product.price.sale" /></label>
 					</td>
 					<td>
-						<html:input path="price_sale" maxlength="60" id="priceSale"/>
+						<html:input path="priceSale" maxlength="60" id="priceSale"/>
 					</td>
 				</tr>
 				<tr>
@@ -147,12 +147,12 @@ $(document).ready(function() {
 	$("#idMaintenanceForm").validate({
 		rules: {
 			nameProduct: "required",
-			price_Product:{
+			price:{
 				required:true,
 				number:true
 			},
 			'tbPresentation.id':{min:1},
-			price_sale:{
+			priceSale:{
 				required:true,
 				number:true,
 // 				greaterThan:"#price"
@@ -161,12 +161,12 @@ $(document).ready(function() {
 		},
 		messages: {
 			nameProduct: '<spring:message code="maintenance.generic.field.required" />',
-			price_Product:{
+			price:{
 					required:'<spring:message code="maintenance.generic.field.required" />',
 					number:'<spring:message code="login.error.number" />',
 				},
 			'tbPresentation.id': '<spring:message code="maintenance.generic.select.required" />',
-			price_sale:{
+			priceSale:{
 				required:'<spring:message code="maintenance.generic.field.required" />',
 				number:'<spring:message code="login.error.number" />',
 // 				greaterThan:'<spring:message code="login.error.number" />'
@@ -184,7 +184,7 @@ $("#new_presentation" ).click(function( event ) {
 		height:249
 	});
 	$( "#nameProduct" ).val("");
-	$( "#price_Product" ).val("");
+	$( "#price" ).val("");
 	$("#idSave").html('<spring:message code="maintenance.roles.botton.new.role.form" />');
 });
 

@@ -16,4 +16,6 @@ public interface TableProductManager {
 	//-----------------------------------
 	public BeanResponseWeb setBeanProduct(ProductDTO beanProductDTO)throws Exception;
 	public BeanResponseWeb findProductByName(String nameProduct)throws Exception;
+	public BeanResponseWeb saveProduct(ProductDTO beanProductDTO)throws Exception;
+	public List<ProductDTO> listProduct() throws Exception;
 }

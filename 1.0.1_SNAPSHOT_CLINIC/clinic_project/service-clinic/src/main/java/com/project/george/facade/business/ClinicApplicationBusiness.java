@@ -10,16 +10,16 @@ import com.project.george.bean.kardex.canonical.BeanRequestCanonicalKardex;
 import com.project.george.bean.paciente.Patient;
 import com.project.george.bean.presentation.BeanRequestPresentation;
 import com.project.george.bean.presentation.BeanResponseListPresentation;
-import com.project.george.bean.product.BeanProduct;
 import com.project.george.bean.product.BeanRequestProduct;
 import com.project.george.bean.product.BeanResponseListProduct;
+import com.project.george.bean.product.BeanResponseProduct;
 
 @Service
 public interface ClinicApplicationBusiness {
 
 	public String mensajeTest(String value)throws Exception;
 	
-	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
+	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
 	
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation)throws Exception;
 	
@@ -46,4 +46,6 @@ public interface ClinicApplicationBusiness {
 	public BeanResponseKardex saveKardex(BeanRequestCanonicalKardex beanReqCanonicalKardex);
 	
 	public BeanResponseListKardexDetail listDetailKardex(String idKardex);
+	
+	public List<BeanResponseProduct> listProduct()throws Exception;
 }

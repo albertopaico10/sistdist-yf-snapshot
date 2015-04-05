@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.george.bean.product.BeanProduct;
 import com.project.george.bean.product.BeanRequestProduct;
 import com.project.george.bean.product.BeanResponseListProduct;
+import com.project.george.bean.product.BeanResponseProduct;
 import com.project.george.bean.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.common.CommonConstants;
 import com.project.george.common.UtilMethods;
@@ -89,14 +90,14 @@ public class TableProductManagerImpl implements TableProductManager {
 
 	//------------------------------------------------------------------------
 	public BeanResponseWeb setBeanProduct(ProductDTO beanProductDTO) throws Exception {
-		BeanRequestProduct beanProduct=new BeanRequestProduct();
-		beanProduct.setNamePresentation(beanProduct.getNameProduct());
-		beanProduct.setIdPresentation(beanProductDTO.getIdPresentation());
-		beanProduct.setNameProduct(beanProductDTO.getNameProduct());
-		beanProduct.setPrice(beanProductDTO.getPrice());
-		beanProduct.setPriceSale(beanProductDTO.getPriceSale());
+		BeanRequestProduct beanRequestProduct=new BeanRequestProduct();
+		beanRequestProduct.setNamePresentation(beanRequestProduct.getNameProduct());
+		beanRequestProduct.setIdPresentation(beanProductDTO.getIdPresentation());
+		beanRequestProduct.setNameProduct(beanProductDTO.getNameProduct());
+		beanRequestProduct.setPrice(beanProductDTO.getPrice());
+		beanRequestProduct.setPriceSale(beanProductDTO.getPriceSale());
 		
-		BeanProduct beanResponseProduct=clinicApplicationBusiness.saveProduct(beanProduct);
+		BeanResponseProduct beanResponseProduct=clinicApplicationBusiness.saveProduct(beanRequestProduct);
 		
 		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
 		if(CommonConstants.ResponseIdResult.RESULT_CORRECT.equals(beanResponseProduct.getResult())){
@@ -132,5 +133,43 @@ public class TableProductManagerImpl implements TableProductManager {
 		}
 		beanResponseWeb.setStatusResponse(beanListProduct.getResult());		
 		return beanResponseWeb;
+	}
+
+	public BeanResponseWeb saveProduct(ProductDTO beanProductDTO) throws Exception {
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		UtilMethods util=new UtilMethods();
+		//Castear
+		BeanRequestProduct beanRequest=new BeanRequestProduct();
+		beanRequest.setNameProduct(beanProductDTO.getNameProduct());
+		beanRequest.setStatus(beanProductDTO.getStatus());
+		beanRequest.setIdPresentation(beanProductDTO.getIdPresentation());
+		beanRequest.setPrice(beanProductDTO.getPrice());
+		beanRequest.setPriceSale(beanProductDTO.getPriceSale());
+		beanRequest.setExpirationDate(util.convertDateFormat(beanProductDTO.getExpirationDate()));
+		
+		BeanResponseProduct beanResponse=clinicApplicationBusiness.saveProduct(beanRequest);
+		
+		beanResponseWeb.setStatusResponse(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW);
+		
+		return beanResponseWeb;
+	}
+
+	public List<ProductDTO> listProduct() throws Exception {
+		List<ProductDTO> listProductWeb=new ArrayList<ProductDTO>();
+		
+		List<BeanResponseProduct> listProduct=clinicApplicationBusiness.listProduct();
+		System.out.println("***** Cantidad del servicio : "+listProduct.size());
+		for(BeanResponseProduct beanProdResp:listProduct){
+			ProductDTO beanProductDTO=new ProductDTO();
+			beanProductDTO.setId(beanProdResp.getId());
+			beanProductDTO.setNameProduct(beanProdResp.getNameProduct());
+			beanProductDTO.setNamePresentation(beanProdResp.getNamePresentation());
+			beanProductDTO.setPrice(beanProdResp.getPriceProduct());
+			beanProductDTO.setPriceSale(beanProdResp.getPriceSale());
+			beanProductDTO.setExpirationDate(beanProdResp.getExpirationDate());
+			listProductWeb.add(beanProductDTO);
+		}
+		
+		return listProductWeb;
 	}
 }

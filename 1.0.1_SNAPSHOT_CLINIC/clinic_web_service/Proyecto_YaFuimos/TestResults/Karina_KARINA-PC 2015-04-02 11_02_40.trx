@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="831ee809-cf46-4421-becd-fa30e4c3c62e" name="Karina@KARINA-PC 2015-04-02 11:02:40" runUser="Karina-PC\Karina" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="085a2416-f681-45aa-a1b3-fd0f72f99014">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Karina_KARINA-PC 2015-04-02 11_02_40" />
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2015-04-02T11:02:40.4453074-05:00" queuing="2015-04-02T11:02:40.4623083-05:00" start="2015-04-02T11:02:40.4923101-05:00" finish="2015-04-02T11:02:42.3214147-05:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="TestCreateProduct" storage="c:\users\karina.karina-pc\nueva carpeta\1.0.1_snapshot_clinic\clinic_web_service\proyecto_yafuimos\producttest\bin\debug\producttest.dll" id="74024f06-a59e-cffd-19e7-55d1d9583c8a">
+      <Execution id="9804c190-0165-4752-b727-32824b0b1994" />
+      <TestMethod codeBase="C:/Users/Karina.Karina-PC/Nueva carpeta/1.0.1_SNAPSHOT_CLINIC/clinic_web_service/Proyecto_YaFuimos/ProductTest/bin/Debug/ProductTest.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="ProductTest.ProductTest, ProductTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="TestCreateProduct" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="74024f06-a59e-cffd-19e7-55d1d9583c8a" executionId="9804c190-0165-4752-b727-32824b0b1994" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="9804c190-0165-4752-b727-32824b0b1994" testId="74024f06-a59e-cffd-19e7-55d1d9583c8a" testName="TestCreateProduct" computerName="KARINA-PC" duration="00:00:01.5959716" startTime="2015-04-02T11:02:40.5043108-05:00" endTime="2015-04-02T11:02:42.2964133-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9804c190-0165-4752-b727-32824b0b1994">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;Tester&gt;. Actual:&lt;(null)&gt;. </Message>
+          <StackTrace>   en ProductTest.ProductTest.TestCreateProduct() en C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductTest\ProductTest.cs:línea 33
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

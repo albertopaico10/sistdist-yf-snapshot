@@ -1,27 +1,61 @@
 package com.project.george.facade.service.impl;
 
-import javax.xml.namespace.QName;
-import javax.xml.rpc.ParameterMode;
-import javax.xml.rpc.encoding.XMLType;
+import java.util.List;
 
-import org.apache.axis.client.Call;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.project.george.bean.product.BeanProduct;
 import com.project.george.bean.product.BeanRequestProduct;
 import com.project.george.bean.product.BeanResponseListProduct;
+import com.project.george.bean.product.BeanResponseProduct;
 import com.project.george.bean.product.canonical.BeanResponseCanonicalListProduct;
+import com.project.george.bean.product.canonical.BeanResponseCanonicalProduct;
 import com.project.george.facade.service.ProductService;
 import com.project.george.util.CommonConstants;
 import com.project.george.util.JsonUtils;
-import com.project.george.util.UtilWebService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 	
 //	private static Logger logger = Logger.getLogger(ProductServiceImpl.class);
-	public String rucService = CommonConstants.PRODUCT_SOAP;
+	
+	
+	public BeanResponseProduct saveProduct(BeanRequestProduct beanRequestProduct) throws Exception {
+		
+		String gson=JsonUtils.toJson(beanRequestProduct);
+		System.out.println("**** GSON : " + gson);
+		
+		RestTemplate restTemplate=new RestTemplate();
+		BeanResponseProduct beanResponseProduct=restTemplate.postForObject(CommonConstants.PRODUCT_REST, beanRequestProduct, BeanResponseProduct.class);
+		
+		String gsonResponse=JsonUtils.toJson(beanResponseProduct);
+		System.out.println("**** GSON : " + gsonResponse);
+		return beanResponseProduct;
+	}
+
+	public boolean verificationExistProduct(String name, int idPresentation)
+		throws Exception {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+	public List<BeanResponseProduct> listProduct() {
+		RestTemplate restTemplate=new RestTemplate();
+		BeanResponseCanonicalListProduct listProductAll=restTemplate.getForObject(CommonConstants.PRODUCT_REST_ALL, BeanResponseCanonicalListProduct.class);
+		String gsonResponse=JsonUtils.toJson(listProductAll.getListProductObj());
+		System.out.println("**** GSON : " + gsonResponse);
+		return listProductAll.getListProductObj();
+	}
+
+//public BeanResponseListProduct listProductByName(String nameProduct)
+//		throws Exception {
+//	// TODO Auto-generated method stub
+//	return null;
+//}	
+
+/*	public String rucService = CommonConstants.PRODUCT_SOAP;
+	
+	
 	
 	public BeanProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
 		System.out.println(CommonConstants.Logger.LOGGER_START);
@@ -101,7 +135,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return false;
 	}
-	
+*/	
 	public BeanResponseListProduct listProductByName(String nameProduct){
 		RestTemplate restTemplate=new RestTemplate();
 		BeanResponseListProduct beanListProduct=new BeanResponseListProduct();
@@ -124,4 +158,5 @@ public class ProductServiceImpl implements ProductService {
 		
 		return beanListProduct;
 	}
+
 }

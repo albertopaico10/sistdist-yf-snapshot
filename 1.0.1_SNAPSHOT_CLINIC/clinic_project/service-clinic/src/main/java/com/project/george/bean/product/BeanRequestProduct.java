@@ -12,7 +12,8 @@ public class BeanRequestProduct {
 	public String namePresentation;
 	public BigDecimal price;
 	public BigDecimal priceSale;
-	public Date expirationDate;
+	public String expirationDate;
+	
 	public int getId() {
 		return id;
 	}
@@ -55,12 +56,13 @@ public class BeanRequestProduct {
 	public void setPriceSale(BigDecimal priceSale) {
 		this.priceSale = priceSale;
 	}
-	public Date getExpirationDate() {
+	public String getExpirationDate() {
 		return expirationDate;
 	}
-	public void setExpirationDate(Date expirationDate) {
+	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+
 	
 	
 	

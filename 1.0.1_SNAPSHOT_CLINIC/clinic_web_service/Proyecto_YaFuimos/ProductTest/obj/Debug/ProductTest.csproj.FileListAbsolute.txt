@@ -1,0 +1,4 @@
+C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductTest\bin\Debug\ProductTest.dll
+C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductTest\bin\Debug\ProductTest.pdb
+C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductTest\obj\Debug\ProductTest.dll
+C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductTest\obj\Debug\ProductTest.pdb
