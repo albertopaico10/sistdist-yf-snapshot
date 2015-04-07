@@ -38,7 +38,8 @@ public class PacienteService {
 
 	
 	@GET
-	@Path("/get/{id}")
+	//@Path("/get/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPaciente (@PathParam("id") String id) throws Exception{	
 		dao.openCurrentSessionwithTransaction();
@@ -53,7 +54,7 @@ public class PacienteService {
 	}
 	
 	@POST
-	@Path("/create")
+	//@Path("/create")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente crearPaciente (Paciente paciente) throws Exception{
@@ -64,7 +65,7 @@ public class PacienteService {
 	}
 	
 	@PUT
-	@Path("/update")
+	//@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente actualizarPaciente (Paciente paciente) throws Exception{	
@@ -75,7 +76,8 @@ public class PacienteService {
 	}
 	
 	@DELETE
-	@Path("/remove/{id}")
+	//@Path("/remove/{id}")
+	@Path("/{id}")
 	public Response eliminarPaciente (@PathParam("id") String id) throws Exception{
 		dao.openCurrentSessionwithTransaction();
 		Paciente paciente = dao.findById(Integer.valueOf(id));
