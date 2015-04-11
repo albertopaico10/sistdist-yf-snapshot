@@ -29,7 +29,7 @@ public class PatientServiceImpl implements PatientService {
 		DefaultClientConfig defaultClientConfig = new DefaultClientConfig();
 		defaultClientConfig.getClasses().add(JacksonJsonProvider.class);
 		Client client = Client.create(defaultClientConfig);
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/create");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes");
 
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, patient);
 		
@@ -45,7 +45,7 @@ public class PatientServiceImpl implements PatientService {
 		defaultClientConfig.getClasses().add(JacksonJsonProvider.class);
 		Client client = Client.create(defaultClientConfig);
 		
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/update");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes");
 		 		
 		ClientResponse clientResponse = resource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).put(ClientResponse.class, patient);
 		
@@ -58,7 +58,7 @@ public class PatientServiceImpl implements PatientService {
 	public Patient getPatient(Integer id) {
 		
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/get/"+id);
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/"+id);
 		 
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 		
@@ -70,7 +70,7 @@ public class PatientServiceImpl implements PatientService {
 
 	public String removePatient(Integer id) {
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/remove/"+id);
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/"+id);
 		
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
 		String output = clientResponse.getEntity(String.class);

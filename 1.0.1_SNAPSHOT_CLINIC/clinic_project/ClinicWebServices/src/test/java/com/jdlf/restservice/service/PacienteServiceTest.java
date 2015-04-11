@@ -25,11 +25,11 @@ public class PacienteServiceTest {
 	
 	Date date = new Date();
 	
-	@Test
+	@Test@Ignore
 	public void testGetPaciente(){
 		
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/get/3");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/3");
 		 
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 		
@@ -38,25 +38,23 @@ public class PacienteServiceTest {
 		paciente = parsePaciente(output, paciente);
 		
 		Assert.assertEquals(new Integer(3), paciente.getId());
-		Assert.assertEquals("Juan Luis", paciente.getNamePatient());
-		Assert.assertEquals("Perez", paciente.getLastNamePatient());
-		Assert.assertEquals("76867867", paciente.getDni());
-		Assert.assertEquals("San Borja", paciente.getDistrictName());	
+		Assert.assertEquals("diego", paciente.getNamePatient());
+		Assert.assertEquals("lopez", paciente.getLastNamePatient());
 		
 	}
 
 	
 	
-	@Test@Ignore
-	public void testPostPaciente(){
+	@Test
+	public void testPostPaciente(){//create paciente
 		
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/create");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes");
 		 
 		Paciente paciente = new Paciente();
 		paciente.setNamePatient("diegoLF");
 		paciente.setLastNamePatient("diegoLN");
-		paciente.setDni("6666667");
+		paciente.setDni("6666668");
 		paciente.setBirthDay(new Date());
 		paciente.setDateCreated(new Timestamp(date.getTime()));
 		paciente.setDateUpdated(new Timestamp(date.getTime()));
@@ -69,7 +67,7 @@ public class PacienteServiceTest {
 		
 		Assert.assertEquals("diegoLF", pacienteUpdated.getNamePatient());
 		Assert.assertEquals("diegoLN", pacienteUpdated.getLastNamePatient());
-		Assert.assertEquals("6666667", pacienteUpdated.getDni());
+		Assert.assertEquals("6666668", pacienteUpdated.getDni());
 		
 	}
 	
@@ -77,11 +75,11 @@ public class PacienteServiceTest {
 	public void testPutPaciente(){
 		
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/update");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes");
 		 
 		Paciente paciente = new Paciente();
 		paciente.setId(5);
-		paciente.setNamePatient("diego5");
+		paciente.setNamePatient("gg");
 		paciente.setLastNamePatient("diegoff5");
 		paciente.setDni("666666655");
 		paciente.setBirthDay(new Date());
@@ -95,17 +93,16 @@ public class PacienteServiceTest {
 		pacienteUpdated = parsePaciente(output, pacienteUpdated);
 		
 		Assert.assertEquals(new Integer(5), pacienteUpdated.getId());
-		Assert.assertEquals("diego5", pacienteUpdated.getNamePatient());
+		Assert.assertEquals("gg", pacienteUpdated.getNamePatient());
 		Assert.assertEquals("diegoff5", pacienteUpdated.getLastNamePatient());
 		Assert.assertEquals("666666655", pacienteUpdated.getDni());
 		
 	}
 	
-	@Test
-	@Ignore
+	@Test@Ignore
 	public void testDeletePaciente(){		
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/remove/7");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/5");
 		
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
 		String output = clientResponse.getEntity(String.class);
@@ -113,11 +110,11 @@ public class PacienteServiceTest {
 		
 	}
 	
-	@Test
+	@Test@Ignore
 	public void testDeleteUnExistingPaciente(){
 	
 		Client client = Client.create();
-		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/remove/0");
+		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes/0");
 			
 		ClientResponse clientResponse = resource.type(MediaType.APPLICATION_JSON).delete(ClientResponse.class);
 		String output = clientResponse.getEntity(String.class);

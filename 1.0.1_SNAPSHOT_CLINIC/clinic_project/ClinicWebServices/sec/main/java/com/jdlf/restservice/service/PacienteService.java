@@ -17,6 +17,7 @@ import antlr.collections.List;
 
 import com.jdlf.restservice.dao.PacienteDao;
 import com.jdlf.restservice.model.Paciente;
+import com.jdlf.restservice.queue.ClinicQueue;
 
 @Path("/pacientes")
 public class PacienteService {
@@ -38,7 +39,8 @@ public class PacienteService {
 
 	
 	@GET
-	@Path("/get/{id}")
+	//@Path("/get/{id}")
+	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getPaciente (@PathParam("id") String id) throws Exception{	
 		dao.openCurrentSessionwithTransaction();
@@ -53,18 +55,25 @@ public class PacienteService {
 	}
 	
 	@POST
-	@Path("/create")
+	//@Path("/create")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente crearPaciente (Paciente paciente) throws Exception{
-		dao.openCurrentSessionwithTransaction();
-		paciente = dao.persist(paciente);
-		dao.closeCurrentSessionwithTransaction();
+		
+		try {
+			dao.openCurrentSessionwithTransaction();
+			paciente = dao.persist(paciente);
+			dao.closeCurrentSessionwithTransaction();
+			return paciente;
+		} catch (Exception e) {
+			ClinicQueue.sendPaciente(paciente);
+		}
+		
 		return paciente;
 	}
 	
 	@PUT
-	@Path("/update")
+	//@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente actualizarPaciente (Paciente paciente) throws Exception{	
@@ -75,7 +84,8 @@ public class PacienteService {
 	}
 	
 	@DELETE
-	@Path("/remove/{id}")
+	//@Path("/remove/{id}")
+	@Path("/{id}")
 	public Response eliminarPaciente (@PathParam("id") String id) throws Exception{
 		dao.openCurrentSessionwithTransaction();
 		Paciente paciente = dao.findById(Integer.valueOf(id));
