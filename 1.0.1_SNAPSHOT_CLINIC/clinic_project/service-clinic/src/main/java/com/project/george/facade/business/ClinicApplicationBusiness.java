@@ -48,4 +48,6 @@ public interface ClinicApplicationBusiness {
 	public BeanResponseListKardexDetail listDetailKardex(String idKardex);
 	
 	public List<BeanResponseProduct> listProduct()throws Exception;
+	
+	public BeanResponseListPresentation listAllPresentationAndroid()throws Exception;
 }

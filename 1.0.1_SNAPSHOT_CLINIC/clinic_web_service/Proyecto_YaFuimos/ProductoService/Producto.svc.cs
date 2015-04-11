@@ -95,6 +95,12 @@ namespace ProductoService
         {
             PresentationResponse presentationResponse= new PresentationResponse();
             try{
+                //--Validacion de nombre de presentacion duplicado
+                Boolean value = PresentationDAO.validacionExisteNombrePresentacion(namePresentation);
+                if (value == true) {
+                    presentationResponse.Result = "PRESENTATION_EXIST";
+                    return presentationResponse;
+                }
                 Presentation presentacionNueva = new ProductoService.Dominio.Presentation()
                 {
                     NamePresentation = namePresentation,
@@ -107,7 +113,7 @@ namespace ProductoService
                 presentationResponse.DateCreated=presentacionNueva.DateCreated;
                 presentationResponse.Result="SUCCESS";
             }
-            catch {
+            catch (Exception e){
                 presentationResponse.Result="ERROR";
             }
 
