@@ -18,4 +18,6 @@ public interface TableProductManager {
 	public BeanResponseWeb findProductByName(String nameProduct)throws Exception;
 	public BeanResponseWeb saveProduct(ProductDTO beanProductDTO)throws Exception;
 	public List<ProductDTO> listProduct() throws Exception;
+	public BeanResponseWeb updateProduct(ProductDTO beanProductDTO) throws Exception;
+	public BeanResponseWeb deleteProduct(int idProduct) throws Exception;
 }

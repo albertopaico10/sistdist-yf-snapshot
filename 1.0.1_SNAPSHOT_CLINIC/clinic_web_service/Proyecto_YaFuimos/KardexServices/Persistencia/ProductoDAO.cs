@@ -103,7 +103,7 @@ namespace KardexServices.Persistencia
                 mysqlCommand.Parameters.AddWithValue("@price_sale", beanProducto.priceSale);
                 mysqlCommand.Parameters.AddWithValue("@expiration_date", beanProducto.expirationDate);
                 mysqlCommand.ExecuteNonQuery();
-                beanResponseProducto.result = "SUCCESS";
+                beanResponseProducto.result = "SUCCESS_SAVE";
             }
             catch (Exception e)
             {
@@ -117,8 +117,8 @@ namespace KardexServices.Persistencia
         {
             ProductListResponse beanListResponse = new ProductListResponse();
             List<ProductResponse> listProd = new List<ProductResponse>();
-            
-            string query = "select prod.id,nameProduct,namePresentation,price_product,price_sale, expiration_date from tb_product prod" +
+
+            string query = "select prod.id,nameProduct,namePresentation,price_product,price_sale, expiration_date,prod.idPresentation from tb_product prod" +
             " inner join tb_presentation pre on prod.idPresentation=pre.id where prod.status = 1";
 
             MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
@@ -143,6 +143,7 @@ namespace KardexServices.Persistencia
                     beanResponseProducto.priceProduct = mysqlDataReader.GetDecimal(3);
                     beanResponseProducto.priceSale = mysqlDataReader.GetDecimal(4);
                     beanResponseProducto.expirationDate = mysqlDataReader.GetString(5);
+                    beanResponseProducto.idPresentation = mysqlDataReader.GetInt32(6);
                     listProd.Add(beanResponseProducto);
                 }
                 beanListResponse.listProductObj = listProd;
@@ -154,6 +155,103 @@ namespace KardexServices.Persistencia
                 beanListResponse.result = "ERROR";
             }
             return beanListResponse;
+        }
+
+        public ProductResponse actualizarProducto(Product beanProduct)
+        {
+            ProductResponse beanResponseProduct = new ProductResponse();
+            string query = "update tb_product set " +
+            "nameProduct=@nameProduct,idPresentation=@idPresentation," +
+            "price_Product=@price_Product,price_sale=@price_sale,expiration_date=@expiration_date" +
+            " where id=@id";
+
+            MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
+
+            MySqlCommand mysqlCommand;
+
+            mysqlConnection.Open();
+            try
+            {
+                mysqlCommand = mysqlConnection.CreateCommand();
+                mysqlCommand.CommandText = query;
+                mysqlCommand.Parameters.AddWithValue("@nameProduct", beanProduct.nameProduct);
+                mysqlCommand.Parameters.AddWithValue("@idPresentation", beanProduct.idPresentation);
+                mysqlCommand.Parameters.AddWithValue("@price_Product", beanProduct.price);
+                mysqlCommand.Parameters.AddWithValue("@price_sale", beanProduct.priceSale);
+                mysqlCommand.Parameters.AddWithValue("@expiration_date", beanProduct.expirationDate);
+                mysqlCommand.Parameters.AddWithValue("@id", beanProduct.id);
+
+                mysqlCommand.ExecuteNonQuery();
+                beanResponseProduct.result = "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                beanResponseProduct.result = "ERROR";
+                beanResponseProduct.messages = e.Message;
+            }
+            return beanResponseProduct;
+        }
+
+        public ProductResponse eliminarProducto(Product beanProduct)
+        {
+            ProductResponse beanResponseProduct = new ProductResponse();
+            string query = "update tb_product set " +
+            "status=@status where id=@id";
+
+            MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
+
+            MySqlCommand mysqlCommand;
+
+            mysqlConnection.Open();
+            try
+            {
+                mysqlCommand = mysqlConnection.CreateCommand();
+                mysqlCommand.CommandText = query;
+                mysqlCommand.Parameters.AddWithValue("@status", beanProduct.status);
+                mysqlCommand.Parameters.AddWithValue("@id", beanProduct.id);
+
+                mysqlCommand.ExecuteNonQuery();
+                beanResponseProduct.result = "SUCCESS";
+            }
+            catch (Exception e)
+            {
+                beanResponseProduct.result = "ERROR";
+                beanResponseProduct.messages = e.Message;
+            }
+            return beanResponseProduct;
+        }
+
+        public Boolean ObtenerNombrePresentacion(string nameProduct, int idPresentation)
+        {
+            Boolean responseValue = false;
+
+            string query = "SELECT * FROM tb_product WHERE idPresentation=@idPresentation and nameProduct=@nameProduct";
+
+            MySqlConnection mysqlConnection = new MySqlConnection(ConexionUtil.ObtenerCadenaMysql);
+
+            MySqlCommand mysqlCommand;
+
+            MySqlDataReader mysqlDataReader;
+
+            mysqlConnection.Open();
+          
+                mysqlCommand = mysqlConnection.CreateCommand();
+                mysqlCommand.CommandText = query;
+                mysqlCommand.Parameters.AddWithValue("@idPresentation", idPresentation);
+                mysqlCommand.Parameters.AddWithValue("@nameProduct", nameProduct);
+
+                mysqlDataReader = mysqlCommand.ExecuteReader();
+                int cantidadRegistros = 0;
+                    while (mysqlDataReader.Read())
+                    {
+                        cantidadRegistros++;
+                    }
+                    if (cantidadRegistros > 0)
+                    {
+                        responseValue = true;
+                    }
+           
+            return responseValue;
         }
     }
 }

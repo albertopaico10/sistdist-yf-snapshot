@@ -21,6 +21,10 @@ public interface ClinicApplicationBusiness {
 	
 	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
 	
+	public BeanResponseProduct deleteProduct(BeanRequestProduct beanProduct)throws Exception;
+	
+	public BeanResponseProduct updateProduct(BeanRequestProduct beanProduct)throws Exception;
+	
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation)throws Exception;
 	
 	public BeanResponseListPresentation listAllPresentation()throws Exception;

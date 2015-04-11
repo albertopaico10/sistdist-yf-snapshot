@@ -127,6 +127,7 @@ public class TableProductManagerImpl implements TableProductManager {
 				beanProductDTO.setNamePresentation(beanResponseProduct.getNamePresentation());
 				beanProductDTO.setPriceSale(beanResponseProduct.getPriceSale());
 				beanProductDTO.setExpirationDate(beanResponseProduct.getExpirationDate());
+//				beanProductDTO.setExpirationDate(UtilMethods.convertFormatString(CommonConstants.FormatDate.DD_MM_YYYY_HHMMSS, beanResponseProduct.getExpirationDate(), CommonConstants.FormatDate.MM_DD_YYYY));
 				beanListDTO.add(beanProductDTO);
 			}
 			beanResponseWeb.setListProductDTO(beanListDTO);
@@ -149,8 +150,8 @@ public class TableProductManagerImpl implements TableProductManager {
 		
 		BeanResponseProduct beanResponse=clinicApplicationBusiness.saveProduct(beanRequest);
 		
-		beanResponseWeb.setStatusResponse(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW);
-		
+		beanResponseWeb.setRedirectTo(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT);
+		beanResponseWeb.setStatusResponse(beanResponse.getResult());
 		return beanResponseWeb;
 	}
 
@@ -164,12 +165,48 @@ public class TableProductManagerImpl implements TableProductManager {
 			beanProductDTO.setId(beanProdResp.getId());
 			beanProductDTO.setNameProduct(beanProdResp.getNameProduct());
 			beanProductDTO.setNamePresentation(beanProdResp.getNamePresentation());
+			System.out.println("ID PRESENTATION : "+beanProdResp.getIdPresentation());
+			beanProductDTO.setIdPresentation(beanProdResp.getIdPresentation());
 			beanProductDTO.setPrice(beanProdResp.getPriceProduct());
 			beanProductDTO.setPriceSale(beanProdResp.getPriceSale());
-			beanProductDTO.setExpirationDate(beanProdResp.getExpirationDate());
+//			beanProductDTO.setExpirationDate(beanProdResp.getExpirationDate());
+			beanProductDTO.setExpirationDate(UtilMethods.convertFormatString(CommonConstants.FormatDate.DD_MM_YYYY_HHMMSS, beanProdResp.getExpirationDate(), CommonConstants.FormatDate.MM_DD_YYYY));
 			listProductWeb.add(beanProductDTO);
 		}
 		
 		return listProductWeb;
 	}
+	
+	public BeanResponseWeb updateProduct(ProductDTO beanProductDTO) throws Exception {
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		UtilMethods util=new UtilMethods();
+		//Castear
+		BeanRequestProduct beanRequest=new BeanRequestProduct();
+		beanRequest.setNameProduct(beanProductDTO.getNameProduct());
+		beanRequest.setIdPresentation(beanProductDTO.getIdPresentation());
+		beanRequest.setPrice(beanProductDTO.getPrice());
+		beanRequest.setPriceSale(beanProductDTO.getPriceSale());
+		beanRequest.setExpirationDate(util.convertDateFormat(beanProductDTO.getExpirationDate()));
+		
+		BeanResponseProduct beanResponse=clinicApplicationBusiness.updateProduct(beanRequest);
+		beanResponseWeb.setStatusResponse(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW);
+		
+		return beanResponseWeb;
+	}
+	
+	public BeanResponseWeb deleteProduct(int idProduct) throws Exception {
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
+		//Castear
+		BeanRequestProduct beanRequest=new BeanRequestProduct();
+		beanRequest.setId(idProduct);
+		beanRequest.setStatus(2);
+			
+		
+		BeanResponseProduct beanResponse=clinicApplicationBusiness.deleteProduct(beanRequest);
+		beanResponseWeb.setStatusResponse(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW);
+		
+		return beanResponseWeb;
+	}
+	
+
 }

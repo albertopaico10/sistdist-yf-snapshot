@@ -52,5 +52,14 @@ namespace KardexServices
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "ProductAll", ResponseFormat = WebMessageFormat.Json)]
         ProductListResponse getProduct();
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "ProductBody", ResponseFormat = WebMessageFormat.Json)]
+        ProductResponse actualizarProducto(Product beanRequest);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "ProductDelete", ResponseFormat = WebMessageFormat.Json)]
+        ProductResponse eliminarProducto(Product beanRequest);
+
     }
 }

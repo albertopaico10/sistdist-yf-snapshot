@@ -12,7 +12,9 @@
 <%-- 	<a href="#" id="new_area"><spring:message code="maintenance.area.botton.new.area" /></a> --%>
 	<br>
 	<div id="idTitleList"><label class="titlePage"><spring:message code="maintenance.type.product.title.list" /></label></div>
-
+	<c:if test="${messages == 'SUCCESS_SAVE'}">
+		<label class="success"><spring:message code="error.message.ws.presentation.success" /></label><br>
+	</c:if>
 	<div id="divTableGet" class="cssTableGet">
 	<html:form action="" method="GET">
 	<table style="width: 100%;" >

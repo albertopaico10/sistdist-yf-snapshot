@@ -83,5 +83,15 @@ public class TableProductDaoImpl implements TableProductDao {
 		
 		return listQuery;
 	}
+	
+	public void updateProduct(TbProduct tbTypeProductBean) {
+		tbTypeProductBean.setNameProduct(tbTypeProductBean.getNameProduct());
+		//tbTypeProductBean.setTbPresentation(tbPresentation.);(tbTypeProductBean.getTbPresentation().getId());
+		tbTypeProductBean.setPrice_Product(tbTypeProductBean.getPrice_Product());
+		tbTypeProductBean.setPrice_sale(tbTypeProductBean.getPrice_sale());
+	//	tbTypeProductBean.setExpirationDate(util.convertDateFormat(tbTypeProductBean.getExpirationDate()));
+		
+		sessionfactory.getCurrentSession().saveOrUpdate(tbTypeProductBean);			
+	}
 
 }

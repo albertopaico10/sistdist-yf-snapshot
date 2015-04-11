@@ -187,6 +187,20 @@ public class UtilMethods {
 		return age;
 	}
 	
+	public static String convertFormatString(String fromFormat,String dateStr,String formatTo){
+		DateFormat df = new SimpleDateFormat(fromFormat);
+		DateFormat dfNew = new SimpleDateFormat(formatTo);
+		String returnDate = "";
+		try {
+			Date date = df.parse(dateStr);
+			returnDate = dfNew.format(date);
+		} catch (ParseException e) {
+			returnDate=dateStr;
+		}
+		System.out.println("New Date"+returnDate);
+		return returnDate;
+	}
+	
 	public String convertFormatString(Date date,String formatTo){
 		DateFormat df = new SimpleDateFormat(formatTo);
 		String returnDate = df.format(date);

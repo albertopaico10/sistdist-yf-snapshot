@@ -13,6 +13,10 @@ public interface ProductService {
 
 	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
 	
+	public BeanResponseProduct deleteProduct(BeanRequestProduct beanProduct)throws Exception;
+	
+	public BeanResponseProduct updateProduct(BeanRequestProduct beanProduct)throws Exception;
+	
 	public boolean verificationExistProduct(String name,int idPresentation)throws Exception;
 	
 	public List<BeanResponseProduct> listProduct();

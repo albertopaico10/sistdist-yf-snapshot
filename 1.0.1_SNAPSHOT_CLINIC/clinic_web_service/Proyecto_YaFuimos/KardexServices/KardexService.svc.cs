@@ -221,8 +221,18 @@ namespace KardexServices
         public ProductResponse insertarProducto(Product beanRequest)
         {
             ProductResponse beanResponse = new ProductResponse();
-            beanResponse = daoProduct.registrarProducto(beanRequest);
+            Boolean value = daoProduct.ObtenerNombrePresentacion(beanRequest.nameProduct, beanRequest.idPresentation);
 
+            if (value == true)
+            {
+                beanResponse.result = "PRODUCT_EXISTS";
+
+                return beanResponse;
+            }
+            else {
+                beanResponse = daoProduct.registrarProducto(beanRequest);
+            }
+            
             return beanResponse;
         }
 
@@ -230,6 +240,16 @@ namespace KardexServices
         public ProductListResponse getProduct()
         {
             return daoProduct.listProduct();
+        }
+
+        public ProductResponse actualizarProducto(Product beanRequest)
+        {
+            return daoProduct.actualizarProducto(beanRequest);
+        }
+
+        public ProductResponse eliminarProducto(Product beanRequest)
+        {
+            return daoProduct.eliminarProducto(beanRequest);
         }
     }
 }

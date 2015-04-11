@@ -47,21 +47,20 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	}
 
 	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception {
-	/*	System.out.println(CommonConstants.Logger.LOGGER_START);
-		//--Validate if Exist Producto with same Presentation
-		boolean validationProduct=productService.verificationExistProduct(beanProduct.getNameProduct(),beanProduct.getIdPresentation());
-		//--End
-		BeanResponseProduct responseProduct=new BeanResponseProduct();
-		if(!validationProduct){
-			//--Save Product
-			responseProduct=productService.saveProduct(beanProduct);
-			responseProduct.setResult("redirect:/listProduct.htm");
-		}		
-		System.out.println(CommonConstants.Logger.LOGGER_END);
-		return responseProduct;*/
+
 		return productService.saveProduct(beanProduct);
 	}
-
+	
+	public BeanResponseProduct deleteProduct(BeanRequestProduct beanProduct)throws Exception {
+	
+		return productService.deleteProduct(beanProduct);
+	}
+	
+	public BeanResponseProduct updateProduct(BeanRequestProduct beanProduct)throws Exception {
+		
+		return productService.updateProduct(beanProduct);
+	}
+	
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation) throws Exception {
 		//--Save Presentation
 		BeanResponsePresentation beanResponsePresentation=presentationService.savePresentationService(beanRequestPresentation);

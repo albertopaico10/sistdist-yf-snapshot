@@ -53,6 +53,7 @@ public class CommonConstants {
 	}
 	public class FormatDate{
 		public static final String YYYY_MM_DD_HHMMSS="YYYY-MM-DD HH:mm:ss";
+		public static final String DD_MM_YYYY_HHMMSS="dd/MM/yyyy HH:mm:ss";
 		public static final String YYYY_MM_DD="YYYY-MM-DD";
 		public static final String MM_DD_YYYY_HHMMSS="MM-dd-YYYY HH:mm:ss";
 		public static final String MM_DD_YYYY="MM/dd/yyyy";
