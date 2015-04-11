@@ -110,6 +110,9 @@
 		<c:if test="${messages=='SUCCESS_SAVE'}">
 			<label class="success"><spring:message code="error.message.ws.kardex.success" /></label><br>
 		</c:if>
+		<c:if test="${messages=='SUCCESS_DELETE'}">
+			<label class="success"><spring:message code="error.message.ws.product.success.delete" /></label><br>
+		</c:if>
 		<c:if test="${listProduct!=null}">
 			<table class="tableStyle" border="1">
 				<tr class="thStyle">

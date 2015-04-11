@@ -45,14 +45,14 @@ public class MantenienceProductController {
 		
 		String responseStr=CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT;
 		
-		try {
-//			List<ProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
-			List<ProductDTO> listAllTypeProduct=tableProduct.listProduct();
-			System.out.println("Cantidad de filas que trae :"+listAllTypeProduct.size());
-			request.setAttribute("listTypeProduct", listAllTypeProduct);
-		} catch (Exception e) {
-			System.out.println("Error : "+e.toString());
-		}
+//		try {
+////			List<ProductDTO> listAllTypeProduct=tableProduct.listAllTypeProduct();
+//			List<ProductDTO> listAllTypeProduct=tableProduct.listProduct();
+//			System.out.println("Cantidad de filas que trae :"+listAllTypeProduct.size());
+//			request.setAttribute("listTypeProduct", listAllTypeProduct);
+//		} catch (Exception e) {
+//			System.out.println("Error : "+e.toString());
+//		}
 		
 		return new ModelAndView(responseStr);
 	}
@@ -74,40 +74,46 @@ public class MantenienceProductController {
 	public ModelAndView validateUserForm(
 			@ModelAttribute ProductDTO beanProductDTO,
 			final BindingResult result, final SessionStatus status,
-			final HttpServletRequest request) {
+			final HttpServletRequest request,final ModelMap model) {
 		System.out.println("inside registerTypeProduct htm");
 		BeanResponseWeb valueResponse=null;
 		try {
 			valueResponse=tableProduct.saveProduct(beanProductDTO);
 //			valueResponse=tableProduct.addNewTypeProduct(beanProductDTO);
 //			BeanProduct responseProduct=tableProduct.saveProduct(beanProductDTO);
-			if(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW.equals(valueResponse.getStatusResponse())){				
-				request.setAttribute("messages", "success");
-			}
+//			if(CommonConstants.MantenienceProduct.RESPONSE_MANTENIENCE_PRODUCT_NEW.equals(valueResponse.getStatusResponse())){				
+//				request.setAttribute("messages", "success");
+//			}
+			System.out.println("VALUE MESSAGES : "+valueResponse.getStatusResponse());
+			request.setAttribute("messages", valueResponse.getStatusResponse());
+			model.addAttribute("maintenanceForm", beanProductDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("**** "+valueResponse.getStatusResponse());
+		System.out.println("**** "+valueResponse.getRedirectTo());
 		System.out.println("Save Product");
-		return new ModelAndView(valueResponse.getStatusResponse());
+		return new ModelAndView(valueResponse.getRedirectTo());
 	}
 	
 	@RequestMapping("updateProduct.htm")
 	public ModelAndView updateAreaForm(
-			@ModelAttribute TbProduct tableTypeProductBean,
+			@ModelAttribute ProductDTO tableTypeProductBean,
 			final BindingResult result, final SessionStatus status,
 			final HttpServletRequest request) {
 		System.out.println("inside updateAreaForm htm");
-		String valueResponse="";
+//		String valueResponse="";
+		BeanResponseWeb valueResponse=null;
 		System.out.println("Change Name : "+tableTypeProductBean.getNameProduct()+"********"+tableTypeProductBean.getId());
 		try {
-			valueResponse=tableProduct.addNewTypeProduct(tableTypeProductBean);
+//			valueResponse=tableProduct.addNewTypeProduct(tableTypeProductBean);
+			valueResponse=tableProduct.updateProduct(tableTypeProductBean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("**** "+valueResponse);
+//		System.out.println("**** "+valueResponse);
+		System.out.println("**** "+valueResponse.getStatusResponse());
 		System.out.println("Save User Data");
-		return new ModelAndView(valueResponse);
+		return new ModelAndView(valueResponse.getStatusResponse());
 	}
 	
 	@RequestMapping("deleteMaintenanceProduct.htm")
@@ -116,13 +122,15 @@ public class MantenienceProductController {
 		System.out.println("inside deleteMaintenanceArea.htm");
 		final int idTypeProduct = Integer.parseInt(request.getParameter("idProduct"));
 		System.out.println("ID Type Product : "+idTypeProduct);
-		String valueResponse="";
+//		String valueResponse="";
+		BeanResponseWeb valueResponse=null;
 		try {
-			valueResponse=tableProduct.deleteTypeProduct(idTypeProduct);
+//			valueResponse=tableProduct.deleteTypeProduct(idTypeProduct);
+			valueResponse=tableProduct.deleteProduct(idTypeProduct);
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
 		} 
-		return valueResponse;
+		return valueResponse.getStatusResponse();
 	}
 	
 	@RequestMapping(value = "/listAllProductJson.htm", 
@@ -134,17 +142,17 @@ public class MantenienceProductController {
 		String json2="";
 		try {
 //			List<ProductDTO> listAllProduct=tableProduct.listAllTypeProduct();
-			List<ProductDTO> listAllProduct=tableProduct.listProduct();
+			BeanResponseWeb listAllProduct=tableProduct.listProduct();
 			PatientJson beanPatientJson=new PatientJson();
-			beanPatientJson.setiTotalDisplayRecords(listAllProduct.size());
-			beanPatientJson.setiTotalRecords(listAllProduct.size());
-			beanPatientJson.setProductData(listAllProduct);
+			beanPatientJson.setiTotalDisplayRecords(listAllProduct.getListProductDTO().size());
+			beanPatientJson.setiTotalRecords(listAllProduct.getListProductDTO().size());
+			beanPatientJson.setProductData(listAllProduct.getListProductDTO());
 			
 			Gson gson=new GsonBuilder().setPrettyPrinting().create();
 			json2=gson.toJson(beanPatientJson);
 			
 			
-			System.out.println("Cantidad de filas que trae : "+listAllProduct.size());
+			System.out.println("Cantidad de filas que trae : "+listAllProduct.getListProductDTO().size());
 //			request.setAttribute("listPatient", listAllPatient);
 //			request.setAttribute("jsonTable", json2);
 		} catch (Exception e) {

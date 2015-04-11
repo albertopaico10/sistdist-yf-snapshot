@@ -6,6 +6,9 @@ public class CommonConstants {
 	public final static String KARDEX_REST = "http://localhost:53924/KardexService.svc/Kardex";
 	public final static String PRODUCT_REST = "http://localhost:53924/KardexService.svc/Producto";
 	public final static String PRODUCT_REST_ALL = "http://localhost:53924/KardexService.svc/ProductAll";
+	public final static String PRODUCT_REST_STATUS = "http://localhost:53924/KardexService.svc/ProductDelete";
+	public final static String PRODUCT_REST_BODY = "http://localhost:53924/KardexService.svc/ProductBody";
+	
 	
 	public class Logger{
 		public final static String LOGGER_START="********START********";

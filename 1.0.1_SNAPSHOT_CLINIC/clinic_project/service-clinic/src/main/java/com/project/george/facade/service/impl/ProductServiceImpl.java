@@ -33,18 +33,24 @@ public class ProductServiceImpl implements ProductService {
 		return beanResponseProduct;
 	}
 
-	public boolean verificationExistProduct(String name, int idPresentation)
-		throws Exception {
-	// TODO Auto-generated method stub
-	return false;
-}
+	public boolean verificationExistProduct(String name, int idPresentation) throws Exception {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-	public List<BeanResponseProduct> listProduct() {
+	public BeanResponseCanonicalListProduct listProduct() {
 		RestTemplate restTemplate=new RestTemplate();
-		BeanResponseCanonicalListProduct listProductAll=restTemplate.getForObject(CommonConstants.PRODUCT_REST_ALL, BeanResponseCanonicalListProduct.class);
-		String gsonResponse=JsonUtils.toJson(listProductAll.getListProductObj());
-		System.out.println("**** GSON : " + gsonResponse);
-		return listProductAll.getListProductObj();
+		BeanResponseCanonicalListProduct listProductAll=null;
+		try {
+			listProductAll=restTemplate.getForObject(CommonConstants.PRODUCT_REST_ALL, BeanResponseCanonicalListProduct.class);
+			String gsonResponse=JsonUtils.toJson(listProductAll.getListProductObj());
+			System.out.println("**** GSON : " + gsonResponse);
+		} catch (Exception e) {
+			listProductAll.setResult(CommonConstants.ResponseWebService.RESP_WS_CONNECTION_REFUSE);
+			System.out.println("Error : "+e.getMessage());
+		}
+		
+		return listProductAll;
 	}
 
 	public BeanResponseListProduct listProductByName(String nameProduct){
@@ -68,6 +74,33 @@ public class ProductServiceImpl implements ProductService {
 		
 		
 		return beanListProduct;
+	}
+
+
+	public BeanResponseProduct deleteProduct(BeanRequestProduct beanRequestProduct){
+		String gson=JsonUtils.toJson(beanRequestProduct);
+		System.out.println("**** GSON : " + gson);
+		
+		RestTemplate restTemplate=new RestTemplate();
+		BeanResponseProduct beanResponseProduct=restTemplate.postForObject(CommonConstants.PRODUCT_REST_STATUS, beanRequestProduct, BeanResponseProduct.class);
+		
+		String gsonResponse=JsonUtils.toJson(beanResponseProduct);
+		System.out.println("**** GSON : " + gsonResponse);
+	
+	return beanResponseProduct;
+	}
+
+	public BeanResponseProduct updateProduct(BeanRequestProduct beanRequestProduct){
+		String gson=JsonUtils.toJson(beanRequestProduct);
+		System.out.println("**** GSON : " + gson);
+		
+		RestTemplate restTemplate=new RestTemplate();
+		BeanResponseProduct beanResponseProduct=restTemplate.postForObject(CommonConstants.PRODUCT_REST_BODY, beanRequestProduct, BeanResponseProduct.class);
+		
+		String gsonResponse=JsonUtils.toJson(beanResponseProduct);
+		System.out.println("**** GSON : " + gsonResponse);
+		
+	return beanResponseProduct;
 	}
 
 }

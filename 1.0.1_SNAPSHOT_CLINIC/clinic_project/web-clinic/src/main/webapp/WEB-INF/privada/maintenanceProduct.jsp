@@ -12,7 +12,18 @@
 <%-- 	<a href="#" id="new_area"><spring:message code="maintenance.area.botton.new.area" /></a> --%>
 	<br>
 	<div id="idTitleList"><label class="titlePage"><spring:message code="maintenance.type.product.title.list" /></label></div>
-
+	<c:if test="${messages == 'SUCCESS_SAVE'}">
+		<label class="success"><spring:message code="error.message.ws.product.success" /></label><br>
+	</c:if>
+	<c:if test="${messages == 'SUCCESS_UPDATE'}">
+		<label class="success"><spring:message code="error.message.ws.product.update.success" /></label><br>
+	</c:if>
+	<c:if test="${messages == 'PRODUCT_EXISTS'}">
+		<label class="error"><spring:message code="error.message.ws.product.exist" /></label><br>
+	</c:if>
+	<c:if test="${messages=='CONNECTION_REFUSE'}">
+		<label class="error"><spring:message code="error.message.ws.notworking" /></label><br>
+	</c:if>
 	<div id="divTableGet" class="cssTableGet">
 	<html:form action="" method="GET">
 	<table style="width: 100%;" >

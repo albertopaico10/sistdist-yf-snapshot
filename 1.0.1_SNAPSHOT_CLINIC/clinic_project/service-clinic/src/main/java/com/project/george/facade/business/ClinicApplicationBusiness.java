@@ -13,6 +13,7 @@ import com.project.george.bean.presentation.BeanResponseListPresentation;
 import com.project.george.bean.product.BeanRequestProduct;
 import com.project.george.bean.product.BeanResponseListProduct;
 import com.project.george.bean.product.BeanResponseProduct;
+import com.project.george.bean.product.canonical.BeanResponseCanonicalListProduct;
 
 @Service
 public interface ClinicApplicationBusiness {
@@ -20,6 +21,10 @@ public interface ClinicApplicationBusiness {
 	public String mensajeTest(String value)throws Exception;
 	
 	public BeanResponseProduct saveProduct(BeanRequestProduct beanProduct)throws Exception;
+	
+	public BeanResponseProduct deleteProduct(BeanRequestProduct beanProduct)throws Exception;
+	
+	public BeanResponseProduct updateProduct(BeanRequestProduct beanProduct)throws Exception;
 	
 	public BeanResponseListPresentation savePresentation(BeanRequestPresentation beanRequestPresentation)throws Exception;
 	
@@ -47,7 +52,7 @@ public interface ClinicApplicationBusiness {
 	
 	public BeanResponseListKardexDetail listDetailKardex(String idKardex);
 	
-	public List<BeanResponseProduct> listProduct()throws Exception;
+	public BeanResponseCanonicalListProduct listProduct()throws Exception;
 	
 	public BeanResponseListPresentation listAllPresentationAndroid()throws Exception;
 }

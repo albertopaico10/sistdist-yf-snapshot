@@ -47,11 +47,11 @@ public class ProductServiceImpl {
 		productService.verificationExistProduct(beanRequest.getNameProduct(), beanRequest.getIdPresentation());
 	}
 	
-	@Test
-	public void testListProduct()throws Exception{
-		BeanResponseListProduct beanResponse=new BeanResponseListProduct();
-//		beanResponse=productService.listProductByName("producto");
-		List<BeanResponseProduct> listProd=productService.listProduct();
-		System.out.println("Cantidad :"+listProd.size());
-	}
+//	@Test
+//	public void testListProduct()throws Exception{
+//		BeanResponseListProduct beanResponse=new BeanResponseListProduct();
+////		beanResponse=productService.listProductByName("producto");
+//		List<BeanResponseProduct> listProd=productService.listProduct();
+//		System.out.println("Cantidad :"+listProd.size());
+//	}
 }
