@@ -5,7 +5,7 @@ public class BeanRequestCanonicalKardex {
 	public int typeOperation;
 	public int countProduct;
 	public String comprobanteClase;
-	public int comprobanteNumber;
+	public String comprobanteNumber;
 	public int idKardex;
 	
 	
@@ -34,10 +34,16 @@ public class BeanRequestCanonicalKardex {
 	public void setComprobanteClase(String comprobanteClase) {
 		this.comprobanteClase = comprobanteClase;
 	}
-	public int getComprobanteNumber() {
+//	public int getComprobanteNumber() {
+//		return comprobanteNumber;
+//	}
+//	public void setComprobanteNumber(int comprobanteNumber) {
+//		this.comprobanteNumber = comprobanteNumber;
+//	}
+	public String getComprobanteNumber() {
 		return comprobanteNumber;
 	}
-	public void setComprobanteNumber(int comprobanteNumber) {
+	public void setComprobanteNumber(String comprobanteNumber) {
 		this.comprobanteNumber = comprobanteNumber;
 	}
 	public int getIdKardex() {

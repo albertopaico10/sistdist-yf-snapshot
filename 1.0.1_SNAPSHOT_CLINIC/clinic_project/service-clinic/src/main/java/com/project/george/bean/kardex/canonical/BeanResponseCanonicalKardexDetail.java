@@ -10,7 +10,7 @@ public class BeanResponseCanonicalKardexDetail {
 	public int typeOperation;
 	public int status;
 	public String comprobanteClase;
-	public int comprobanteNumber;
+	public String comprobanteNumber;
 	public BigDecimal priceProduct;
 	public BigDecimal priceSale;
 	public String result;
@@ -53,14 +53,20 @@ public class BeanResponseCanonicalKardexDetail {
 	public void setComprobanteClase(String comprobanteClase) {
 		this.comprobanteClase = comprobanteClase;
 	}
-	public int getComprobanteNumber() {
-		return comprobanteNumber;
-	}
-	public void setComprobanteNumber(int comprobanteNumber) {
-		this.comprobanteNumber = comprobanteNumber;
-	}
+//	public int getComprobanteNumber() {
+//		return comprobanteNumber;
+//	}
+//	public void setComprobanteNumber(int comprobanteNumber) {
+//		this.comprobanteNumber = comprobanteNumber;
+//	}
 	public BigDecimal getPriceProduct() {
 		return priceProduct;
+	}
+	public String getComprobanteNumber() {
+		return comprobanteNumber;
+	}
+	public void setComprobanteNumber(String comprobanteNumber) {
+		this.comprobanteNumber = comprobanteNumber;
 	}
 	public void setPriceProduct(BigDecimal priceProduct) {
 		this.priceProduct = priceProduct;

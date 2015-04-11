@@ -90,13 +90,17 @@ public class TablePresentationManagerImpl implements TablePresentationManager {
 			beanResponseWeb.setRedirectTo(CommonConstants.ManteniencePresentation.RESPONSE_MANTENIENCE_PRESENTENTION);
 			beanResponseWeb.setStatusResponse(beanResponsePresentation.getResult());
 			beanResponseWeb.setMessage("El Servicio no esta Activo. Por favor comunicarse con el Administrador...!!");
+		}else if(CommonConstants.ResponseIdResult.RESULT_PRESENTATION_EXIST.equals(beanResponsePresentation.getResult())){
+			beanResponseWeb.setRedirectTo(CommonConstants.ManteniencePresentation.RESPONSE_MANTENIENCE_PRESENTENTION);
+			beanResponseWeb.setStatusResponse(beanResponsePresentation.getResult());
+			beanResponseWeb.setMessage("La presentacion ya existe");
 		}
 		//--List All Presentation to Service
-		BeanResponseListPresentation beanListResponse=clinicApplicationBusiness.listAllPresentation();
-		System.out.println("Cantidad de registros : "+beanListResponse.getBeanListPresentation().size());
+//		BeanResponseListPresentation beanListResponse=clinicApplicationBusiness.listAllPresentation();
+		System.out.println("Cantidad de registros : "+beanResponsePresentation.getBeanListPresentation().size());
 		List<PresentationDTO> newListAllPresentation=new ArrayList<PresentationDTO>();
 		UtilMethods utilMethods=new UtilMethods();
-		for(BeanResponseCanonicalPresentation beanCanonicalPresentation:beanListResponse.getBeanListPresentation()){
+		for(BeanResponseCanonicalPresentation beanCanonicalPresentation:beanResponsePresentation.getBeanListPresentation()){
 			 PresentationDTO reponsebeanPresentationDTO=new PresentationDTO();
 			 beanPresentationDTO=utilMethods.copyValuesPresentationDTOfromService(beanCanonicalPresentation, reponsebeanPresentationDTO);
 			 newListAllPresentation.add(reponsebeanPresentationDTO);
@@ -106,20 +110,25 @@ public class TablePresentationManagerImpl implements TablePresentationManager {
 		return beanResponseWeb;
 	}
 
-	public List<PresentationDTO> listPresentationComplete() throws Exception {
+	public BeanResponseWeb listPresentationComplete() throws Exception {
 		logger.info(CommonConstants.Logger.LOGGER_START);
+		BeanResponseWeb beanResponseWeb=new BeanResponseWeb();
 		//--Call Service List Presentation
 		BeanResponseListPresentation beanListResponse=clinicApplicationBusiness.listAllPresentation();
-		System.out.println("Cantidad de registros : "+beanListResponse.getBeanListPresentation().size());
+//		System.out.println("Cantidad de registros : "+beanListResponse.getBeanListPresentation().size());
 		List<PresentationDTO> newListAllPresentation=new ArrayList<PresentationDTO>();
 		UtilMethods utilMethods=new UtilMethods();
-		for(BeanResponseCanonicalPresentation beanCanonicalPresentation:beanListResponse.getBeanListPresentation()){
-			 PresentationDTO beanPresentationDTO=new PresentationDTO();
-			 beanPresentationDTO=utilMethods.copyValuesPresentationDTOfromService(beanCanonicalPresentation, beanPresentationDTO);
-			 newListAllPresentation.add(beanPresentationDTO);
+		if(CommonConstants.ResponseIdResult.RESULT_CORRECT_LIST.equals(beanListResponse.getResult())){
+			for(BeanResponseCanonicalPresentation beanCanonicalPresentation:beanListResponse.getBeanListPresentation()){
+				 PresentationDTO beanPresentationDTO=new PresentationDTO();
+				 beanPresentationDTO=utilMethods.copyValuesPresentationDTOfromService(beanCanonicalPresentation, beanPresentationDTO);
+				 newListAllPresentation.add(beanPresentationDTO);
+			}
+			beanResponseWeb.setListPresentationDTO(newListAllPresentation);
 		}
+		beanResponseWeb.setStatusResponse(beanListResponse.getResult());
 		logger.info(CommonConstants.Logger.LOGGER_START);
-		return newListAllPresentation;
+		return beanResponseWeb;
 	}
 	
 	public BeanResponseWeb updatePresentation(PresentationDTO beanPresentationDTO) throws Exception {
@@ -147,11 +156,11 @@ public class TablePresentationManagerImpl implements TablePresentationManager {
 			beanResponseWeb.setMessage("El Servicio no esta Activo. Por favor comunicarse con el Administrador...!!");
 		}
 		//--List All Presentation to Service
-		BeanResponseListPresentation beanListResponse=clinicApplicationBusiness.listAllPresentation();
-		System.out.println("Cantidad de registros : "+beanListResponse.getBeanListPresentation().size());
+//		BeanResponseListPresentation beanListResponse=clinicApplicationBusiness.listAllPresentation();
+		System.out.println("Cantidad de registros : "+beanResponsePresentation.getBeanListPresentation().size());
 		List<PresentationDTO> newListAllPresentation=new ArrayList<PresentationDTO>();
 		UtilMethods utilMethods=new UtilMethods();
-		for(BeanResponseCanonicalPresentation beanCanonicalPresentation:beanListResponse.getBeanListPresentation()){
+		for(BeanResponseCanonicalPresentation beanCanonicalPresentation:beanResponsePresentation.getBeanListPresentation()){
 			 PresentationDTO reponsebeanPresentationDTO=new PresentationDTO();
 			 reponsebeanPresentationDTO=utilMethods.copyValuesPresentationDTOfromService(beanCanonicalPresentation, reponsebeanPresentationDTO);
 			 newListAllPresentation.add(reponsebeanPresentationDTO);

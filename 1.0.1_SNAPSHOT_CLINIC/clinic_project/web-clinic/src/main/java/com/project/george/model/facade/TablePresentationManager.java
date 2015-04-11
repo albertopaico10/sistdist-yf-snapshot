@@ -12,7 +12,7 @@ public interface TablePresentationManager {
 	String deletePresentation(int idPresentation) throws Exception;
 	//---------------------
 	BeanResponseWeb insertNewPresentation(PresentationDTO beanPresentationDTO)throws Exception;
-	List<PresentationDTO> listPresentationComplete() throws Exception;
+	BeanResponseWeb listPresentationComplete() throws Exception;
 	BeanResponseWeb updatePresentation(PresentationDTO beanPresentationDTO) throws Exception;
 	BeanResponseWeb deletePresentationWS(int idPresentation) throws Exception;
 }

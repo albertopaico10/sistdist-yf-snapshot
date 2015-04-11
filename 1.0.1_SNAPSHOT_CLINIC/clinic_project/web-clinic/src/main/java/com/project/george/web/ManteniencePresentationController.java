@@ -42,9 +42,10 @@ public class ManteniencePresentationController {
 		
 		try {
 			//--List presentation
-			List<PresentationDTO> listAllPresentation=tablePresentationMan.listPresentationComplete();
-			System.out.println("Cantidad de filas que trae :"+listAllPresentation.size());
-			request.setAttribute("listPresentation", listAllPresentation);
+			BeanResponseWeb listAllPresentation=tablePresentationMan.listPresentationComplete();
+			request.setAttribute("listPresentation", listAllPresentation.getListPresentationDTO());
+			System.out.println("Mensage : "+listAllPresentation.getStatusResponse());
+			request.setAttribute("messages", listAllPresentation.getStatusResponse());
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
 		}

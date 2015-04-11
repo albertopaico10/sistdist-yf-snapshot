@@ -34,7 +34,7 @@ public class UtilMethods {
 	public DetailKardexDTO copyValuesTbDetailKardexDTO(TbDetailKardex beanFrom,DetailKardexDTO beanTo){
 		beanTo.setId(beanFrom.getId());
 		beanTo.setComprobanteClase(beanFrom.getComprobante_clase());
-		beanTo.setComprobanteNumero(beanFrom.getComprobante_number());
+//		beanTo.setComprobanteNumero(beanFrom.getComprobante_number());
 		beanTo.setCantidad(beanFrom.getCantidad());
 		beanTo.setTypeOperation(beanFrom.getTypeOperation());
 		beanTo.setPriceProduct(beanFrom.getPrice_Product());
@@ -197,7 +197,6 @@ public class UtilMethods {
 		} catch (ParseException e) {
 			returnDate=dateStr;
 		}
-		System.out.println("New Date"+returnDate);
 		return returnDate;
 	}
 	

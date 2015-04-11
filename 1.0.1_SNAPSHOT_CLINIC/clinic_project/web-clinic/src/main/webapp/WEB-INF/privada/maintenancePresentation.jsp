@@ -18,6 +18,9 @@
 	<c:if test="${messages == 'ERROR'}">
 		<label class="error"><spring:message code="error.message.ws.presentation.error" /></label><br>
 	</c:if>
+	<c:if test="${messages == 'PRESENTATION_EXIST'}">
+		<label class="error"><spring:message code="error.message.ws.presentation.exist" /></label><br>
+	</c:if>
 	<c:if test="${messages == 'SUCCESS'}">
 		<label class="success"><spring:message code="error.message.ws.presentation.success" /></label><br>
 	</c:if>
@@ -93,7 +96,6 @@ $("#new_presentation" ).click(function( event ) {
 $("#savePresentation").click(function(){
 	var valueAction=$( "#nameAction" ).val();
 	if(valueAction=='updateAction'){
-		alert("action");
 		$('#idMaintenancePresentationForm').attr('action', 'updatePresentation.htm').submit();
 	}
 });
@@ -102,7 +104,7 @@ function updateArea(idArea,namePresentation){
 // 	$("#divIdPresentation").empty();
 	$( "#frmMaintenancePresentation" ).dialog();
 	$( "#namePresentation" ).val(namePresentation+"");
-	$( "#frmMaintenancePresentation" ).dialog('option', 'title', '<spring:message code="maintenance.areas.title.update" />');
+	$( "#frmMaintenancePresentation" ).dialog('option', 'title', '<spring:message code="maintenance.presentation.botton.update.presention" />');
 	$("#savePresentation").html('<spring:message code="maintenance.roles.botton.update.role.form" />');
 // 	$("#divIdPresentation").append('<input id="idArea" name="id" type="hidden" value="'+idArea+'"/>');
 	$("#id").val(idArea);

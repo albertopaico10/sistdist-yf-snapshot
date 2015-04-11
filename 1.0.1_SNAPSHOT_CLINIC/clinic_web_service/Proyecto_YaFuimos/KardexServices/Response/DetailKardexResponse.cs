@@ -24,7 +24,7 @@ namespace KardexServices.Response
         [DataMember]
         public string comprobanteClase { get; set; }
         [DataMember]
-        public int comprobanteNumber { get; set; }
+        public string comprobanteNumber { get; set; }
         [DataMember]
         public decimal priceProduct { get; set; }
         [DataMember]

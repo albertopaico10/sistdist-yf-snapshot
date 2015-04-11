@@ -165,7 +165,6 @@ public class TableProductManagerImpl implements TableProductManager {
 			beanProductDTO.setId(beanProdResp.getId());
 			beanProductDTO.setNameProduct(beanProdResp.getNameProduct());
 			beanProductDTO.setNamePresentation(beanProdResp.getNamePresentation());
-			System.out.println("ID PRESENTATION : "+beanProdResp.getIdPresentation());
 			beanProductDTO.setIdPresentation(beanProdResp.getIdPresentation());
 			beanProductDTO.setPrice(beanProdResp.getPriceProduct());
 			beanProductDTO.setPriceSale(beanProdResp.getPriceSale());

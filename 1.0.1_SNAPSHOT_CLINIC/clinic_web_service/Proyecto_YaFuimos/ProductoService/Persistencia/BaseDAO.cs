@@ -77,5 +77,21 @@ namespace ProductoService.Persistencia
             }
         }
 
+        public Boolean validacionExisteNombrePresentacion(string name)
+        {
+            using (ISession sesion = NHibernateHelper.ObtenerSesion())
+            {
+                //ICriteria busqueda = sesion.CreateCriteria(typeof(Entidad));
+                string query = "from Presentation where status=1 and namePresentation = '" + name + "'";
+                IQuery busqueda = sesion.CreateQuery(query);
+                int cantidad = busqueda.List<Entidad>().Count;
+                Boolean returnValue = false;
+                if (cantidad > 0) {
+                    returnValue = true;
+                }
+                return returnValue;
+            }
+        }
+
     }
 }

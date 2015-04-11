@@ -17,6 +17,7 @@ import antlr.collections.List;
 
 import com.jdlf.restservice.dao.PacienteDao;
 import com.jdlf.restservice.model.Paciente;
+import com.jdlf.restservice.queue.ClinicQueue;
 
 @Path("/pacientes")
 public class PacienteService {
@@ -58,9 +59,16 @@ public class PacienteService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Paciente crearPaciente (Paciente paciente) throws Exception{
-		dao.openCurrentSessionwithTransaction();
-		paciente = dao.persist(paciente);
-		dao.closeCurrentSessionwithTransaction();
+		
+		try {
+			dao.openCurrentSessionwithTransaction();
+			paciente = dao.persist(paciente);
+			dao.closeCurrentSessionwithTransaction();
+			return paciente;
+		} catch (Exception e) {
+			ClinicQueue.sendPaciente(paciente);
+		}
+		
 		return paciente;
 	}
 	

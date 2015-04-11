@@ -61,9 +61,9 @@ public class MantenienceProductController {
   public final List<PresentationDTO> presentationList(
           final HttpServletRequest request) {
 		try {
-			List<PresentationDTO> listAllPresentation=tablePresentationMan.listPresentationComplete();
-			System.out.println("Cantidad de areas  para cargar:"+listAllPresentation.size());
-			return listAllPresentation;
+			BeanResponseWeb listAllPresentation=tablePresentationMan.listPresentationComplete();
+			System.out.println("Cantidad de filas : "+listAllPresentation.getListPresentationDTO().size());
+			return listAllPresentation.getListPresentationDTO();
 		} catch (Exception e) {
 			System.out.println("Error : "+e.toString());
 		}

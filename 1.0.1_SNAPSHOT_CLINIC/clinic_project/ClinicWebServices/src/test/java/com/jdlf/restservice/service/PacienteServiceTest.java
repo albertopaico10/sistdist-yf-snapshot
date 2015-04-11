@@ -25,7 +25,7 @@ public class PacienteServiceTest {
 	
 	Date date = new Date();
 	
-	@Test
+	@Test@Ignore
 	public void testGetPaciente(){
 		
 		Client client = Client.create();
@@ -45,8 +45,8 @@ public class PacienteServiceTest {
 
 	
 	
-	@Test@Ignore
-	public void testPostPaciente(){
+	@Test
+	public void testPostPaciente(){//create paciente
 		
 		Client client = Client.create();
 		WebResource resource = client.resource("http://localhost:8080/ClinicWebServices/rest/pacientes");
@@ -110,7 +110,7 @@ public class PacienteServiceTest {
 		
 	}
 	
-	@Test
+	@Test@Ignore
 	public void testDeleteUnExistingPaciente(){
 	
 		Client client = Client.create();

@@ -34,3 +34,4 @@ C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service
 C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductoService\bin\NHibernate.dll
 C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductoService\obj\Debug\ProductoService.dll
 C:\Users\Karina.Karina-PC\Nueva carpeta\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductoService\obj\Debug\ProductoService.pdb
+C:\Users\Alberto\git\sistdist-yf-snapshot\1.0.1_SNAPSHOT_CLINIC\clinic_web_service\Proyecto_YaFuimos\ProductoService\obj\Debug\ProductoService.csprojResolveAssemblyReference.cache

@@ -81,6 +81,7 @@ public class CommonConstants {
 	}
 	public class ResponseIdResult{
 		public static final String RESULT_CORRECT="SUCCESS";
+		public static final String RESULT_CORRECT_LIST="SUCCESS_LIST";
 		public static final String RESULT_CORRECT_SAVE="SUCCESS_SAVE";
 		public static final String RESULT_CORRECT_UPDATE="SUCCESS_UPDATE";
 		public static final String RESULT_CORRECT_DELETE="SUCCESS_DELETE";
@@ -90,6 +91,8 @@ public class CommonConstants {
 		public static final String RESULT_SUCCESS_LIST="SUCCESS_LIST";
 		public static final String RESULT_EXIST="EXIST";
 		public static final String RESULT_NOT_EXIST="NOT_EXIST";
+		public static final String RESULT_PRESENTATION_EXIST="PRESENTATION_EXIST";
+		public static final String MESSAGES_INSUFFICIENT_PRODUCT="INSUFFICIENT_PRODUCT";
 	}
 	
 	public class Logger{

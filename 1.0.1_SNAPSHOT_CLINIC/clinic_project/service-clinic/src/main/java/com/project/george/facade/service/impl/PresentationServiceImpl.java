@@ -50,6 +50,8 @@ public class PresentationServiceImpl implements PresentationService {
 				beanResponsePresentation.setStatus(beanResponseWS.Status);
 				beanResponsePresentation.setNamePresentation(beanResponseWS.NamePresentation);
 				beanResponsePresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS);
+			}else if(CommonConstants.ResponseWebService.RESP_WS_PRESENTATION_EXIST.equals(beanResponseWS.Result)){
+				beanResponsePresentation.setResult(CommonConstants.ResponseWebService.RESP_WS_PRESENTATION_EXIST);
 			}
 			
 		} catch (Exception e) {
@@ -67,7 +69,7 @@ public class PresentationServiceImpl implements PresentationService {
 		BeanResponseCanonicalListPresentation beanResponseWS=null;
 		try {
 			System.out.println("1");
-			Call objCall = UtilWebService.getCallService(rucService);
+			Call objCall = UtilWebService.getCallService("http://localhost:2766/Producto.svc");
 			System.out.println("2");
 			objCall.setSOAPActionURI("http://tempuri.org/IProducto/listarPresentacionObj");
 			System.out.println("3");
@@ -85,7 +87,7 @@ public class PresentationServiceImpl implements PresentationService {
 				BeanListPresentation listBean=JsonUtils.jsonToJavaObject(beanResponseWS.strCadenaValues, BeanListPresentation.class);
 				System.out.println("Cantida de registros Integration Layer : "+listBean.getResponse().size());
 				responseListPresentation.setBeanListPresentation(listBean.getResponse());
-				responseListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS);
+				responseListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS_LIST);
 			}
 			else{
 				responseListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_ERROR);

@@ -24,6 +24,7 @@ import com.project.george.facade.service.KardexService;
 import com.project.george.facade.service.PatientService;
 import com.project.george.facade.service.PresentationService;
 import com.project.george.facade.service.ProductService;
+import com.project.george.facade.service.impl.PresentationServiceImpl;
 import com.project.george.util.CommonConstants;
 
 @Service
@@ -36,10 +37,11 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 	public PresentationService presentationService;
 	@Autowired
 	public PatientService patientService;
-	
 	@Autowired
 	public KardexService kardexService;
-		
+	
+	
+	
 	public String mensajeTest(String value) throws Exception {
 //		logger.info(CommonConstants.Logger.LOGGER_START);
 		System.out.println(CommonConstants.Logger.LOGGER_START);
@@ -66,7 +68,7 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		BeanResponsePresentation beanResponsePresentation=presentationService.savePresentationService(beanRequestPresentation);
 		//--List Presentation
 		BeanResponseListPresentation beanListPresentation=presentationService.listAllPresentation();
-		if(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS.equals(beanListPresentation.getResult())){
+		if(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS_LIST.equals(beanListPresentation.getResult())){
 			beanListPresentation.setResult(beanResponsePresentation.getResult());
 		}
 		
@@ -94,7 +96,7 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		}
 		//--List Presentation
 		BeanResponseListPresentation beanListPresentation=presentationService.listAllPresentation();
-		if(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS.equals(beanListPresentation.getResult())){
+		if(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS_LIST.equals(beanListPresentation.getResult())){
 			beanListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS_UPDATE);
 		}	
 		return beanListPresentation;
@@ -113,16 +115,16 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		}
 		//--List Presentation
 		BeanResponseListPresentation beanListPresentation=presentationService.listAllPresentation();
-		if(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS.equals(beanListPresentation.getResult())){
+		if(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS_LIST.equals(beanListPresentation.getResult())){
 			beanListPresentation.setResult(CommonConstants.ResponseWebLayer.RESP_SL_SUCCESS_DELETE);
 		}	
 		return beanListPresentation;
 	}
 	
-//	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
-//		
-//		return productService.listProduct();
-//	}
+	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+		
+		return productService.listProductByName(nameProduct);
+	}
 	public List<BeanResponseProduct> listProduct()throws Exception{
 		
 		return productService.listProduct();
@@ -157,12 +159,18 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		BeanResponseKardex beanResponse=new BeanResponseKardex();
 		try {
 			 beanResponse=kardexService.saveKardexService(beanReqCanonicalKardex);
+			 String messages=beanResponse.getMessages();
 			 //--Listar Kardex
 			 BeanResponseKardex beanResponseListKardex=kardexService.listKardexByProduct(String.valueOf(beanReqCanonicalKardex.getIdProduct()));
 			 if(CommonConstants.ResponseWebService.RESP_WS_EXIST.equals(beanResponseListKardex.getResult())){
 //				 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_NOT_EXIST);
 				 beanResponse=beanResponseListKardex;
-				 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE);
+				 if(messages!=null&&CommonConstants.ResponseWebService.RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT.equals(messages)){
+					 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE);
+					 beanResponse.setMessages(CommonConstants.ResponseWebService.RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT);
+				 }else{
+					 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE); 
+				 }				 
 			 }
 		} catch (Exception e) {
 			System.out.println("Error : "+e.getMessage());
@@ -199,9 +207,15 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return beanRespListKardexDetail;
 	}
 
-	public BeanResponseListProduct listProductByName(String nameProduct)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public BeanResponseListProduct listProductByName(String nameProduct)
+//			throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
+	public BeanResponseListPresentation listAllPresentationAndroid()throws Exception{
+		System.out.println("Dentro de listAllPresentationAndroid");
+		PresentationService presentationServiceAnd=new PresentationServiceImpl();
+		return presentationServiceAnd.listAllPresentation();
+	} 
 }

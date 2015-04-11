@@ -1,5 +1,6 @@
 package com.jdlf.restservice.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ import com.jdlf.restservice.util.TimestampAdapter;
 @XmlRootElement(name="paciente")
 @Entity
 @Table(name = "tb_newpatient")
-public class Paciente {
+public class Paciente implements Serializable{
 	
 	@XmlElement
 	@Id
