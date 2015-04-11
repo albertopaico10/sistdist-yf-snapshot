@@ -91,6 +91,7 @@ public class CommonConstants {
 		public static final String RESULT_EXIST="EXIST";
 		public static final String RESULT_NOT_EXIST="NOT_EXIST";
 		public static final String RESULT_PRESENTATION_EXIST="PRESENTATION_EXIST";
+		public static final String MESSAGES_INSUFFICIENT_PRODUCT="INSUFFICIENT_PRODUCT";
 	}
 	
 	public class Logger{

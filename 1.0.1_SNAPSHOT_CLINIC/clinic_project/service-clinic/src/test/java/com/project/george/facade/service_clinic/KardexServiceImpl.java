@@ -38,7 +38,7 @@ public class KardexServiceImpl {
 		beanRequestKardex.setTypeOperation(2);
 		beanRequestKardex.setCountProduct(680);
 		beanRequestKardex.setComprobanteClase("Boleta de Venta");
-		beanRequestKardex.setComprobanteNumber(722);
+		beanRequestKardex.setComprobanteNumber("722");
 		beanRequestKardex.setIdKardex(150);
 		
 		BeanResponseKardex response=kardexService.saveKardexService(beanRequestKardex);

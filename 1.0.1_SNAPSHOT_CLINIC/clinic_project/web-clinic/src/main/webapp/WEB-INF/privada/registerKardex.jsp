@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<td><label class="labelForm"><spring:message code="register.kardex.comprobante.number" /></label></td>
-					<td><input type="text" id="idComprobanteNumber" name="idComprobanteNumber"/></td>
+					<td><input type="text" id="idComprobanteNumber" name="idComprobanteNumber" maxlength="11"/></td>
 				</tr>
 				<tr>
 					<td>
@@ -98,6 +98,9 @@
 	</div>
 	<br />
 	<div>
+		<c:if test="${messages=='INSUFFICIENT_PRODUCT'}">
+			<label class="error"><spring:message code="register.kardex.error.product.stock" /></label><br>
+		</c:if>
 		<c:if test="${messages=='PRODUCT_NOT_EXIST'}">
 			<label class="error"><spring:message code="maintenance.type.product.list.empty" /></label><br>
 		</c:if>
@@ -295,7 +298,7 @@
 		$("#idSpanPriceTotalProduct").html('<label class="labelFormDetail"><spring:message code="price.total.product"/></label><label class="labelForm">'+priceTotalProduct+'</label>');
 		$("#idSpanPriceTotalSale").html('<label class="labelFormDetail"><spring:message code="price.total.sale"/></label><label class="labelForm"> '+priceTotalSale+'</label>');
 		if(countTotalProduct<5){
-			$("#idCountProductTotal").html('<label class="error"><spring:message code="register.kardex.count.total"/></label><label class="error"> '+countTotalProduct+'</label>');
+			$("#idCountProductTotal").html('<label class="error"><spring:message code="register.kardex.count.total"/></label><label class="error"> '+countTotalProduct+'</label>&nbsp;<label class="error"><spring:message code="register.kardex.error.product.stock.minimun" /></label>');
 		}else{
 			$("#idCountProductTotal").html('<label class="labelFormDetail"><spring:message code="register.kardex.count.total"/></label><label class="labelForm"> '+countTotalProduct+'</label>');
 		}

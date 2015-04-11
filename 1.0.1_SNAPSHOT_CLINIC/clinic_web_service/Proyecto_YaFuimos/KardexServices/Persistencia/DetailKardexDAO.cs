@@ -114,7 +114,7 @@ namespace KardexServices.Persistencia
                     detalleKardex.typeOperation = mysqlDataReader.GetInt32(2);
                     detalleKardex.dateCreated = mysqlDataReader.GetString(3);
                     detalleKardex.comprobanteClase = mysqlDataReader.GetString(4);
-                    detalleKardex.comprobanteNumber = mysqlDataReader.GetInt32(5);
+                    detalleKardex.comprobanteNumber = mysqlDataReader.GetString(5);
                     detalleKardex.priceSale = mysqlDataReader.GetDecimal(6);
                     detalleKardex.priceProduct = mysqlDataReader.GetDecimal(7);
                     listaDetalleKardex.Add(detalleKardex);

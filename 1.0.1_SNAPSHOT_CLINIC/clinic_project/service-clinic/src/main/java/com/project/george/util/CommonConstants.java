@@ -22,6 +22,7 @@ public class CommonConstants {
 		public final static String RESP_WS_NOT_EXIST="NOT_EXIST";
 		public final static String RESP_WS_CONNECTION_REFUSE="CONNECTION_REFUSE";
 		public final static String RESP_WS_PRESENTATION_EXIST="PRESENTATION_EXIST";
+		public final static String RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT="INSUFFICIENT_PRODUCT";
 	}
 	
 	public class ResponseWebLayer{

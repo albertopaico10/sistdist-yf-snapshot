@@ -69,7 +69,11 @@ public class KardexServiceImpl implements KardexService {
 		String gsonResp=JsonUtils.toJson(beanResponseCanonicalKardex);
 		System.out.println("RESPONSE : "+gsonResp);
 		if(CommonConstants.ResponseWebService.RESP_WS_SUCCESS.equals(beanResponseCanonicalKardex.getResult())){
+			if(beanResponseCanonicalKardex.getMessages()!=null&&CommonConstants.ResponseWebService.RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT.equals(beanResponseCanonicalKardex.getMessages())){
+				beanResponseKardex.setMessages(CommonConstants.ResponseWebService.RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT);
+			}
 			beanResponseKardex.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE);
+			
 		}else{
 			beanResponseKardex.setResult(CommonConstants.ResponseWebService.RESP_WS_ERROR);
 		}

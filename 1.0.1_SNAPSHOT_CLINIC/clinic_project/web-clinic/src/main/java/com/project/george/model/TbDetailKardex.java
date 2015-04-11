@@ -29,7 +29,7 @@ public class TbDetailKardex implements Serializable {
 
 	private String comprobante_clase;
 
-	private int comprobante_number;
+	private String comprobante_number;
 
 	private int status;
 
@@ -112,16 +112,26 @@ public class TbDetailKardex implements Serializable {
 		this.comprobante_clase = comprobante_clase;
 	}
 
-	public int getComprobante_number() {
-		return comprobante_number;
-	}
-
-	public void setComprobante_number(int comprobante_number) {
-		this.comprobante_number = comprobante_number;
-	}
+//	public int getComprobante_number() {
+//		return comprobante_number;
+//	}
+//
+//	public void setComprobante_number(int comprobante_number) {
+//		this.comprobante_number = comprobante_number;
+//	}
+	
+	
 
 	public TbKardex getTbKardex() {
 		return this.tbKardex;
+	}
+
+	public String getComprobante_number() {
+		return comprobante_number;
+	}
+
+	public void setComprobante_number(String comprobante_number) {
+		this.comprobante_number = comprobante_number;
 	}
 
 	public void setTbKardex(TbKardex tbKardex) {

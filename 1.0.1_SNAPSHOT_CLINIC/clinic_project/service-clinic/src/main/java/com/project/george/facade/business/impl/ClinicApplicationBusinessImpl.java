@@ -122,10 +122,10 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return beanListPresentation;
 	}
 	
-//	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
-//		
-//		return productService.listProduct();
-//	}
+	public BeanResponseListProduct listProductByName(String nameProduct)throws Exception{
+		
+		return productService.listProductByName(nameProduct);
+	}
 	public List<BeanResponseProduct> listProduct()throws Exception{
 		
 		return productService.listProduct();
@@ -160,12 +160,18 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		BeanResponseKardex beanResponse=new BeanResponseKardex();
 		try {
 			 beanResponse=kardexService.saveKardexService(beanReqCanonicalKardex);
+			 String messages=beanResponse.getMessages();
 			 //--Listar Kardex
 			 BeanResponseKardex beanResponseListKardex=kardexService.listKardexByProduct(String.valueOf(beanReqCanonicalKardex.getIdProduct()));
 			 if(CommonConstants.ResponseWebService.RESP_WS_EXIST.equals(beanResponseListKardex.getResult())){
 //				 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_NOT_EXIST);
 				 beanResponse=beanResponseListKardex;
-				 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE);
+				 if(messages!=null&&CommonConstants.ResponseWebService.RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT.equals(messages)){
+					 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE);
+					 beanResponse.setMessages(CommonConstants.ResponseWebService.RESP_WS_MESSAGES_INSUFFICIENT_PRODUCT);
+				 }else{
+					 beanResponse.setResult(CommonConstants.ResponseWebService.RESP_WS_SUCCESS_SAVE); 
+				 }				 
 			 }
 		} catch (Exception e) {
 			System.out.println("Error : "+e.getMessage());
@@ -202,11 +208,11 @@ public class ClinicApplicationBusinessImpl implements ClinicApplicationBusiness 
 		return beanRespListKardexDetail;
 	}
 
-	public BeanResponseListProduct listProductByName(String nameProduct)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public BeanResponseListProduct listProductByName(String nameProduct)
+//			throws Exception {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	public BeanResponseListPresentation listAllPresentationAndroid()throws Exception{
 		System.out.println("Dentro de listAllPresentationAndroid");

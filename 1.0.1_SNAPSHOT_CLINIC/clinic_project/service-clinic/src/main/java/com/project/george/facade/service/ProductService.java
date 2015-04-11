@@ -16,4 +16,6 @@ public interface ProductService {
 	public boolean verificationExistProduct(String name,int idPresentation)throws Exception;
 	
 	public List<BeanResponseProduct> listProduct();
+	
+	public BeanResponseListProduct listProductByName(String nameProduct);
 }

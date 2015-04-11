@@ -95,7 +95,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		beanDetailKardex.setCantidad(Integer.parseInt(cantidad));
 		beanDetailKardex.setTypeOperation(typeOperation);
 		beanDetailKardex.setComprobante_clase(comprobanteClase);
-		beanDetailKardex.setComprobante_number(Integer.parseInt(comprobanteNumber));
+//		beanDetailKardex.setComprobante_number(Integer.parseInt(comprobanteNumber));
 		beanDetailKardex.setStatus(CommonConstants.STATUS_ACTIVE);
 		beanDetailKardex.setPrice_Product(beanProuctKardex.getPrice_Product());
 		beanDetailKardex.setPrice_sale(beanProuctKardex.getPrice_sale());
@@ -216,7 +216,8 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		beanRequestCanonicalKardex.setIdProduct(Integer.parseInt(productId));
 		beanRequestCanonicalKardex.setCountProduct(Integer.parseInt(cantidad));
 		beanRequestCanonicalKardex.setComprobanteClase(comprobanteClase);
-		beanRequestCanonicalKardex.setComprobanteNumber(Integer.parseInt(comprobanteNumber));
+//		beanRequestCanonicalKardex.setComprobanteNumber(Integer.parseInt(comprobanteNumber));
+		beanRequestCanonicalKardex.setComprobanteNumber(comprobanteNumber);
 		if(!StringUtils.isEmpty(idKardex)){
 			beanRequestCanonicalKardex.setIdKardex(Integer.parseInt(idKardex));
 		}		
@@ -225,7 +226,7 @@ public class TableKardexManagerImpl implements TableKardexManager{
 		BeanResponseKardex beanResponseKardex=clinicApplicationBusiness.saveKardex(beanRequestCanonicalKardex);
 		
 		List<KardexDTO> newListKardex=new ArrayList<KardexDTO>();
-		
+		String messages=beanResponseKardex.getMessages();
 		if(CommonConstants.ResponseIdResult.RESULT_CORRECT_SAVE.equals(beanResponseKardex.getResult())){
 			KardexDTO beanKardexDTO=new KardexDTO();
 			beanKardexDTO.setId(beanResponseKardex.getId());
@@ -236,11 +237,17 @@ public class TableKardexManagerImpl implements TableKardexManager{
 			beanKardexDTO.setCountProduct(beanResponseKardex.getCountProduct());
 			beanKardexDTO.setPriceTotalProduct(beanResponseKardex.getPriceTotalProduct());
 			beanKardexDTO.setPriceTotalSale(beanResponseKardex.getPriceTotalSale());
+			
 			beanKardexDTO.setMessages(beanResponseKardex.getMessages());
 			newListKardex.add(beanKardexDTO);
 			beanResponseWeb.setListKardexDTO(newListKardex);
 		}
-		beanResponseWeb.setStatusResponse(beanResponseKardex.getResult());
+		if(messages!=null&&CommonConstants.ResponseIdResult.MESSAGES_INSUFFICIENT_PRODUCT.equals(messages)){
+			beanResponseWeb.setStatusResponse(CommonConstants.ResponseIdResult.MESSAGES_INSUFFICIENT_PRODUCT);
+		}else{
+			beanResponseWeb.setStatusResponse(beanResponseKardex.getResult());
+		}
+		
 		
 		System.out.println(CommonConstants.Logger.LOGGER_END);
 		return beanResponseWeb;
