@@ -27,7 +27,7 @@ public class Receiver {
     	dao = new PacienteDao();
     }
 
-    public void receiveQueue() {
+    public boolean receiveQueue() {
         try {
             factory = new ActiveMQConnectionFactory(
                     ActiveMQConnection.DEFAULT_BROKER_URL);
@@ -68,6 +68,8 @@ public class Receiver {
         } catch (JMSException e) {
                       e.printStackTrace();
         }
+        
+        return true;
     }
 }
 
